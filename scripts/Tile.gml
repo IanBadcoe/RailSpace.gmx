@@ -149,7 +149,7 @@ tx = px + hx;
 ty = py + hy;
 
 var ret;
-ret[0] = tx * 2 / 3 - ty * 2 / 3;
-ret[1] = tx * 1 / 3 + ty * 1 / 3;
+ret[0] = tx;
+ret[1] = ty;
 
 return ret;

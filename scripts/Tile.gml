@@ -93,9 +93,17 @@ return ret;
 enum TileTypes
 {
     DoubleCorner,
-    Swerve
+    Swerve,
+    SinglePointsNarrowNear,
+    SinglePointsNarrowFar,
+    SinglePointsWideNear,
+    SinglePointsWideFar
 }
 
 global.all_tiles[TileTypes.DoubleCorner] = instance_create(0, 0, tile_double_corner);
 global.all_tiles[TileTypes.Swerve] = instance_create(0, 0, tile_swerve);
+global.all_tiles[TileTypes.SinglePointsNarrowNear] = instance_create(0, 0, tile_single_points_narrow_near);
+global.all_tiles[TileTypes.SinglePointsNarrowFar] = instance_create(0, 0, tile_single_points_narrow_far);
+global.all_tiles[TileTypes.SinglePointsWideNear] = instance_create(0, 0, tile_single_points_wide_near);
+global.all_tiles[TileTypes.SinglePointsWideFar] = instance_create(0, 0, tile_single_points_wide_far);
 

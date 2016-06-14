@@ -18,6 +18,10 @@
     <object>objects\obController</object>
     <objects name="Tiles">
       <object>objects\tile_double_corner</object>
+      <object>objects\tile_single_points_narrow_near</object>
+      <object>objects\tile_single_points_wide_near</object>
+      <object>objects\tile_single_points_wide_far</object>
+      <object>objects\tile_single_points_narrow_far</object>
       <object>objects\tile_swerve</object>
     </objects>
   </objects>

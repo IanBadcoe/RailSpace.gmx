@@ -9,14 +9,16 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\SetupConsts.gml</script>
+    <script>scripts\create_consts.gml</script>
     <script>scripts\Control.gml</script>
     <script>scripts\Tile.gml</script>
+    <script>scripts\Misc.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obController</object>
     <objects name="Tiles">
-      <object>objects\ob_tile</object>
+      <object>objects\tile_double_corner</object>
+      <object>objects\tile_swerve</object>
     </objects>
   </objects>
   <rooms name="rooms">

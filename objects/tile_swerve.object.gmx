@@ -27,18 +27,11 @@
             <kind>1</kind>
             <string>_paths_x[0, 0] = 0;  _paths_y[0, 0] = 2;
 _paths_x[0, 1] = 1;  _paths_y[0, 1] = 2;
-_paths_x[0, 2] = 1;  _paths_y[0, 2] = 3;
-
-_paths_x[1, 0] = 0;  _paths_y[1, 0] = 1;
-_paths_x[1, 1] = 1;  _paths_y[1, 1] = 1;
-_paths_x[1, 2] = 2;  _paths_y[1, 2] = 1;
-_paths_x[1, 3] = 2;  _paths_y[1, 3] = 2;
-_paths_x[1, 4] = 2;  _paths_y[1, 4] = 3;
+_paths_x[0, 2] = 2;  _paths_y[0, 2] = 1;
+_paths_x[0, 3] = 3;  _paths_y[0, 3] = 1;
 
 tile_create_paths();
 
-rotations = 4;
-flips = 1;
 
 </string>
           </argument>

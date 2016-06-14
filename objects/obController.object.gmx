@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>SetupConsts();
+            <string>create_consts();
+create_all_tiles();
 
 // coords of centre of screen
 _X = 0;
@@ -37,13 +38,11 @@ var a = application_get_position();
 global.Width = a[2] - a[0];
 global.Height = a[3] - a[1];
 
-var tile_inst = instance_create(0, 0, ob_tile);
-
 for(var i = 0; i &lt; 10; i++)
 {
     for(var j = 0; j &lt; 10; j++)
     {
-        _tiles[i, j] = tile_inst;
+        _tiles[i, j] = random_from_array(global.all_tiles);
         _tile_rots[i, j] = irandom(3);
         _tile_flips[i, j] = irandom(1);
     }

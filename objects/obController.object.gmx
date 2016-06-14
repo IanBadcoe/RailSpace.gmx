@@ -38,9 +38,9 @@ var a = application_get_position();
 global.Width = a[2] - a[0];
 global.Height = a[3] - a[1];
 
-for(var i = 0; i &lt; 10; i++)
+for(var i = 0; i &lt; 30; i++)
 {
-    for(var j = 0; j &lt; 10; j++)
+    for(var j = 0; j &lt; 30; j++)
     {
         _tiles[i, j] = random_from_array(global.all_tiles);
         _tile_rots[i, j] = irandom(3);

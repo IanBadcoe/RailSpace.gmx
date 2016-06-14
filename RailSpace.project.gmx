@@ -23,6 +23,15 @@
       <object>objects\tile_single_points_wide_far</object>
       <object>objects\tile_single_points_narrow_far</object>
       <object>objects\tile_swerve</object>
+      <object>objects\tile_swap</object>
+      <object>objects\tile_pair</object>
+      <object>objects\tile_pair_single_points_near</object>
+      <object>objects\tile_pair_opposite_points_near</object>
+      <object>objects\tile_pair_opposite_points_far</object>
+      <object>objects\tile_pair_opposite_points_far_near</object>
+      <object>objects\tile_pair_opposite_points_near_far</object>
+      <object>objects\tile_pair_single_points_far</object>
+      <object>objects\tile_octo</object>
     </objects>
   </objects>
   <rooms name="rooms">

@@ -4,35 +4,57 @@
 #define control_step
 if keyboard_check(vk_left)
 {
-    _X -= 5;
+    _X_offset -= 5;
 }
 
 if keyboard_check(vk_right)
 {
-    _X += 5;
+    _X_offset += 5;
 }
 
 if keyboard_check(vk_up)
 {
-    _Y -= 5;
+    _Y_offset -= 5;
 }
 
 if keyboard_check(vk_down)
 {
-    _Y += 5;
+    _Y_offset += 5;
 }
 
 
 
-#define control_draw
-for(var i = 0; i < array_height_2d(_tile_rots); i++)
+#define control_draw_tile_array
+var tile_array = argument0;
+var parallax_factor = argument1;
+
+for(var i = 0; i < global.TilesWidth; i++)
 {
-    for(var j = 0; j < array_length_2d(_tile_rots, i); j++)
+    for(var j = 0; j < global.TilesHeight; j++)
     {
-        with(_tiles[i,j])
+        with(tile_array[i,j])
         {
-            tile_draw(i * 100 - other._X, j * 100 -other._Y,
-                other._tile_rots[i, j], other._tile_flips[i,j]);
+            tile_draw(
+                _tile,
+                global.ScreenWidth / 2
+                    + (i - global.TilesHalfWidth) * global.TileSize * parallax_factor
+                    - other._X_offset * parallax_factor,
+                global.ScreenHeight / 2
+                    + (j - global.TilesHalfHeight) * global.TileSize * parallax_factor
+                    - other._Y_offset * parallax_factor,
+                _rot,
+                _flip,
+                parallax_factor);
         }
     }
+}
+
+#define control_draw
+for(var i = 2; i >= 0; i--)
+{
+    draw_set_colour(global.LayerColours[i]);
+    
+    var tile_array = ds_list_find_value(_tiles, i);
+    
+    control_draw_tile_array(tile_array, global.LayerParallax[i]);
 }

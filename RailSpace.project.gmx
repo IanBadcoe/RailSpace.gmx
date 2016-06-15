@@ -9,7 +9,6 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\create_consts.gml</script>
     <script>scripts\Control.gml</script>
     <script>scripts\Tile.gml</script>
     <script>scripts\Misc.gml</script>
@@ -33,6 +32,7 @@
       <object>objects\tile_pair_single_points_far</object>
       <object>objects\tile_octo</object>
     </objects>
+    <object>objects\obTileInstance</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMain</room>

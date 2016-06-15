@@ -25,28 +25,70 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>create_consts();
-create_all_tiles();
-
-// coords of centre of screen
-_X = 0;
-_Y = 0;
+            <string>// offset of the coords of centre of screen
+// for a point on the top parallax layer, this will be in the middle of the screen
+// for points on lower layers, we need to divide this by LayerParallax
+_X_offset = 0;
+_Y_offset = 0;
 
 window_set_fullscreen(true);
 var a = application_get_position();
 
-global.Width = a[2] - a[0];
-global.Height = a[3] - a[1];
+global.ScreenWidth = a[2] - a[0];
+global.ScreenHeight = a[3] - a[1];
 
-for(var i = 0; i &lt; 10; i++)
+global.TilesWidth = 11;
+global.TilesHeight = 9;
+
+global.TilesHalfWidth = global.TilesWidth / 2;
+global.TilesHalfHeight = global.TilesHeight / 2;
+
+global.TileSize = 100;
+
+global.LayerParallax[0] = 1;
+global.LayerParallax[1] = 0.75;
+global.LayerParallax[2] = 0.5;
+
+global.LayerColours[0] = c_black;
+global.LayerColours[1] = merge_color(c_black, c_blue, 0.3);
+global.LayerColours[2] = merge_color(c_black, c_blue, 0.6);
+
+create_all_tiles();
+
+var l1, l2, l3;
+
+for(var i = 0; i &lt; global.TilesWidth; i++)
 {
-    for(var j = 0; j &lt; 10; j++)
+    for(var j = 0; j &lt; global.TilesHeight; j++)
     {
-        _tiles[i, j] = random_from_array(global.all_tiles);
-        _tile_rots[i, j] = irandom(3);
-        _tile_flips[i, j] = irandom(1);
+        var ti = instance_create(0, 0, obTileInstance);
+        ti._tile = random_from_array(global.all_tiles);
+        ti._rot = irandom(3);
+        ti._flip = irandom(1);
+        
+        l1[i, j] = ti;
+        
+        ti = instance_create(0, 0, obTileInstance);
+        ti._tile = random_from_array(global.all_tiles);
+        ti._rot = irandom(3);
+        ti._flip = irandom(1);
+        
+        l2[i, j] = ti;
+
+        ti = instance_create(0, 0, obTileInstance);
+        ti._tile = random_from_array(global.all_tiles);
+        ti._rot = irandom(3);
+        ti._flip = irandom(1);
+        
+        l3[i, j] = ti;
     }
 }
+
+_tiles = ds_list_create();
+
+ds_list_add(_tiles, l1);
+ds_list_add(_tiles, l2);
+ds_list_add(_tiles, l3);
 
 </string>
           </argument>

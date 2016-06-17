@@ -155,4 +155,3 @@ global.all_tiles[TileTypes.PairOppositePointsNear] = instance_create(0, 0, tile_
 global.all_tiles[TileTypes.PairOppositePointsFar] = instance_create(0, 0, tile_pair_opposite_points_far);
 global.all_tiles[TileTypes.PairOppositePointsNearFar] = instance_create(0, 0, tile_pair_opposite_points_near_far);
 global.all_tiles[TileTypes.PairOppositePointsFarNear] = instance_create(0, 0, tile_pair_opposite_points_far_near);
-

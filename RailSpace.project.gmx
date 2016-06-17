@@ -5,36 +5,37 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
-  <backgrounds name="background"/>
-  <paths name="paths"/>
+  <sprites name="sprites">
+    <sprite>sprites\sprTown</sprite>
+    <sprite>sprites\sprJunction</sprite>
+  </sprites>
+  <backgrounds name="background">
+    <background>background\bckMap</background>
+  </backgrounds>
+  <paths name="paths">
+    <path>paths\map_v_1</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\Control.gml</script>
     <script>scripts\Tile.gml</script>
     <script>scripts\Misc.gml</script>
+    <script>scripts\Map.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fntMap</font>
+    <font>fonts\fntMapSmall</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obController</object>
-    <objects name="Tiles">
-      <object>objects\tile_double_corner</object>
-      <object>objects\tile_single_points_narrow_near</object>
-      <object>objects\tile_single_points_wide_near</object>
-      <object>objects\tile_single_points_wide_far</object>
-      <object>objects\tile_single_points_narrow_far</object>
-      <object>objects\tile_swerve</object>
-      <object>objects\tile_swap</object>
-      <object>objects\tile_pair</object>
-      <object>objects\tile_pair_single_points_near</object>
-      <object>objects\tile_pair_opposite_points_near</object>
-      <object>objects\tile_pair_opposite_points_far</object>
-      <object>objects\tile_pair_opposite_points_far_near</object>
-      <object>objects\tile_pair_opposite_points_near_far</object>
-      <object>objects\tile_pair_single_points_far</object>
-      <object>objects\tile_octo</object>
+    <object>objects\obGlobalController</object>
+    <objects name="Map">
+      <object>objects\obTown</object>
+      <object>objects\obJunction</object>
+      <object>objects\obLocation</object>
     </objects>
-    <object>objects\obTileInstance</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rmMap</room>
     <room>rooms\rmMain</room>
   </rooms>
   <help>

@@ -51,6 +51,14 @@ view_wview[0] = global.ScreenWidth;
 global.RoomSquares = noone;
 global.RoomSides = noone;
 
+global.Ground[0] = background_get_texture(txtGround1);
+global.Ground[1] = background_get_texture(txtGround2);
+global.Ground[2] = background_get_texture(txtGround3);
+global.Ground[3] = background_get_texture(txtGround4);
+global.Ground[4] = background_get_texture(txtGround5);
+
+global.MaxHeights = 5;
+global.GroundHeight = 2;
 </string>
           </argument>
         </arguments>

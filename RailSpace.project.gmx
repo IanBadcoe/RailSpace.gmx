@@ -12,7 +12,11 @@
   <backgrounds name="background">
     <background>background\bckMap</background>
     <background>background\txtCliff</background>
-    <background>background\txtGround</background>
+    <background>background\txtGround5</background>
+    <background>background\txtGround4</background>
+    <background>background\txtGround3</background>
+    <background>background\txtGround2</background>
+    <background>background\txtGround1</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\pthPBJ_1_1</path>

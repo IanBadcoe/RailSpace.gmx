@@ -29,10 +29,16 @@ grid_make_sides();
 #define grid_make_squares
 if (global.RoomSquares != noone)
 {
-    ds_list_destroy(global.RoomSquares);
+    for(i = 0; i < global.MaxHeights; i++)
+    {
+        ds_list_destroy(global.RoomSquares[i]);
+    }
 }
 
-global.RoomSquares = ds_list_create();
+for(i = 0; i < global.MaxHeights; i++)
+{
+    global.RoomSquares[i] = ds_list_create();
+}
 
 for(var i = 0; i < 16; i++)
 {
@@ -62,18 +68,20 @@ inst._tr[0] = x_h; inst._tr[1] = y_h;
 
 inst._height = h;
 
-ds_list_add(global.RoomSquares, inst);
+ds_list_add(global.RoomSquares[h], inst);
 
 
 #define grid_draw_squares
 var fx = argument0;
 var fy = argument1;
 
-for (var i = 0; i < ds_list_size(global.RoomSquares); i++)
+for(j = 0; j < global.MaxHeights; j++)
 {
-    grid_draw_square(fx, fy, ds_list_find_value(global.RoomSquares, i));
+    for (var i = 0; i < ds_list_size(global.RoomSquares[j]); i++)
+    {
+        grid_draw_square(fx, fy, ds_list_find_value(global.RoomSquares[j], i));
+    }
 }
-
 
 #define grid_draw_sides
 var fx = argument0;
@@ -108,21 +116,17 @@ draw_primitive_end();
 */
 
 texture_set_repeat(true)
-texture_set_blending(true);
+texture_set_blending(false);
 
-draw_primitive_begin_texture(pr_trianglestrip, background_get_texture(txtGround));
-draw_vertex_texture_colour(bl[0], bl[1],
-    sq._bl[0] / global.SquareSize / 4, sq._bl[1] / global.SquareSize / 4,
-    c_blue, 1 - sq._height / 5);
-draw_vertex_texture_colour(br[0], br[1],
-    sq._br[0] / global.SquareSize / 4, sq._br[1] / global.SquareSize / 4,
-    c_blue, 1 - sq._height / 5);
-draw_vertex_texture_colour(tl[0], tl[1], sq._tl[0] / global.SquareSize / 4,
-    sq._tl[1] / global.SquareSize / 4,
-    c_blue, 1 - sq._height / 5);
-draw_vertex_texture_colour(tr[0], tr[1],
-    sq._tr[0] / global.SquareSize / 4, sq._tr[1] / global.SquareSize / 4,
-    c_blue, 1 - sq._height / 5);
+draw_primitive_begin_texture(pr_trianglestrip, global.Ground[sq._height]);
+draw_vertex_texture(bl[0], bl[1],
+    sq._bl[0] / global.SquareSize / 4, sq._bl[1] / global.SquareSize / 4);
+draw_vertex_texture(br[0], br[1],
+    sq._br[0] / global.SquareSize / 4, sq._br[1] / global.SquareSize / 4);
+draw_vertex_texture(tl[0], tl[1], sq._tl[0] / global.SquareSize / 4,
+    sq._tl[1] / global.SquareSize / 4);
+draw_vertex_texture(tr[0], tr[1],
+    sq._tr[0] / global.SquareSize / 4, sq._tr[1] / global.SquareSize / 4);
 draw_primitive_end();
 
 /*draw_primitive_begin_texture(pr_trianglestrip, background_get_texture(txtGround));
@@ -139,9 +143,13 @@ var fy = argument1;
 var c = argument2;
 var h = argument3;
 
+// this is set up to go down reciprocally with distance from camera (depth)
+// and arranged so that global.GroundHeight is where perspective == 1
+var perspective = global.MaxHeights / (global.MaxHeights + global.GroundHeight - h);
+
 var ret;
-ret[0] = (c[0] - fx) * 5 / (7 - h) + global.ScreenCentreX;
-ret[1] = (c[1] - fy) * 5 / (7 - h) + global.ScreenCentreY;
+ret[0] = (c[0] - fx) * perspective + global.ScreenCentreX;
+ret[1] = (c[1] - fy) * perspective + global.ScreenCentreY;
 
 return ret;
 

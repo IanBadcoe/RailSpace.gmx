@@ -11,15 +11,19 @@
   </sprites>
   <backgrounds name="background">
     <background>background\bckMap</background>
+    <background>background\txtCliff</background>
+    <background>background\txtGround</background>
   </backgrounds>
   <paths name="paths">
-    <path>paths\map_v_1</path>
+    <path>paths\pthPBJ_1_1</path>
+    <path>paths\pthPBJ_2_1</path>
   </paths>
   <scripts name="scripts">
     <script>scripts\Control.gml</script>
     <script>scripts\Tile.gml</script>
     <script>scripts\Misc.gml</script>
     <script>scripts\Map.gml</script>
+    <script>scripts\Grid.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMap</font>
@@ -33,10 +37,12 @@
       <object>objects\obJunction</object>
       <object>objects\obLocation</object>
     </objects>
+    <object>objects\obSquare</object>
+    <object>objects\obRoomController</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>
-    <room>rooms\rmMain</room>
+    <room>rooms\rmPBJ</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

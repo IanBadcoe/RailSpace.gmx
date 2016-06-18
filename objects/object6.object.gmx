@@ -4,11 +4,11 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,55 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// offset of the coords of centre of screen
-// for a point on the top parallax layer, this will be in the middle of the screen
-// for points on lower layers, we need to divide this by LayerParallax
-global.MapXOffset = 0;
-global.MapYOffset = 0;
+            <string>for(var i = 0; i &lt; 16; i++)
+{
+    for(var j = 0; j &lt; 16; j++)
+    {
+        draw_text(i*16, j*16, string(global.RoomGrid[i,j]));
+    }
+}
 
-window_set_fullscreen(true);
-var a = application_get_position();
-
-global.ScreenWidth = a[2] - a[0];
-global.ScreenHeight = a[3] - a[1];
-
-global.ScreenCentreX = global.ScreenWidth / 2;
-global.ScreenCentreY = global.ScreenHeight / 2;
-
-global.SquareSize = 128;
-
-view_hport[0] = global.ScreenHeight;
-view_wport[0] = global.ScreenWidth;
-
-view_hview[0] = global.ScreenHeight;
-view_wview[0] = global.ScreenWidth;
-
-global.RoomSquares = noone;
-global.RoomSides = noone;
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="27">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>game_end();
 </string>
           </argument>
         </arguments>

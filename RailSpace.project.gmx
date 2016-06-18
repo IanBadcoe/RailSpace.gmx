@@ -27,7 +27,8 @@
     <script>scripts\Tile.gml</script>
     <script>scripts\Misc.gml</script>
     <script>scripts\Map.gml</script>
-    <script>scripts\Grid.gml</script>
+    <script>scripts\GridMake.gml</script>
+    <script>scripts\GridDraw.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMap</font>
@@ -42,6 +43,7 @@
       <object>objects\obLocation</object>
     </objects>
     <object>objects\obSquare</object>
+    <object>objects\obSide</object>
     <object>objects\obRoomController</object>
   </objects>
   <rooms name="rooms">

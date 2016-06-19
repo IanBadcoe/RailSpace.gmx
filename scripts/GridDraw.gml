@@ -148,8 +148,8 @@ var perspective = global.MaxHeights / (global.MaxHeights + global.GroundHeight -
 
 var ret;
 
-ret[0] = (p[0] - fx) * perspective + global.ScreenCentreX;
-ret[1] = (p[1] - fy) * perspective + global.ScreenCentreY;
+ret[0] = (p[0] - fx + noise(p, 0) * global.NoiseAmount) * perspective + global.ScreenCentreX;
+ret[1] = (p[1] - fy + noise(p, 1) * global.NoiseAmount) * perspective + global.ScreenCentreY;
 
 return ret;
 

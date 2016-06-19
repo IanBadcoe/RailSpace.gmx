@@ -40,6 +40,7 @@ global.ScreenCentreX = global.ScreenWidth / 2;
 global.ScreenCentreY = global.ScreenHeight / 2;
 
 global.SquareSize = 128;
+global.NoiseAmount = global.SquareSize / 2;
 
 global.TilesWidth = 16;
 global.TilesHeight = 15;

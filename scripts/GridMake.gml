@@ -67,7 +67,9 @@ var cube = argument3;
 
 var tp;
 
+for(var d = 0; d < 4; d++)
 {
+    tp[d] = grid_transform(0, 0, cube._p[d], cube._h);
 }
 
 for(var d = 0; d < 4; d++)
@@ -85,6 +87,7 @@ for(var d = 0; d < 4; d++)
             cube._side_bottoms[d] = other_h;
 
             var dn = (d + 1) % 4;
+            cube._side_normals[d] = coord_normalised(coord_rot90(coord_subtract(tp[dn], tp[d])));
         }
     }
 }

@@ -29,10 +29,12 @@
     <script>scripts\Map.gml</script>
     <script>scripts\GridMake.gml</script>
     <script>scripts\GridDraw.gml</script>
+    <script>scripts\View.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMap</font>
     <font>fonts\fntMapSmall</font>
+    <font>fonts\fntDebug</font>
   </fonts>
   <objects name="objects">
     <object>objects\obController</object>
@@ -42,9 +44,8 @@
       <object>objects\obJunction</object>
       <object>objects\obLocation</object>
     </objects>
-    <object>objects\obSquare</object>
-    <object>objects\obSide</object>
     <object>objects\obRoomController</object>
+    <object>objects\obCube</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>

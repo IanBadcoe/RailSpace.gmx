@@ -1,74 +1,128 @@
 #define GridDraw
 
 
-#define grid_draw_squares
+#define grid_draw_cubes
 var fx = argument0;
 var fy = argument1;
+var h = argument2;
 
-for(j = 0; j < global.MaxHeights; j++)
+var square_x = floor(fx / global.SquareSize);
+var square_y = floor(fy / global.SquareSize);
+
+if (square_y > 0)
 {
-    for (var i = 0; i < ds_list_size(global.RoomSquares[j]); i++)
+    if (square_x > 0)
     {
-        grid_draw_square(fx, fy, ds_list_find_value(global.RoomSquares[j], i));
+        grid_draw_quadrant(fx, fy,
+            square_x, square_y,
+            0, 0,
+            1, 1,
+            h, 1);
+    }
+    
+    if (square_x < global.TilesWidth)
+    {
+        grid_draw_quadrant(fx, fy,
+            square_x - 1, square_y,
+            global.TilesWidth - 1, 0,
+            -1, 1,
+            h, 2);
     }
 }
 
-#define grid_draw_sides
-var fx = argument0;
-var fy = argument1;
-
-for(j = 0; j < global.MaxHeights; j++)
+if (square_y < global.TilesWidth)
 {
-    for (var i = 0; i < ds_list_size(global.RoomSides[j]); i++)
+    if (square_x > 0)
     {
-        grid_draw_side(fx, fy, ds_list_find_value(global.RoomSides[j], i));
+        grid_draw_quadrant(fx, fy,
+            square_x, square_y - 1,
+            0, global.TilesHeight - 1,
+            1, -1,
+            h, 0);
+    }
+
+    if (square_x < global.TilesWidth)
+    {
+        grid_draw_quadrant(fx, fy,
+            square_x - 1, square_y - 1,
+            global.TilesWidth - 1, global.TilesHeight - 1,
+            -1, -1,
+            h, 3);
     }
 }
 
-#define grid_draw_square
+#define grid_draw_quadrant
+var fx = argument0;
+var fy = argument1;
+var esx = argument2;
+var esy = argument3;
+var ssx = argument4;
+var ssy = argument5;
+var dsx = argument6;
+var dsy = argument7;
+var h = argument8;
+var d = argument9;
+
+for(var i = ssx; i != esx; i += dsx)
+{
+    for(var j = ssy; j != esy; j += dsy)
+    {
+        if (global.RoomCubes[i, j]._h == h)
+        {
+            grid_draw_cube(fx, fy, global.RoomCubes[i, j]);
+        }
+    }
+}
+
+
+#define grid_draw_cube
+var fx = argument0;
+var fy = argument1;
+var cube = argument2;
+
 var fx = argument0;
 var fy = argument1;
 var sq = argument2;
 
-var bl = grid_transform(fx, fy, sq._bl, sq._height);
-var br = grid_transform(fx, fy, sq._br, sq._height);
-var tl = grid_transform(fx, fy, sq._tl, sq._height);
-var tr = grid_transform(fx, fy, sq._tr, sq._height);
+var tp;
+
+for(var i = 0; i < 4; i++)
+{
+    tp[i] = grid_transform(fx, fy, cube._p[i, 0], cube._p[i, 1], cube._h);
+}
 
 texture_set_repeat(true)
 texture_set_blending(false);
 
-draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[sq._height]);
-draw_vertex_texture(bl[0], bl[1],
-    sq._bl[0] / global.SquareSize / 4, sq._bl[1] / global.SquareSize / 4);
-draw_vertex_texture(br[0], br[1],
-    sq._br[0] / global.SquareSize / 4, sq._br[1] / global.SquareSize / 4);
-draw_vertex_texture(tl[0], tl[1], sq._tl[0] / global.SquareSize / 4,
-    sq._tl[1] / global.SquareSize / 4);
-draw_vertex_texture(tr[0], tr[1],
-    sq._tr[0] / global.SquareSize / 4, sq._tr[1] / global.SquareSize / 4);
+draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h]);
+grid_draw_vertex(tp[0], cube._p[0, 0], cube._p[0, 1]);
+grid_draw_vertex(tp[1], cube._p[1, 0], cube._p[1, 1]);
+grid_draw_vertex(tp[3], cube._p[3, 0], cube._p[3, 1]);
+grid_draw_vertex(tp[2], cube._p[2, 0], cube._p[2, 1]);
 draw_primitive_end();
 
 
 #define grid_transform
 var fx = argument0;
 var fy = argument1;
-var c = argument2;
-var h = argument3;
+var px = argument2;
+var py = argument3;
+var h = argument4;
 
 // this is set up to go down reciprocally with distance from camera (depth)
 // and arranged so that global.GroundHeight is where perspective == 1
 var perspective = global.MaxHeights / (global.MaxHeights + global.GroundHeight - h);
 
 var ret;
-ret[0] = (c[0] - fx) * perspective + global.ScreenCentreX;
-ret[1] = (c[1] - fy) * perspective + global.ScreenCentreY;
+
+ret[0] = (px - fx) * perspective + global.ScreenCentreX;
+ret[1] = (py - fy) * perspective + global.ScreenCentreY;
 
 return ret;
 
 
 #define grid_draw_side
-var fx = argument0;
+/*var fx = argument0;
 var fy = argument1;
 var sq = argument2;
 
@@ -90,4 +144,12 @@ draw_vertex_texture(b1[0], b1[1],
 draw_vertex_texture(b2[0], b2[1],
     (sq._p2[0] + sq._p2[1]) / global.SquareSize / 4, 0);
 draw_primitive_end();
+*/
+
+#define grid_draw_vertex
+var c = argument0;
+var tx = argument1;
+var ty = argument2;
+
+draw_vertex_texture(c[0], c[1], tx / global.SquareSize / 4, ty / global.SquareSize / 4);
 

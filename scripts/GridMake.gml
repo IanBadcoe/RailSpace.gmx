@@ -22,36 +22,47 @@ for(var i = 0; i < global.TilesWidth; i++)
 var str = argument0;
 
 grid_make_grid(str);
-grid_make_squares();
-grid_make_sides();
+grid_make_cubes();
 
-#define grid_make_sides
-if (global.RoomSides != noone)
-{
-    for(i = 0; i < global.MaxHeights; i++)
-    {
-        ds_list_destroy(global.RoomSides[i]);
-    }
-}
 
-for(i = 0; i < global.MaxHeights; i++)
-{
-    global.RoomSides[i] = ds_list_create();
-}
-
+#define grid_make_cubes
 for(var i = 0; i < global.TilesWidth; i++)
 {
     for(var j = 0; j < global.TilesHeight; j++)
     {
-        grid_make_side(i, j, global.RoomGrid[i, j]);
+        grid_make_cube(i, j, global.RoomGrid[i, j]);
     }
 }
 
 
-#define grid_make_side
+#define grid_make_cube
 var i = argument0;
 var j = argument1;
 var h = argument2;
+
+var x_l = i * global.SquareSize;
+var x_h = i * global.SquareSize + global.SquareSize;
+var y_l = j * global.SquareSize;
+var y_h = j * global.SquareSize + global.SquareSize;
+
+var inst = instance_create(x_l, y_l, obCube);
+
+inst._p[0, 0] = x_l; inst._p[0, 1] = y_h;
+inst._p[1, 0] = x_h; inst._p[1, 1] = y_h;
+inst._p[2, 0] = x_h; inst._p[2, 1] = y_l;
+inst._p[3, 0] = x_l; inst._p[3, 1] = y_l;
+
+inst._h = h;
+
+grid_make_sides(i, j, h, inst);
+
+global.RoomCubes[i, j] = inst;
+
+#define grid_make_sides
+var i = argument0;
+var j = argument1;
+var h = argument2;
+var cube = argument3;
 
 var x_c = (i + 0.5) * global.SquareSize;
 var y_c = (j + 0.5) * global.SquareSize;
@@ -70,65 +81,9 @@ for(var d = 0; d < 4; d++)
         
         if (other_h < h)
         {
-            var x1 = x_c + (global.OrthDirs[d, 0] + global.OrthDirs[p_d, 0]) * global.SquareSize * 0.5;
-            var y1 = y_c + (global.OrthDirs[d, 1] + global.OrthDirs[p_d, 1]) * global.SquareSize * 0.5;
-            var x2 = x_c + (global.OrthDirs[d, 0] + global.OrthDirs[m_d, 0]) * global.SquareSize * 0.5;
-            var y2 = y_c + (global.OrthDirs[d, 1] + global.OrthDirs[m_d, 1]) * global.SquareSize * 0.5;
-
-            var inst = instance_create(x_c, y_c, obSide);
-
-            inst._p1[0] = x1; inst._p1[1] = y1;
-            inst._p2[0] = x2; inst._p2[1] = y2;
-            inst._h_up = h;
-            inst._h_down = other_h;
-
-            ds_list_add(global.RoomSides[h], inst);
+            cube._side_tops[d] = h;
+            cube._side_bottoms[d] = other_h;
         }
     }
 }
-
-
-#define grid_make_squares
-if (global.RoomSquares != noone)
-{
-    for(i = 0; i < global.MaxHeights; i++)
-    {
-        ds_list_destroy(global.RoomSquares[i]);
-    }
-}
-
-for(i = 0; i < global.MaxHeights; i++)
-{
-    global.RoomSquares[i] = ds_list_create();
-}
-
-for(var i = 0; i < global.TilesWidth; i++)
-{
-    for(var j = 0; j < global.TilesHeight; j++)
-    {
-        grid_make_square(i, j, global.RoomGrid[i, j]);
-    }
-}
-
-
-#define grid_make_square
-var i = argument0;
-var j = argument1;
-var h = argument2;
-
-var x_l = i * global.SquareSize;
-var x_h = i * global.SquareSize + global.SquareSize;
-var y_l = j * global.SquareSize;
-var y_h = j * global.SquareSize + global.SquareSize;
-
-var inst = instance_create(x_l, y_l, obSquare);
-
-inst._bl[0] = x_l; inst._bl[1] = y_l;
-inst._br[0] = x_h; inst._br[1] = y_l;
-inst._tl[0] = x_l; inst._tl[1] = y_h;
-inst._tr[0] = x_h; inst._tr[1] = y_h;
-
-inst._height = h;
-
-ds_list_add(global.RoomSquares[h], inst);
 

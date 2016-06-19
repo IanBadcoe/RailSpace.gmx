@@ -32,10 +32,9 @@ global.MapXOffset = 0;
 global.MapYOffset = 0;
 
 window_set_fullscreen(true);
-var a = application_get_position();
 
-global.ScreenWidth = a[2] - a[0];
-global.ScreenHeight = a[3] - a[1];
+global.ScreenWidth = display_get_width();
+global.ScreenHeight = display_get_height();;
 
 global.ScreenCentreX = global.ScreenWidth / 2;
 global.ScreenCentreY = global.ScreenHeight / 2;
@@ -45,14 +44,9 @@ global.SquareSize = 128;
 global.TilesWidth = 16;
 global.TilesHeight = 15;
 
-view_hport[0] = global.ScreenHeight;
-view_wport[0] = global.ScreenWidth;
+view_reset();
 
-view_hview[0] = global.ScreenHeight;
-view_wview[0] = global.ScreenWidth;
-
-global.RoomSquares = noone;
-global.RoomSides = noone;
+global.RoomCubes[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
 
 global.GroundTex[0] = background_get_texture(txtGround1);
 global.GroundTex[1] = background_get_texture(txtGround2);

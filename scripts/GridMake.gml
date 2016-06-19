@@ -30,7 +30,7 @@ for(var i = 0; i < global.TilesWidth; i++)
 {
     for(var j = 0; j < global.TilesHeight; j++)
     {
-        grid_make_cube(i, j, global.RoomGrid[i, j]);
+        grid_make_cube(i, j);
     }
 }
 
@@ -38,7 +38,8 @@ for(var i = 0; i < global.TilesWidth; i++)
 #define grid_make_cube
 var i = argument0;
 var j = argument1;
-var h = argument2;
+
+var h = global.RoomGrid[i, j];
 
 var x_l = i * global.SquareSize;
 var x_h = i * global.SquareSize + global.SquareSize;
@@ -51,6 +52,9 @@ inst._p[0] = make_coord(x_l, y_h);
 inst._p[1] = make_coord(x_h, y_h);
 inst._p[2] = make_coord(x_h, y_l);
 inst._p[3] = make_coord(x_l, y_l);
+
+inst._i = i;
+inst._j = j;
 
 inst._h = h;
 

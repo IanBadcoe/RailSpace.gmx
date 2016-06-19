@@ -92,8 +92,6 @@ for(var i = 0; i < 4; i++)
 texture_set_repeat(true)
 texture_set_blending(false);
 
-
-
 for(var d = 0; d < 4; d++)
 {
     if (cube._side_bottoms[d] != -1)
@@ -129,6 +127,16 @@ grid_draw_vertex(tp[3], cube._p[3]);
 grid_draw_vertex(tp[2], cube._p[2]);
 draw_primitive_end();
 
+if (cube._highlit)
+{
+    draw_set_color(c_white);
+    
+    grid_draw_line(tp[0], tp[1], 3);
+    grid_draw_line(tp[1], tp[2], 3);
+    grid_draw_line(tp[2], tp[3], 3);
+    grid_draw_line(tp[3], tp[0], 3);
+}
+
 
 #define grid_transform
 var fx = argument0;
@@ -138,7 +146,7 @@ var h = argument3;
 
 // this is set up to go down reciprocally with distance from camera (depth)
 // and arranged so that global.GroundHeight is where perspective == 1
-var perspective = global.MaxHeights / (global.MaxHeights + global.GroundHeight - h);
+var perspective = grid_perspective(h);
 
 var ret;
 
@@ -165,3 +173,15 @@ var h = argument2;
 
 draw_vertex_texture(c[0], c[1], (t[0] + t[1]) / global.SquareSize / 4, h);
 
+
+#define grid_perspective
+var h = argument0;
+
+return global.MaxHeights / (global.MaxHeights + global.GroundHeight - h);
+
+#define grid_draw_line
+var p1 = argument0;
+var p2 = argument1;
+var w = argument2;
+
+draw_line_width(p1[0], p1[1], p2[0], p2[1], w);

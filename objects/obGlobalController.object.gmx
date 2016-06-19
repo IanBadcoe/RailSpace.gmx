@@ -41,7 +41,7 @@ global.ScreenCentreY = global.ScreenHeight / 2;
 global.ScreenCentre[0] = global.ScreenCentreX;
 global.ScreenCentre[1] = global.ScreenCentreY;
 
-global.SquareSize = 128;
+global.SquareSize = 120;
 global.NoiseAmount = global.SquareSize / 2;
 
 global.TilesWidth = 16;
@@ -50,6 +50,7 @@ global.TilesHeight = 16;
 view_reset();
 
 global.RoomCubes[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
+global.RoomGrid[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
 
 global.GroundTex[0] = background_get_texture(txtGround1);
 global.GroundTex[1] = background_get_texture(txtGround2);

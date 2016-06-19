@@ -92,40 +92,34 @@ for(var i = 0; i < 4; i++)
 texture_set_repeat(true)
 texture_set_blending(false);
 
-var dn = (d + 1) % 4;
 
-if (cube._side_bottoms[d] != -1)
+
+for(var d = 0; d < 4; d++)
 {
-    var et1 = tp[d];
-    var et2 = tp[dn];
-    var eb1 = grid_transform(fx, fy, cube._p[d], cube._side_bottoms[d]);    
-    var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d]);    
-
-    draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
-    grid_draw_vertex_2(et1, cube._p[d], 1);
-    grid_draw_vertex_2(et2, cube._p[dn], 1);
-    grid_draw_vertex_2(eb1, cube._p[d], 0);
-    grid_draw_vertex_2(eb2, cube._p[dn], 0);
-    draw_primitive_end();
-}
-
-d = dn;
-dn = (d + 1) % 4;
-
-if (cube._side_bottoms[d] != -1)
-{
-    var et1 = tp[d];
-    var et2 = tp[dn];
-    var eb1 = grid_transform(fx, fy, cube._p[d], cube._side_bottoms[d]);    
-    var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d]);    
-
-    draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
-    grid_draw_vertex_2(et1, cube._p[d], 1);
-    grid_draw_vertex_2(et2, cube._p[dn], 1);
-    grid_draw_vertex_2(eb1, cube._p[d], 0);
-    grid_draw_vertex_2(eb2, cube._p[dn], 0);
-    draw_primitive_end();
-    
+    if (cube._side_bottoms[d] != -1)
+    {
+        var side_rel = coord_subtract(global.ScreenCentre, tp[d]);
+        
+        var dot = coord_dot(side_rel, cube._side_normals[d]);
+        
+        // is the centre of the screen outside the side?
+        if (dot < 0)
+        {
+            var dn = (d + 1) % 4;
+            
+            var et1 = tp[d];
+            var et2 = tp[dn];
+            var eb1 = grid_transform(fx, fy, cube._p[d], cube._side_bottoms[d]);    
+            var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d]);    
+        
+            draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
+            grid_draw_vertex_2(et1, cube._p[d], 1);
+            grid_draw_vertex_2(et2, cube._p[dn], 1);
+            grid_draw_vertex_2(eb1, cube._p[d], 0);
+            grid_draw_vertex_2(eb2, cube._p[dn], 0);
+            draw_primitive_end();
+        }
+    }
 }
 
 draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h]);

@@ -64,6 +64,12 @@ var j = argument1;
 var h = argument2;
 var cube = argument3;
 
+
+var tp;
+
+{
+}
+
 for(var d = 0; d < 4; d++)
 {
     var ni = i + global.OrthDirs[d, 0];
@@ -77,6 +83,8 @@ for(var d = 0; d < 4; d++)
         if (other_h < h)
         {
             cube._side_bottoms[d] = other_h;
+
+            var dn = (d + 1) % 4;
         }
     }
 }

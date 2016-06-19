@@ -102,10 +102,10 @@ if (cube._side_bottoms[d] != -1)
     var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d]);    
 
     draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
-    grid_draw_vertex_2(et1, cube._p[0], 1);
-    grid_draw_vertex_2(et2, cube._p[1], 1);
-    grid_draw_vertex_2(eb1, cube._p[3], 0);
-    grid_draw_vertex_2(eb2, cube._p[2], 0);
+    grid_draw_vertex_2(et1, cube._p[d], 1);
+    grid_draw_vertex_2(et2, cube._p[dn], 1);
+    grid_draw_vertex_2(eb1, cube._p[d], 0);
+    grid_draw_vertex_2(eb2, cube._p[dn], 0);
     draw_primitive_end();
 }
 
@@ -120,10 +120,10 @@ if (cube._side_bottoms[d] != -1)
     var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d]);    
 
     draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
-    grid_draw_vertex_2(et1, cube._p[0], 1);
-    grid_draw_vertex_2(et2, cube._p[1], 1);
-    grid_draw_vertex_2(eb1, cube._p[3], 0);
-    grid_draw_vertex_2(eb2, cube._p[2], 0);
+    grid_draw_vertex_2(et1, cube._p[d], 1);
+    grid_draw_vertex_2(et2, cube._p[dn], 1);
+    grid_draw_vertex_2(eb1, cube._p[d], 0);
+    grid_draw_vertex_2(eb2, cube._p[dn], 0);
     draw_primitive_end();
     
 }
@@ -154,31 +154,6 @@ ret[1] = (p[1] - fy) * perspective + global.ScreenCentreY;
 return ret;
 
 
-#define grid_draw_side
-/*var fx = argument0;
-var fy = argument1;
-var sq = argument2;
-
-var t1 = grid_transform(fx, fy, sq._p1, sq._h_up);
-var t2 = grid_transform(fx, fy, sq._p2, sq._h_up);
-var b1 = grid_transform(fx, fy, sq._p1, sq._h_down);
-var b2 = grid_transform(fx, fy, sq._p2, sq._h_down);
-
-texture_set_repeat(true)
-texture_set_blending(false);
-
-draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
-draw_vertex_texture(t1[0], t1[1],
-    (sq._p1[0] + sq._p1[1]) / global.SquareSize / 4, 1);
-draw_vertex_texture(t2[0], t2[1],
-    (sq._p2[0] + sq._p2[1]) / global.SquareSize / 4, 1);
-draw_vertex_texture(b1[0], b1[1],
-    (sq._p1[0] + sq._p1[1]) / global.SquareSize / 4, 0);
-draw_vertex_texture(b2[0], b2[1],
-    (sq._p2[0] + sq._p2[1]) / global.SquareSize / 4, 0);
-draw_primitive_end();
-*/
-
 #define grid_draw_vertex
 var c = argument0;
 var t = argument1;
@@ -192,6 +167,7 @@ var t = argument1;
 var h = argument2;
 
 // override the y texture coordinate with h
+// use diagonal distance on texture x so it changes correctly on x and y of map
 
-draw_vertex_texture(c[0], c[1], t[0] / global.SquareSize / 4, h);
+draw_vertex_texture(c[0], c[1], (t[0] + t[1]) / global.SquareSize / 4, h);
 

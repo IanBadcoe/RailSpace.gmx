@@ -6,8 +6,8 @@ var fx = argument0;
 var fy = argument1;
 var h = argument2;
 
-var square_x = floor(fx / global.SquareSize);
-var square_y = floor(fy / global.SquareSize);
+var square_x = max(min(floor(fx / global.SquareSize), global.TilesWidth - 1), 0);
+var square_y = max(min(floor(fy / global.SquareSize), global.TilesHeight - 1), 0);
 
 if (square_y > 0)
 {
@@ -17,7 +17,7 @@ if (square_y > 0)
             square_x, square_y,
             0, 0,
             1, 1,
-            h, 1);
+            h, 0);
     }
     
     if (square_x < global.TilesWidth)
@@ -26,7 +26,7 @@ if (square_y > 0)
             square_x - 1, square_y,
             global.TilesWidth - 1, 0,
             -1, 1,
-            h, 2);
+            h, 3);
     }
 }
 
@@ -38,7 +38,7 @@ if (square_y < global.TilesWidth)
             square_x, square_y - 1,
             0, global.TilesHeight - 1,
             1, -1,
-            h, 0);
+            h, 1);
     }
 
     if (square_x < global.TilesWidth)
@@ -47,7 +47,7 @@ if (square_y < global.TilesWidth)
             square_x - 1, square_y - 1,
             global.TilesWidth - 1, global.TilesHeight - 1,
             -1, -1,
-            h, 3);
+            h, 2);
     }
 }
 
@@ -69,7 +69,7 @@ for(var i = ssx; i != esx; i += dsx)
     {
         if (global.RoomCubes[i, j]._h == h)
         {
-            grid_draw_cube(fx, fy, global.RoomCubes[i, j]);
+            grid_draw_cube(fx, fy, global.RoomCubes[i, j], h, d);
         }
     }
 }
@@ -79,35 +79,68 @@ for(var i = ssx; i != esx; i += dsx)
 var fx = argument0;
 var fy = argument1;
 var cube = argument2;
-
-var fx = argument0;
-var fy = argument1;
-var sq = argument2;
+var h = argument3;
+var d = argument4;
 
 var tp;
 
 for(var i = 0; i < 4; i++)
 {
-    tp[i] = grid_transform(fx, fy, cube._p[i, 0], cube._p[i, 1], cube._h);
+    tp[i] = grid_transform(fx, fy, cube._p[i], cube._h);
 }
 
 texture_set_repeat(true)
 texture_set_blending(false);
 
+var dn = (d + 1) % 4;
+
+if (cube._side_bottoms[d] != -1)
+{
+    var et1 = tp[d];
+    var et2 = tp[dn];
+    var eb1 = grid_transform(fx, fy, cube._p[d], cube._side_bottoms[d]);    
+    var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d]);    
+
+    draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
+    grid_draw_vertex_2(et1, cube._p[0], 1);
+    grid_draw_vertex_2(et2, cube._p[1], 1);
+    grid_draw_vertex_2(eb1, cube._p[3], 0);
+    grid_draw_vertex_2(eb2, cube._p[2], 0);
+    draw_primitive_end();
+}
+
+d = dn;
+dn = (d + 1) % 4;
+
+if (cube._side_bottoms[d] != -1)
+{
+    var et1 = tp[d];
+    var et2 = tp[dn];
+    var eb1 = grid_transform(fx, fy, cube._p[d], cube._side_bottoms[d]);    
+    var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d]);    
+
+    draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
+    grid_draw_vertex_2(et1, cube._p[0], 1);
+    grid_draw_vertex_2(et2, cube._p[1], 1);
+    grid_draw_vertex_2(eb1, cube._p[3], 0);
+    grid_draw_vertex_2(eb2, cube._p[2], 0);
+    draw_primitive_end();
+    
+}
+
 draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h]);
-grid_draw_vertex(tp[0], cube._p[0, 0], cube._p[0, 1]);
-grid_draw_vertex(tp[1], cube._p[1, 0], cube._p[1, 1]);
-grid_draw_vertex(tp[3], cube._p[3, 0], cube._p[3, 1]);
-grid_draw_vertex(tp[2], cube._p[2, 0], cube._p[2, 1]);
+grid_draw_vertex(tp[0], cube._p[0]);
+grid_draw_vertex(tp[1], cube._p[1]);
+grid_draw_vertex(tp[3], cube._p[3]);
+grid_draw_vertex(tp[2], cube._p[2]);
 draw_primitive_end();
 
 
 #define grid_transform
 var fx = argument0;
 var fy = argument1;
-var px = argument2;
-var py = argument3;
-var h = argument4;
+var p = argument2;
+var h = argument3;
 
 // this is set up to go down reciprocally with distance from camera (depth)
 // and arranged so that global.GroundHeight is where perspective == 1
@@ -115,8 +148,8 @@ var perspective = global.MaxHeights / (global.MaxHeights + global.GroundHeight -
 
 var ret;
 
-ret[0] = (px - fx) * perspective + global.ScreenCentreX;
-ret[1] = (py - fy) * perspective + global.ScreenCentreY;
+ret[0] = (p[0] - fx) * perspective + global.ScreenCentreX;
+ret[1] = (p[1] - fy) * perspective + global.ScreenCentreY;
 
 return ret;
 
@@ -148,8 +181,17 @@ draw_primitive_end();
 
 #define grid_draw_vertex
 var c = argument0;
-var tx = argument1;
-var ty = argument2;
+var t = argument1;
 
-draw_vertex_texture(c[0], c[1], tx / global.SquareSize / 4, ty / global.SquareSize / 4);
+draw_vertex_texture(c[0], c[1], t[0] / global.SquareSize / 4, t[1] / global.SquareSize / 4);
+
+
+#define grid_draw_vertex_2
+var c = argument0;
+var t = argument1;
+var h = argument2;
+
+// override the y texture coordinate with h
+
+draw_vertex_texture(c[0], c[1], t[0] / global.SquareSize / 4, h);
 

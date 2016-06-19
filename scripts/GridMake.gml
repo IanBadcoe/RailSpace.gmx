@@ -47,10 +47,10 @@ var y_h = j * global.SquareSize + global.SquareSize;
 
 var inst = instance_create(x_l, y_l, obCube);
 
-inst._p[0, 0] = x_l; inst._p[0, 1] = y_h;
-inst._p[1, 0] = x_h; inst._p[1, 1] = y_h;
-inst._p[2, 0] = x_h; inst._p[2, 1] = y_l;
-inst._p[3, 0] = x_l; inst._p[3, 1] = y_l;
+inst._p[0] = make_coord(x_l, y_h);
+inst._p[1] = make_coord(x_h, y_h);
+inst._p[2] = make_coord(x_h, y_l);
+inst._p[3] = make_coord(x_l, y_l);
 
 inst._h = h;
 
@@ -64,9 +64,6 @@ var j = argument1;
 var h = argument2;
 var cube = argument3;
 
-var x_c = (i + 0.5) * global.SquareSize;
-var y_c = (j + 0.5) * global.SquareSize;
-
 for(var d = 0; d < 4; d++)
 {
     var ni = i + global.OrthDirs[d, 0];
@@ -76,12 +73,9 @@ for(var d = 0; d < 4; d++)
         nj >= 0 && nj < global.TilesHeight)
     {
         var other_h = global.RoomGrid[ni, nj];
-        var p_d = (d + 1) % 4;
-        var m_d = (d + 3) % 4;
         
         if (other_h < h)
         {
-            cube._side_tops[d] = h;
             cube._side_bottoms[d] = other_h;
         }
     }

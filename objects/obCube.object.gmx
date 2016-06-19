@@ -26,8 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>// make the sides array big enough that we can look at all entries
-_side_tops[3] = noone;
-_side_bottoms[3] = noone;
+_side_bottoms[0] = -1;
+_side_bottoms[1] = -1;
+_side_bottoms[2] = -1;
+_side_bottoms[3] = -1;
 
 </string>
           </argument>

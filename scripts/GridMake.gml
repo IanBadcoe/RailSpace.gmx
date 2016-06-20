@@ -1,11 +1,19 @@
 #define GridMake
 
 
+#define grid_make_level
+var str = argument0;
+
+grid_make_grid(str);
+grid_make_cubes();
+
+
 #define grid_make_grid
 var str = argument0;
 
 // size the array
-global.RoomGrid[15, 15] = 0;
+global.RoomGrid = noone;
+global.RoomGrid[global.TilesWidth - 1, global.TilesHeight - 1] = 0;
 
 for(var i = 0; i < global.TilesWidth; i++)
 {
@@ -18,14 +26,10 @@ for(var i = 0; i < global.TilesWidth; i++)
 }
 
 
-#define grid_make_level
-var str = argument0;
-
-grid_make_grid(str);
-grid_make_cubes();
-
-
 #define grid_make_cubes
+global.RoomCubes = noone;
+global.RoomCubes[global.TilesWidth - 1, global.TilesHeight - 1] = 0;
+
 for(var i = 0; i < global.TilesWidth; i++)
 {
     for(var j = 0; j < global.TilesHeight; j++)

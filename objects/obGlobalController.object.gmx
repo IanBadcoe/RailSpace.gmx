@@ -31,23 +31,11 @@
 global.MapXOffset = 0;
 global.MapYOffset = 0;
 
-window_set_fullscreen(true);
-
-global.ScreenWidth = display_get_width();
-global.ScreenHeight = display_get_height();;
-
-global.ScreenCentreX = global.ScreenWidth / 2;
-global.ScreenCentreY = global.ScreenHeight / 2;
-global.ScreenCentre[0] = global.ScreenCentreX;
-global.ScreenCentre[1] = global.ScreenCentreY;
-
 global.SquareSize = 120;
 global.NoiseAmount = global.SquareSize / 2;
 
 global.TilesWidth = 16;
 global.TilesHeight = 16;
-
-view_reset();
 
 global.RoomCubes[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
 global.RoomGrid[global.TilesWidth - 1, global.TilesHeight - 1] = noone;

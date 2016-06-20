@@ -117,6 +117,94 @@ edit_find_mouse();
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="83">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var fname = get_save_filename("*.txt", "PBJ.txt");
+
+if (fname != "")
+{
+    var f = file_text_open_write(fname);
+    
+    file_text_write_real(f, global.TilesWidth);
+    file_text_write_real(f, global.TilesHeight);
+    file_text_writeln(f);
+    
+    for(var j = 0; j &lt; global.TilesHeight; j++)
+    {
+        for(var i = 0; i &lt; global.TilesWidth; i++)
+        {
+            file_text_write_real(f, global.RoomGrid[i, j]);
+        }
+        
+        file_text_writeln(f)
+    }
+    
+    file_text_close(f);
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="76">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var fname = get_open_filename("*.lev", "PBJ.lev");
+
+if (fname != "")
+{
+    var f = file_text_open_read(fname);
+    
+    global.TilesWidth = file_text_read_real(f);
+    global.TilesHeight = file_text_read_real(f);
+    
+    for(var j = 0; j &lt; global.TilesHeight; j++)
+    {
+        for(var i = 0; i &lt; global.TilesWidth; i++)
+        {
+            global.RoomGrid[i, j] = file_text_read_real(f);
+        }
+    }
+    
+    file_text_close(f);
+}
+
+grid_make_cubes();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="68">
       <action>
         <libid>1</libid>

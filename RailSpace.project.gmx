@@ -38,7 +38,7 @@
     <font>fonts\fntDebug</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obController</object>
+    <object>objects\obMapController</object>
     <object>objects\obGlobalController</object>
     <objects name="Map">
       <object>objects\obTown</object>

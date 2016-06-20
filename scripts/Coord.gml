@@ -53,4 +53,3 @@ var x2 = argument1[0];
 var y2 = argument1[1];
 
 return x1 * x2 + y1 * y2;
-

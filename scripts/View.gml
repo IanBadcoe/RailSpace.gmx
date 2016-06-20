@@ -11,4 +11,3 @@ view_wview[0] = global.ScreenWidth;
 view_xview[0] = 0;
 view_yview[0] = 0;
 
-

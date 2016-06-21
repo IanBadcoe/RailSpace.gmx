@@ -129,3 +129,24 @@ ret[2] = (i * (global.SquareSize / 3) - _focus_x) * pers + global.ScreenCentreX;
 ret[3] = (j * (global.SquareSize / 3) - _focus_y) * pers + global.ScreenCentreY;
 
 return ret;
+
+#define edit_set_cube_height
+var cube = argument0;
+var h = argument1;
+
+if (h < 0 || h >= global.MaxHeights) exit;
+
+var hi = cube._i;
+var hj = cube._j;
+
+global.RoomGrid[hi, hj] = h;
+_last_height = h;
+            
+for(var i = max(hi - 1, 0); i <= min(hi + 1, global.TilesWidth - 1); i++)
+{
+    for(var j = max(hj - 1, 0); j <= min(hj + 1, global.TilesHeight - 1); j++)
+    {
+        grid_make_cube(i, j);
+    }
+}
+

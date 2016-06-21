@@ -33,6 +33,8 @@ _highlit_point_cube = noone;
 // height mode
 _mode = 0;
 
+_last_height = 2;
+
 </string>
           </argument>
         </arguments>
@@ -84,6 +86,13 @@ if (_mode == 1)
 else
 {
     edit_highlight_cube(c_white);
+    
+    if (keyboard_check(vk_control) &amp;&amp;
+        _highlit_cube != noone &amp;&amp;
+        _highlit_cube._h != _last_height)
+    {
+        edit_set_cube_height(_highlit_cube, _last_height);
+    }    
 }
 
 </string>
@@ -112,21 +121,7 @@ else
 {
     if (_highlit_cube != noone)
     {
-        if (_highlit_cube._h &lt; global.MaxHeights - 1)
-        {
-            var hi = _highlit_cube._i;
-            var hj = _highlit_cube._j;
-            
-            global.RoomGrid[hi, hj]++;
-            
-            for(var i = max(hi - 1, 0); i &lt;= min(hi + 1, global.TilesWidth - 1); i++)
-            {
-                for(var j = max(hj - 1, 0); j &lt;= min(hj + 1, global.TilesHeight - 1); j++)
-                {
-                    grid_make_cube(i, j);
-                }
-            }
-        }
+        edit_set_cube_height(_highlit_cube, _highlit_cube._h + 1);
     }
 }
 </string>
@@ -155,21 +150,7 @@ else
 {
     if (_highlit_cube != noone)
     {
-        if (_highlit_cube._h &gt; 0)
-        {
-            var hi = _highlit_cube._i;
-            var hj = _highlit_cube._j;
-            
-            global.RoomGrid[hi, hj]--;
-            
-            for(var i = max(hi - 1, 0); i &lt;= min(hi + 1, global.TilesWidth - 1); i++)
-            {
-                for(var j = max(hj - 1, 0); j &lt;= min(hj + 1, global.TilesHeight - 1); j++)
-                {
-                    grid_make_cube(i, j);
-                }
-            }
-        }
+        edit_set_cube_height(_highlit_cube, _highlit_cube._h - 1);
     }
 }
 

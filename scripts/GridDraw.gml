@@ -51,6 +51,7 @@ if (square_y < global.TilesWidth)
     }
 }
 
+
 #define grid_draw_quadrant
 var fx = argument0;
 var fy = argument1;
@@ -86,7 +87,7 @@ var tp;
 
 for(var i = 0; i < 4; i++)
 {
-    tp[i] = grid_transform(fx, fy, cube._p[i], cube._h);
+    tp[i] = grid_transform(fx, fy, cube._p[i], cube._h, true);
 }
 
 texture_set_repeat(true)
@@ -107,8 +108,8 @@ for(var d = 0; d < 4; d++)
             
             var et1 = tp[d];
             var et2 = tp[dn];
-            var eb1 = grid_transform(fx, fy, cube._p[d], cube._side_bottoms[d]);    
-            var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d]);    
+            var eb1 = grid_transform(fx, fy, cube._p[d], cube._side_bottoms[d], true);    
+            var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d], true);    
         
             draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
             grid_draw_vertex_2(et1, cube._p[d], 1);
@@ -130,12 +131,42 @@ draw_primitive_end();
 if (cube._highlit)
 {
     draw_set_color(cube._highlight_colour);
-        
-    
+            
     grid_draw_line(tp[0], tp[1], 3);
     grid_draw_line(tp[1], tp[2], 3);
     grid_draw_line(tp[2], tp[3], 3);
     grid_draw_line(tp[3], tp[0], 3);
+}
+
+if (cube._show_grid)
+{
+    draw_set_colour(c_gray);
+    
+    var a;
+    a[ 0] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 1/6) * global.SquareSize);
+    a[ 1] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 1/6) * global.SquareSize);
+    a[ 2] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 1/2) * global.SquareSize);
+    a[ 3] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 1/2) * global.SquareSize);
+    a[ 4] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 5/6) * global.SquareSize);
+    a[ 5] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 5/6) * global.SquareSize);
+    a[ 6] = make_coord((cube._i + 1/6) * global.SquareSize, (cube._j + 0) * global.SquareSize);
+    a[ 7] = make_coord((cube._i + 1/6) * global.SquareSize, (cube._j + 1) * global.SquareSize);
+    a[ 8] = make_coord((cube._i + 1/2) * global.SquareSize, (cube._j + 0) * global.SquareSize);
+    a[ 9] = make_coord((cube._i + 1/2) * global.SquareSize, (cube._j + 1) * global.SquareSize);
+    a[10] = make_coord((cube._i + 5/6) * global.SquareSize, (cube._j + 0) * global.SquareSize);
+    a[11] = make_coord((cube._i + 5/6) * global.SquareSize, (cube._j + 1) * global.SquareSize);
+   
+    for(var i = 0; i < 12; i++)
+    {
+        a[i] = grid_transform(fx, fy, a[i], cube._h, false);
+    }
+    
+    grid_draw_line(a[ 0], a[ 1], 2);
+    grid_draw_line(a[ 2], a[ 3], 2);
+    grid_draw_line(a[ 4], a[ 5], 2);
+    grid_draw_line(a[ 6], a[ 7], 2);
+    grid_draw_line(a[ 8], a[ 9], 2);
+    grid_draw_line(a[10], a[11], 2);
 }
 
 
@@ -144,6 +175,7 @@ var fx = argument0;
 var fy = argument1;
 var p = argument2;
 var h = argument3;
+var with_noise = argument4;
 
 // this is set up to go down reciprocally with distance from camera (depth)
 // and arranged so that global.GroundHeight is where perspective == 1
@@ -151,8 +183,17 @@ var perspective = grid_perspective(h);
 
 var ret;
 
-ret[0] = (p[0] - fx + noise(p, 0) * global.NoiseAmount) * perspective + global.ScreenCentreX;
-ret[1] = (p[1] - fy + noise(p, 1) * global.NoiseAmount) * perspective + global.ScreenCentreY;
+ret[0] = p[0] - fx;
+ret[1] = p[1] - fy;
+
+if (with_noise)
+{
+    ret[0] += noise(p, 0) * global.NoiseAmount;
+    ret[1] += noise(p, 1) * global.NoiseAmount;
+}
+
+ret[0] = ret[0] * perspective + global.ScreenCentreX;
+ret[1] = ret[1] * perspective + global.ScreenCentreY;
 
 return ret;
 

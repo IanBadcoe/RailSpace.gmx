@@ -69,6 +69,8 @@ if (_highlit_cube != noone)
 
 
 #define edit_highlight_point
+edit_clear_highlit_point();
+
 if (_highlit_cube != noone)
 {
     var r = edit_find_subcube(_highlit_cube);
@@ -83,10 +85,17 @@ if (_highlit_cube != noone)
     // coord [0 - 3] within cube
     _highlit_point_subcube[0] = r[0];
     _highlit_point_subcube[1] = r[2];
+    
+    _highlit_point_cube._show_grid = true;
 }
 
 
 #define edit_clear_highlit_point
+if (_highlit_point_cube != noone)
+{
+    _highlit_point_cube._show_grid = false;
+}
+
 _highlit_point_cube = noone;
 
 #define edit_find_subcube
@@ -105,8 +114,8 @@ hy = hy / pers + _focus_y;
 var i = floor(hx / (global.SquareSize / 3));
 var j = floor(hy / (global.SquareSize / 3));
 
-var ri = clamp((i - cube._i * 3), 0, 3);
-var rj = clamp((j - cube._j * 3), 0, 3);
+var ri = clamp((i - cube._i * 3), 0, 2) + 0.5;
+var rj = clamp((j - cube._j * 3), 0, 2) + 0.5;
 
 // recalc global sub-cube position allowing for limits of current cube...
 i = cube._i * 3 + ri;

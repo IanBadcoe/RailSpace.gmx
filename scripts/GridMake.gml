@@ -77,7 +77,7 @@ var tp;
 
 for(var d = 0; d < 4; d++)
 {
-    tp[d] = grid_transform(0, 0, cube._p[d], cube._h);
+    tp[d] = grid_transform(0, 0, cube._p[d], cube._h, true);
 }
 
 for(var d = 0; d < 4; d++)

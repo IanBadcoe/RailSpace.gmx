@@ -32,7 +32,7 @@ global.MapXOffset = 0;
 global.MapYOffset = 0;
 
 global.SquareSize = 120;
-global.NoiseAmount = global.SquareSize / 2;
+global.NoiseAmount = global.SquareSize / 6;
 
 global.TilesWidth = 16;
 global.TilesHeight = 16;

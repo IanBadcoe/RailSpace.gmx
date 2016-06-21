@@ -32,6 +32,7 @@ _side_bottoms[2] = -1;
 _side_bottoms[3] = -1;
 
 _highlit = false;
+_show_grid = false;
 
 </string>
           </argument>

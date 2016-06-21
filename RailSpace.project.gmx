@@ -48,6 +48,7 @@
     <object>objects\obRoomController</object>
     <object>objects\obCube</object>
     <object>objects\obRoomControllerEdit</object>
+    <object>objects\obRoomDrawController</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>

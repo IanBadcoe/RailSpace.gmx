@@ -124,7 +124,7 @@ if (cube._h == h)
         tp[i] = grid_transform(fx, fy, cube._p[i], cube._h, true);
     }
     
-    draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h]);
+    draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h / 2]);
     grid_draw_vertex(tp[0], cube._p[0]);
     grid_draw_vertex(tp[1], cube._p[1]);
     grid_draw_vertex(tp[3], cube._p[3]);

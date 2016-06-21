@@ -41,8 +41,8 @@ var pers = grid_perspective(h);
 var hx = window_mouse_get_x() - global.ScreenCentreX;
 var hy = window_mouse_get_y() - global.ScreenCentreY;
 
-hx = hx / pers + _focus_x;
-hy = hy / pers + _focus_y;
+hx = hx / pers + global._focus_x;
+hy = hy / pers + global._focus_y;
 
 var i = floor(hx / global.SquareSize);
 var j = floor(hy / global.SquareSize);
@@ -108,8 +108,8 @@ var pers = grid_perspective(h);
 var hx = window_mouse_get_x() - global.ScreenCentreX;
 var hy = window_mouse_get_y() - global.ScreenCentreY;
 
-hx = hx / pers + _focus_x;
-hy = hy / pers + _focus_y;
+hx = hx / pers + global._focus_x;
+hy = hy / pers + global._focus_y;
 
 var i = floor(hx / (global.SquareSize / 3));
 var j = floor(hy / (global.SquareSize / 3));
@@ -125,8 +125,8 @@ var ret;
 
 ret[0] = ri;
 ret[1] = rj;
-ret[2] = (i * (global.SquareSize / 3) - _focus_x) * pers + global.ScreenCentreX;
-ret[3] = (j * (global.SquareSize / 3) - _focus_y) * pers + global.ScreenCentreY;
+ret[2] = (i * (global.SquareSize / 3) - global._focus_x) * pers + global.ScreenCentreX;
+ret[3] = (j * (global.SquareSize / 3) - global._focus_y) * pers + global.ScreenCentreY;
 
 return ret;
 

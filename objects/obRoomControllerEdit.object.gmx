@@ -59,22 +59,22 @@ _last_height = 2;
             <kind>1</kind>
             <string>if (keyboard_check(vk_left))
 {
-    _focus_x -= 8;
+    global._focus_x -= 8;
 }
 
 if (keyboard_check(vk_right))
 {
-    _focus_x += 8;
+    global._focus_x += 8;
 }
 
 if (keyboard_check(vk_up))
 {
-    _focus_y -= 8;
+    global._focus_y -= 8;
 }
 
 if (keyboard_check(vk_down))
 {
-    _focus_y += 8;
+    global._focus_y += 8;
 }
 
 

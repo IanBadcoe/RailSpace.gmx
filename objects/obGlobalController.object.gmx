@@ -48,8 +48,8 @@ global.GroundTex[4] = background_get_texture(txtGround5);
 
 global.CliffTex = background_get_texture(txtCliff);
 
-global.MaxHeights = 5;
-global.GroundHeight = 2;
+global.MaxHeights = 10;
+global.GroundHeight = 5;
 
 global.OrthDirs[0, 0] =  0; global.OrthDirs[0, 1] =  1;
 global.OrthDirs[1, 0] =  1; global.OrthDirs[1, 1] =  0;

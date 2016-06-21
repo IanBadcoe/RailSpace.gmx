@@ -25,11 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// make the sides array big enough that we can look at all entries
-_side_bottoms[0] = -1;
-_side_bottoms[1] = -1;
-_side_bottoms[2] = -1;
-_side_bottoms[3] = -1;
+            <string>// put the bottom off the top to disable all sides
+_side_bottoms[0] = 100;
+_side_bottoms[1] = 100;
+_side_bottoms[2] = 100;
+_side_bottoms[3] = 100;
+
+// will set the lowest known side to match out top height when we know it
+// as that will be correct if we have no sides...
 
 _highlit = false;
 _show_grid = false;

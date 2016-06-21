@@ -61,6 +61,8 @@ inst._i = i;
 inst._j = j;
 
 inst._h = h;
+// this gets lowered if we  have any sides
+inst._side_min = h;
 
 grid_make_sides(i, j, h, inst);
 
@@ -93,6 +95,7 @@ for(var d = 0; d < 4; d++)
         if (other_h < h)
         {
             cube._side_bottoms[d] = other_h;
+            cube._side_min = min(cube._side_min, other_h);
 
             var dn = (d + 1) % 4;
             cube._side_normals[d] = coord_normalised(coord_rot90(coord_subtract(tp[dn], tp[d])));

@@ -68,7 +68,7 @@ for(var i = ssx; i != esx; i += dsx)
 {
     for(var j = ssy; j != esy; j += dsy)
     {
-        if (global.RoomCubes[i, j]._h == h)
+        if (global.RoomCubes[i, j]._h >= h && global.RoomCubes[i, j]._side_min <= h)
         {
             grid_draw_cube(fx, fy, global.RoomCubes[i, j], h, d);
         }
@@ -83,21 +83,16 @@ var cube = argument2;
 var h = argument3;
 var d = argument4;
 
-var tp;
-
-for(var i = 0; i < 4; i++)
-{
-    tp[i] = grid_transform(fx, fy, cube._p[i], cube._h, true);
-}
-
 texture_set_repeat(true)
 texture_set_blending(false);
 
 for(var d = 0; d < 4; d++)
 {
-    if (cube._side_bottoms[d] != -1)
+    if (cube._side_bottoms[d] < h && cube._h >= h)
     {
-        var side_rel = coord_subtract(global.ScreenCentre, tp[d]);
+        var et1 = grid_transform(fx, fy, cube._p[d], h, true);
+        
+        var side_rel = coord_subtract(global.ScreenCentre, et1);
         
         var dot = coord_dot(side_rel, cube._side_normals[d]);
         
@@ -106,10 +101,9 @@ for(var d = 0; d < 4; d++)
         {
             var dn = (d + 1) % 4;
             
-            var et1 = tp[d];
-            var et2 = tp[dn];
-            var eb1 = grid_transform(fx, fy, cube._p[d], cube._side_bottoms[d], true);    
-            var eb2 = grid_transform(fx, fy, cube._p[dn], cube._side_bottoms[d], true);    
+            var et2 = grid_transform(fx, fy, cube._p[dn], h, true);
+            var eb1 = grid_transform(fx, fy, cube._p[d], h - 1, true);
+            var eb2 = grid_transform(fx, fy, cube._p[dn], h - 1, true);
         
             draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
             grid_draw_vertex_2(et1, cube._p[d], 1);
@@ -121,53 +115,64 @@ for(var d = 0; d < 4; d++)
     }
 }
 
-draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h]);
-grid_draw_vertex(tp[0], cube._p[0]);
-grid_draw_vertex(tp[1], cube._p[1]);
-grid_draw_vertex(tp[3], cube._p[3]);
-grid_draw_vertex(tp[2], cube._p[2]);
-draw_primitive_end();
-
-if (cube._highlit)
+if (cube._h == h)
 {
-    draw_set_color(cube._highlight_colour);
-            
-    grid_draw_line(tp[0], tp[1], 3);
-    grid_draw_line(tp[1], tp[2], 3);
-    grid_draw_line(tp[2], tp[3], 3);
-    grid_draw_line(tp[3], tp[0], 3);
-}
-
-if (cube._show_grid)
-{
-    draw_set_colour(c_gray);
+    var tp;
     
-    var a;
-    a[ 0] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 1/6) * global.SquareSize);
-    a[ 1] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 1/6) * global.SquareSize);
-    a[ 2] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 1/2) * global.SquareSize);
-    a[ 3] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 1/2) * global.SquareSize);
-    a[ 4] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 5/6) * global.SquareSize);
-    a[ 5] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 5/6) * global.SquareSize);
-    a[ 6] = make_coord((cube._i + 1/6) * global.SquareSize, (cube._j + 0) * global.SquareSize);
-    a[ 7] = make_coord((cube._i + 1/6) * global.SquareSize, (cube._j + 1) * global.SquareSize);
-    a[ 8] = make_coord((cube._i + 1/2) * global.SquareSize, (cube._j + 0) * global.SquareSize);
-    a[ 9] = make_coord((cube._i + 1/2) * global.SquareSize, (cube._j + 1) * global.SquareSize);
-    a[10] = make_coord((cube._i + 5/6) * global.SquareSize, (cube._j + 0) * global.SquareSize);
-    a[11] = make_coord((cube._i + 5/6) * global.SquareSize, (cube._j + 1) * global.SquareSize);
-   
-    for(var i = 0; i < 12; i++)
+    for(var i = 0; i < 4; i++)
     {
-        a[i] = grid_transform(fx, fy, a[i], cube._h, false);
+        tp[i] = grid_transform(fx, fy, cube._p[i], cube._h, true);
     }
     
-    grid_draw_line(a[ 0], a[ 1], 2);
-    grid_draw_line(a[ 2], a[ 3], 2);
-    grid_draw_line(a[ 4], a[ 5], 2);
-    grid_draw_line(a[ 6], a[ 7], 2);
-    grid_draw_line(a[ 8], a[ 9], 2);
-    grid_draw_line(a[10], a[11], 2);
+    draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h]);
+    grid_draw_vertex(tp[0], cube._p[0]);
+    grid_draw_vertex(tp[1], cube._p[1]);
+    grid_draw_vertex(tp[3], cube._p[3]);
+    grid_draw_vertex(tp[2], cube._p[2]);
+    draw_primitive_end();
+
+    if (cube._highlit)
+    {
+        draw_set_color(cube._highlight_colour);
+                
+        grid_draw_line(tp[0], tp[1], 3);
+        grid_draw_line(tp[1], tp[2], 3);
+        grid_draw_line(tp[2], tp[3], 3);
+        grid_draw_line(tp[3], tp[0], 3);
+    }
+    
+    if (cube._show_grid)
+    {
+        draw_set_colour(c_gray);
+        
+        var a;
+        a[ 0] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 1/6) * global.SquareSize);
+        a[ 1] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 1/6) * global.SquareSize);
+        a[ 2] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 1/2) * global.SquareSize);
+        a[ 3] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 1/2) * global.SquareSize);
+        a[ 4] = make_coord((cube._i + 0) * global.SquareSize, (cube._j + 5/6) * global.SquareSize);
+        a[ 5] = make_coord((cube._i + 1) * global.SquareSize, (cube._j + 5/6) * global.SquareSize);
+        a[ 6] = make_coord((cube._i + 1/6) * global.SquareSize, (cube._j + 0) * global.SquareSize);
+        a[ 7] = make_coord((cube._i + 1/6) * global.SquareSize, (cube._j + 1) * global.SquareSize);
+        a[ 8] = make_coord((cube._i + 1/2) * global.SquareSize, (cube._j + 0) * global.SquareSize);
+        a[ 9] = make_coord((cube._i + 1/2) * global.SquareSize, (cube._j + 1) * global.SquareSize);
+        a[10] = make_coord((cube._i + 5/6) * global.SquareSize, (cube._j + 0) * global.SquareSize);
+        a[11] = make_coord((cube._i + 5/6) * global.SquareSize, (cube._j + 1) * global.SquareSize);
+       
+        for(var i = 0; i < 12; i++)
+        {
+            a[i] = grid_transform(fx, fy, a[i], cube._h, false);
+        }
+        
+        grid_draw_line(a[ 0], a[ 1], 2);
+        grid_draw_line(a[ 2], a[ 3], 2);
+        grid_draw_line(a[ 4], a[ 5], 2);
+        grid_draw_line(a[ 6], a[ 7], 2);
+        grid_draw_line(a[ 8], a[ 9], 2);
+        grid_draw_line(a[10], a[11], 2);
+    }
 }
+
 
 
 #define grid_transform

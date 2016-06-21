@@ -28,6 +28,11 @@
             <string>event_inherited();
 
 _highlit_cube = noone;
+_highlit_point_cube = noone;
+
+// height mode
+_mode = 0;
+
 </string>
           </argument>
         </arguments>
@@ -70,7 +75,49 @@ if (keyboard_check(vk_down))
     _focus_y += 8;
 }
 
-edit_find_mouse();
+
+if (_mode == 1)
+{
+    edit_highlight_cube(c_blue);
+    edit_highlight_point();
+}
+else
+{
+    edit_highlight_cube(c_white);
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+
+if (_highlit_point_cube != noone)
+{
+    draw_set_colour(c_red);
+    draw_line(_highlit_point[0] - 20, _highlit_point[1] - 20,
+        _highlit_point[0] + 20, _highlit_point[1] + 20)
+    draw_line(_highlit_point[0] - 20, _highlit_point[1] + 20,
+        _highlit_point[0] + 20, _highlit_point[1] - 20)
+}
 
 </string>
           </argument>
@@ -240,6 +287,30 @@ grid_make_cubes();
         }
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>_mode = (_mode + 1) % 2;
+
 </string>
           </argument>
         </arguments>

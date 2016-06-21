@@ -129,7 +129,8 @@ draw_primitive_end();
 
 if (cube._highlit)
 {
-    draw_set_color(c_white);
+    draw_set_color(cube._highlight_colour);
+        
     
     grid_draw_line(tp[0], tp[1], 3);
     grid_draw_line(tp[1], tp[2], 3);

@@ -58,7 +58,7 @@
     <instance objName="obTown" x="176" y="1015" name="inst_7F0E132E" locked="0" code="_name = &quot;Steam Rock Corner&quot;&#xA;_room = noone&#xA;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obTown" x="626" y="838" name="inst_E5C9BF54" locked="0" code="_name = &quot;Spannersley&quot;&#xA;_room = noone&#xA;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obJunction" x="500" y="787" name="inst_BD181282" locked="0" code="_name = &quot;Piston Broke Junction&quot;&#xA;_room = rmPBJ" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obController" x="17" y="19" name="inst_24DB1D4B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obMapController" x="17" y="19" name="inst_24DB1D4B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obGlobalController" x="18" y="47" name="inst_596641AD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>

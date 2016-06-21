@@ -11,3 +11,12 @@ var n = argument1;
 
 return (sin(v[0] * (n + 0.47675638)) + sin(v[1] * (n + 0.56375879))) / 2;
 
+
+#define copy_coord
+var p = argument0;
+
+var ret;
+ret[0] = p[0];
+ret[1] = p[1];
+
+return ret;

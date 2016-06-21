@@ -84,9 +84,11 @@ if (_highlit_cube != noone)
 
     // coord [0 - 3] within cube
     _highlit_point_subcube[0] = r[0];
-    _highlit_point_subcube[1] = r[2];
+    _highlit_point_subcube[1] = r[1];
     
     _highlit_point_cube._show_grid = true;
+    
+    _highlit_point_saved = _highlit_point_cube._points[_highlit_point_subcube[0], _highlit_point_subcube[1]];
 }
 
 
@@ -114,19 +116,19 @@ hy = hy / pers + global._focus_y;
 var i = floor(hx / (global.SquareSize / 3));
 var j = floor(hy / (global.SquareSize / 3));
 
-var ri = clamp((i - cube._i * 3), 0, 2) + 0.5;
-var rj = clamp((j - cube._j * 3), 0, 2) + 0.5;
+var ri = clamp((i - cube._i * 3), 0, 2);
+var rj = clamp((j - cube._j * 3), 0, 2);
 
 // recalc global sub-cube position allowing for limits of current cube...
-i = cube._i * 3 + ri;
-j = cube._j * 3 + rj;
+i = (cube._i + (ri + 0.5) / 3) * global.SquareSize;
+j = (cube._j + (rj + 0.5) / 3) * global.SquareSize;
 
 var ret;
 
 ret[0] = ri;
 ret[1] = rj;
-ret[2] = (i * (global.SquareSize / 3) - global._focus_x) * pers + global.ScreenCentreX;
-ret[3] = (j * (global.SquareSize / 3) - global._focus_y) * pers + global.ScreenCentreY;
+ret[2] = i;
+ret[3] = j;
 
 return ret;
 
@@ -150,3 +152,21 @@ for(var i = max(hi - 1, 0); i <= min(hi + 1, global.TilesWidth - 1); i++)
     }
 }
 
+
+#define edit_add_point
+var cube = argument0;
+var sc = argument1;
+var p = argument2;
+
+var inst = instance_create(0, 0, obPoint);
+
+inst._h = cube._h;
+inst._p = copy_coord(p);
+inst._sc = copy_coord(sc);
+inst._i = cube._i;
+inst._j = cube._j;
+
+cube._points[sc[0], sc[1]] = inst;
+
+global.Points[global.NumPoints] = inst;
+global.NumPoints++;

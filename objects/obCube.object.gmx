@@ -37,6 +37,16 @@ _side_bottoms[3] = 100;
 _highlit = false;
 _show_grid = false;
 
+_points[0, 0] = noone;
+_points[0, 1] = noone;
+_points[0, 2] = noone;
+_points[1, 0] = noone;
+_points[1, 1] = noone;
+_points[1, 2] = noone;
+_points[2, 0] = noone;
+_points[2, 1] = noone;
+_points[2, 2] = noone;
+
 </string>
           </argument>
         </arguments>

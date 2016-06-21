@@ -56,6 +56,11 @@ global.OrthDirs[1, 0] =  1; global.OrthDirs[1, 1] =  0;
 global.OrthDirs[2, 0] =  0; global.OrthDirs[2, 1] = -1;
 global.OrthDirs[3, 0] = -1; global.OrthDirs[3, 1] =  0;
 
+global.Tracks = noone;
+global.NumTracks = 0;
+global.Points = noone;
+global.NumPoints = 0;
+
 </string>
           </argument>
         </arguments>

@@ -31,6 +31,7 @@
     <script>scripts\GridDraw.gml</script>
     <script>scripts\View.gml</script>
     <script>scripts\Edit.gml</script>
+    <script>scripts\File.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMap</font>
@@ -49,6 +50,7 @@
     <object>objects\obCube</object>
     <object>objects\obRoomControllerEdit</object>
     <object>objects\obRoomDrawController</object>
+    <object>objects\obPoint</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>

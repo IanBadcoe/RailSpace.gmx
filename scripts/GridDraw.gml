@@ -232,3 +232,29 @@ var p2 = argument1;
 var w = argument2;
 
 draw_line_width(p1[0], p1[1], p2[0], p2[1], w);
+#define grid_draw_points
+var fx = argument0;
+var fy = argument1;
+var h = argument2;
+
+for(var i = 0; i < global.NumPoints; i++)
+{
+    if (global.Points[i]._h = h)
+    {
+        grid_draw_point(fx, fy, global.Points[i]);
+    }
+}
+
+#define grid_draw_point
+var fx = argument0;
+var fy = argument1;
+var pnt = argument2;
+
+var p = pnt._p;
+var h = pnt._h;
+
+var t = grid_transform(fx, fy, p, h, false);
+
+draw_set_colour(c_blue);
+draw_circle(t[0], t[1], 3, false);
+

@@ -40,11 +40,16 @@ global.TilesHeight = 16;
 global.RoomCubes[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
 global.RoomGrid[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
 
-global.GroundTex[0] = background_get_texture(txtGround1);
-global.GroundTex[1] = background_get_texture(txtGround2);
-global.GroundTex[2] = background_get_texture(txtGround3);
-global.GroundTex[3] = background_get_texture(txtGround4);
+global.GroundTex[0] = background_get_texture(txtGround9);
+global.GroundTex[1] = background_get_texture(txtGround8);
+global.GroundTex[2] = background_get_texture(txtGround7);
+global.GroundTex[3] = background_get_texture(txtGround6);
 global.GroundTex[4] = background_get_texture(txtGround5);
+global.GroundTex[5] = background_get_texture(txtGround4);
+global.GroundTex[6] = background_get_texture(txtGround3);
+global.GroundTex[7] = background_get_texture(txtGround2);
+global.GroundTex[8] = background_get_texture(txtGround1);
+global.GroundTex[9] = background_get_texture(txtGround0);
 
 global.CliffTex = background_get_texture(txtCliff);
 
@@ -56,8 +61,8 @@ global.OrthDirs[1, 0] =  1; global.OrthDirs[1, 1] =  0;
 global.OrthDirs[2, 0] =  0; global.OrthDirs[2, 1] = -1;
 global.OrthDirs[3, 0] = -1; global.OrthDirs[3, 1] =  0;
 
-global.Tracks = noone;
-global.NumTracks = 0;
+global.Curves = noone;
+global.NumCurves = 0;
 global.Points = noone;
 global.NumPoints = 0;
 

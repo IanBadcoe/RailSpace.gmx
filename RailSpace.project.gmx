@@ -12,15 +12,18 @@
   <backgrounds name="background">
     <background>background\bckMap</background>
     <background>background\txtCliff</background>
+    <background>background\txtGround9</background>
+    <background>background\txtGround8</background>
+    <background>background\txtGround7</background>
+    <background>background\txtGround6</background>
     <background>background\txtGround5</background>
     <background>background\txtGround4</background>
     <background>background\txtGround3</background>
     <background>background\txtGround2</background>
     <background>background\txtGround1</background>
+    <background>background\txtGround0</background>
   </backgrounds>
-  <paths name="paths">
-    <path>paths\pthPBJ_2_0</path>
-  </paths>
+  <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\Control.gml</script>
     <script>scripts\Tile.gml</script>
@@ -30,7 +33,9 @@
     <script>scripts\GridMake.gml</script>
     <script>scripts\GridDraw.gml</script>
     <script>scripts\View.gml</script>
-    <script>scripts\Edit.gml</script>
+    <script>scripts\EditCube.gml</script>
+    <script>scripts\EditCurve.gml</script>
+    <script>scripts\EditPoint.gml</script>
     <script>scripts\File.gml</script>
   </scripts>
   <fonts name="fonts">
@@ -51,6 +56,7 @@
     <object>objects\obRoomControllerEdit</object>
     <object>objects\obRoomDrawController</object>
     <object>objects\obPoint</object>
+    <object>objects\obCurve</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>

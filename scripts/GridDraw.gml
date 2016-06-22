@@ -90,7 +90,10 @@ for(var d = 0; d < 4; d++)
 {
     if (cube._side_bottoms[d] < h && cube._h >= h)
     {
+        var dn = (d + 1) % 4;
+        
         var et1 = grid_transform(fx, fy, cube._p[d], h, true);
+        var et2 = grid_transform(fx, fy, cube._p[dn], h, true);
         
         var side_rel = coord_subtract(global.ScreenCentre, et1);
         
@@ -98,10 +101,7 @@ for(var d = 0; d < 4; d++)
         
         // is the centre of the screen outside the side?
         if (dot < 0)
-        {
-            var dn = (d + 1) % 4;
-            
-            var et2 = grid_transform(fx, fy, cube._p[dn], h, true);
+        {    
             var eb1 = grid_transform(fx, fy, cube._p[d], h - 1, true);
             var eb2 = grid_transform(fx, fy, cube._p[dn], h - 1, true);
         
@@ -111,6 +111,12 @@ for(var d = 0; d < 4; d++)
             grid_draw_vertex_2(eb1, cube._p[d], 0);
             grid_draw_vertex_2(eb2, cube._p[dn], 0);
             draw_primitive_end();
+        }
+        
+        if (cube._h == h)
+        {
+            draw_set_colour(c_black);
+            draw_line_width(et1[0], et1[1], et2[0], et2[1], 3);
         }
     }
 }
@@ -124,7 +130,7 @@ if (cube._h == h)
         tp[i] = grid_transform(fx, fy, cube._p[i], cube._h, true);
     }
     
-    draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h / 2]);
+    draw_primitive_begin_texture(pr_trianglestrip, global.GroundTex[cube._h]);
     grid_draw_vertex(tp[0], cube._p[0]);
     grid_draw_vertex(tp[1], cube._p[1]);
     grid_draw_vertex(tp[3], cube._p[3]);
@@ -268,5 +274,36 @@ else
     draw_set_colour(c_blue);
 }
 
-
 draw_circle(t[0], t[1], 3, false);
+
+
+#define grid_draw_curves
+var fx = argument0;
+var fy = argument1;
+var h = argument2;
+
+for(var i = 0; i < global.NumCurves; i++)
+{
+    if (global.Curves[i] != noone && global.Curves[i]._h = h)
+    {
+        grid_draw_curve(fx, fy, global.Curves[i]);
+    }
+}
+
+#define grid_draw_curve
+var fx = argument0;
+var fy = argument1;
+var crv = argument2;
+
+var h = crv._h;
+
+draw_set_color(c_black);
+
+draw_primitive_begin(pr_linestrip);
+for(var i = 0; i < crv._num_points; i++)
+{
+    var pt = grid_transform(fx, fy, crv._points[i]._p, h, false);
+    draw_vertex(pt[0], pt[1]);
+}
+draw_primitive_end();
+

@@ -184,6 +184,8 @@ var idx = pnt._idx;
 global.Points[idx] = noone;
 cube._points[sc[0], sc[1]] = noone;
 
+edit_deselect_point(pnt);
+
 while(global.NumPoints > 0 && global.Points[global.NumPoints - 1] == noone)
 {
     global.NumPoints--;
@@ -191,17 +193,46 @@ while(global.NumPoints > 0 && global.Points[global.NumPoints - 1] == noone)
 
 
 #define edit_select_point
-var c = argument0;
-var sc = argument1;
+var pnt = argument0;
 
-var pnt = c._points[sc[0], sc[1]];
-
-if (global._selected_point_idx == pnt._idx)
+if (edit_point_is_selected(pnt))
 {
-    global._selected_point_idx = -1;
+    edit_deselect_point(pnt);
 }
 else
 {
-    global._selected_point_idx = pnt._idx;
+    global._selected_points[2] = global._selected_points[1];
+    global._selected_points[1] = global._selected_points[0];
+    global._selected_points[0] = pnt;
 }
 
+
+#define edit_deselect_point
+var pnt = argument0;
+
+var removing = false;
+
+if (pnt == global._selected_points[0])
+{
+    global._selected_points[0] = global._selected_points[1];
+    removing = true;
+}
+
+if (removing || pnt == global._selected_points[1])
+{
+    global._selected_points[1] = global._selected_points[2];
+    removing = true;
+}
+
+if (removing || pnt == global._selected_points[2])
+{
+    global._selected_points[2] = noone;
+}
+
+
+#define edit_point_is_selected
+var pnt = argument0;
+
+return pnt == global._selected_points[0] ||
+    pnt == global._selected_points[1] ||
+    pnt == global._selected_points[2];

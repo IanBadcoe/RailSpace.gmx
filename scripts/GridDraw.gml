@@ -255,13 +255,18 @@ var h = pnt._h;
 
 var t = grid_transform(fx, fy, p, h, false);
 
-if (global._selected_point_idx == pnt._idx)
+if (global._selected_points[0] == pnt)
 {
     draw_set_colour(c_yellow);
+}
+else if (edit_point_is_selected(pnt))
+{
+    draw_set_colour(c_white);
 }
 else
 {
     draw_set_colour(c_blue);
 }
+
 
 draw_circle(t[0], t[1], 3, false);

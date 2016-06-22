@@ -30,7 +30,9 @@
 _highlit_cube = noone;
 _highlit_point_cube = noone;
 
-global._selected_point_idx = -1;
+global._selected_points[0] = noone;
+global._selected_points[1] = noone;
+global._selected_points[2] = noone;
 
 // height mode
 _mode = 0;
@@ -170,7 +172,7 @@ else
         edit_add_point(_highlit_cube, _highlit_point_subcube, _highlit_point);
     }
     
-    edit_select_point(_highlit_cube, _highlit_point_subcube);
+    edit_select_point(_highlit_cube._points[_highlit_point_subcube[0], _highlit_point_subcube[1]]);
 }
 
 </string>

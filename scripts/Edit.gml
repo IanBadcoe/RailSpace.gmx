@@ -236,3 +236,9 @@ var pnt = argument0;
 return pnt == global._selected_points[0] ||
     pnt == global._selected_points[1] ||
     pnt == global._selected_points[2];
+#define edit_new_curve
+
+#define edit_curve_add_point_end
+
+#define edit_curve_add_point_begin
+

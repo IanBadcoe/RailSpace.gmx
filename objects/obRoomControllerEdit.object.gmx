@@ -173,6 +173,24 @@ else
     }
     
     edit_select_point(_highlit_cube._points[_highlit_point_subcube[0], _highlit_point_subcube[1]]);
+    
+    if (global._selected_points[0]._curve == noone &amp;&amp;
+        global._selected_points[1] != noone &amp;&amp;
+        global._selected_points[0]._h == global._selected_points[1]._h)
+    {
+        if (global._selected_points[1]._curve != noone)
+        {
+            edit_new_curve(_selected_points[0], _selected_points[1]);
+        }
+        else if (global._selected_points[1]._next_point == noone)
+        {
+            edit_curve_add_point_end(global._selected_points[1]._curve);
+        }
+        else if (global._selected_points[1]._prev_point == noone)
+        {
+            edit_curve_add_point_begin(global._selected_points[1]._curve);
+        }        
+    }
 }
 
 </string>

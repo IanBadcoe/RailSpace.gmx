@@ -165,8 +165,43 @@ inst._p = copy_coord(p);
 inst._sc = copy_coord(sc);
 inst._i = cube._i;
 inst._j = cube._j;
+inst._idx = global.NumPoints;
 
 cube._points[sc[0], sc[1]] = inst;
 
 global.Points[global.NumPoints] = inst;
 global.NumPoints++;
+
+_highlit_point_saved = true;
+
+#define edit_remove_point
+var cube = argument0;
+var sc = argument1;
+
+var pnt = cube._points[sc[0], sc[1]];
+var idx = pnt._idx;
+
+global.Points[idx] = noone;
+cube._points[sc[0], sc[1]] = noone;
+
+while(global.NumPoints > 0 && global.Points[global.NumPoints - 1] == noone)
+{
+    global.NumPoints--;
+}
+
+
+#define edit_select_point
+var c = argument0;
+var sc = argument1;
+
+var pnt = c._points[sc[0], sc[1]];
+
+if (global._selected_point_idx == pnt._idx)
+{
+    global._selected_point_idx = -1;
+}
+else
+{
+    global._selected_point_idx = pnt._idx;
+}
+

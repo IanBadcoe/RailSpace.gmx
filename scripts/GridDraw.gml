@@ -239,7 +239,7 @@ var h = argument2;
 
 for(var i = 0; i < global.NumPoints; i++)
 {
-    if (global.Points[i]._h = h)
+    if (global.Points[i] != noone && global.Points[i]._h = h)
     {
         grid_draw_point(fx, fy, global.Points[i]);
     }
@@ -255,6 +255,13 @@ var h = pnt._h;
 
 var t = grid_transform(fx, fy, p, h, false);
 
-draw_set_colour(c_blue);
-draw_circle(t[0], t[1], 3, false);
+if (global._selected_point_idx == pnt._idx)
+{
+    draw_set_colour(c_yellow);
+}
+else
+{
+    draw_set_colour(c_blue);
+}
 
+draw_circle(t[0], t[1], 3, false);

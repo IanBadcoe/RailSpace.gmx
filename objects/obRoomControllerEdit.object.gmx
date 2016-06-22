@@ -19,7 +19,7 @@
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>obRoomControllerEdit</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -29,6 +29,8 @@
 
 _highlit_cube = noone;
 _highlit_point_cube = noone;
+
+global._selected_point_idx = -1;
 
 // height mode
 _mode = 0;
@@ -124,6 +126,14 @@ else
         edit_set_cube_height(_highlit_cube, _highlit_cube._h + 1);
     }
 }
+else
+{
+    if (_highlit_point_saved != noone)
+    {
+        edit_remove_point(_highlit_cube, _highlit_point_subcube);
+    }
+}
+
 </string>
           </argument>
         </arguments>
@@ -159,6 +169,8 @@ else
     {
         edit_add_point(_highlit_cube, _highlit_point_subcube, _highlit_point);
     }
+    
+    edit_select_point(_highlit_cube, _highlit_point_subcube);
 }
 
 </string>

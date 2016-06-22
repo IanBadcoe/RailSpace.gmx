@@ -26,13 +26,22 @@ if (fname != "")
 
     for(var i = 0; i < global.NumPoints; i++)
     {
-        file_text_write_real(f, global.Points[i]._h);
-        file_text_write_real(f, global.Points[i]._sc[0]);
-        file_text_write_real(f, global.Points[i]._sc[1]);
-        file_text_write_real(f, global.Points[i]._p[0]);
-        file_text_write_real(f, global.Points[i]._p[1]);
-        file_text_write_real(f, global.Points[i]._i);
-        file_text_write_real(f, global.Points[i]._j);
+        if (global.Points[i] != noone)
+        {
+            file_text_write_real(f, 1);
+            
+            file_text_write_real(f, global.Points[i]._h);
+            file_text_write_real(f, global.Points[i]._sc[0]);
+            file_text_write_real(f, global.Points[i]._sc[1]);
+            file_text_write_real(f, global.Points[i]._p[0]);
+            file_text_write_real(f, global.Points[i]._p[1]);
+            file_text_write_real(f, global.Points[i]._i);
+            file_text_write_real(f, global.Points[i]._j);
+        }
+        else
+        {
+            file_text_write_real(f, 0);
+        }
 
         file_text_writeln(f);
     }
@@ -63,16 +72,23 @@ if (fname != "")
     
     for(var i = 0; i < global.NumPoints; i++)
     {
-        var inst = instance_create(0, 0, obPoint);
-        
-        inst._h = file_text_read_real(f);
-        inst._sc[0] = file_text_read_real(f);
-        inst._sc[1] = file_text_read_real(f);
-        inst._p[0] = file_text_read_real(f);
-        inst._p[1] = file_text_read_real(f);
-        inst._i = file_text_read_real(f);
-        inst._j = file_text_read_real(f);
-        
+        var exists = file_text_read_real(f);
+        var inst = noone;
+
+        if (exists)
+        {
+            inst = instance_create(0, 0, obPoint);
+            
+            inst._h = file_text_read_real(f);
+            inst._sc[0] = file_text_read_real(f);
+            inst._sc[1] = file_text_read_real(f);
+            inst._p[0] = file_text_read_real(f);
+            inst._p[1] = file_text_read_real(f);
+            inst._i = file_text_read_real(f);
+            inst._j = file_text_read_real(f);
+            inst._idx = i;
+        }
+            
         global.Points[i] = inst;
     }
     
@@ -84,6 +100,9 @@ grid_make_cubes();
 for(var i = 0; i < global.NumPoints; i++)
 {
     var pnt = global.Points[i];
-    global.RoomCubes[pnt._i, pnt._j]._points[pnt._sc[0], pnt._sc[1]] = pnt;
+    
+    if (pnt != noone)
+    {
+        global.RoomCubes[pnt._i, pnt._j]._points[pnt._sc[0], pnt._sc[1]] = pnt;
+    }
 }
-

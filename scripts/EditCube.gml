@@ -119,4 +119,3 @@ for(var i = max(hi - 1, 0); i <= min(hi + 1, global.TilesWidth - 1); i++)
         grid_make_cube(i, j);
     }
 }
-

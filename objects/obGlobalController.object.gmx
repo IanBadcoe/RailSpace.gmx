@@ -71,7 +71,7 @@ global.NumPoints = 0;
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="27">
+    <event eventtype="9" enumb="81">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -88,7 +88,11 @@ global.NumPoints = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>game_end();
+            <string>if (keyboard_check(vk_control) &amp;&amp; keyboard_check(vk_shift))
+{
+    game_end();
+}
+    
 </string>
           </argument>
         </arguments>

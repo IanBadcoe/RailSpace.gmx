@@ -46,6 +46,32 @@ if (fname != "")
         file_text_writeln(f);
     }
     
+    file_text_write_real(f, global.NumCurves);
+    file_text_writeln(f);
+
+    for(var i = 0; i < global.NumCurves; i++)
+    {
+        if (global.Curves[i] != noone)
+        {
+            file_text_write_real(f, 1);
+            
+            file_text_write_real(f, global.Curves[i]._h);
+            file_text_write_real(f, global.Curves[i]._num_points);
+            
+            for(var j = 0; j < global.Curves[i]._num_points; j++)
+            {
+                file_text_write_real(f, global.Curves[i]._points[j]._idx);
+            }
+        }
+        else
+        {
+            file_text_write_real(f, 0);
+        }
+
+        file_text_writeln(f);
+        
+    }
+    
     file_text_close(f);
 }
 
@@ -90,6 +116,31 @@ if (fname != "")
         }
             
         global.Points[i] = inst;
+    }
+
+    global.NumCurves = file_text_read_real(f);
+
+    for(var i = 0; i < global.NumCurves; i++)
+    {
+        var exists = file_text_read_real(f);
+        var inst = noone;
+
+        if (exists)
+        {
+            inst = instance_create(0, 0, obPoint);
+            
+            inst._h = file_text_read_real(f);
+            inst._num_points = file_text_read_real(f);
+
+            for(var j = 0; j < inst._num_points; j++)
+            {
+                inst._points[j] = global.Points[file_text_read_real(f)];
+            }
+            
+            inst._idx = i;
+        }
+            
+        global.Curves[i] = inst;
     }
     
     file_text_close(f);

@@ -306,4 +306,3 @@ for(var i = 0; i < crv._num_points; i++)
     draw_vertex(pt[0], pt[1]);
 }
 draw_primitive_end();
-

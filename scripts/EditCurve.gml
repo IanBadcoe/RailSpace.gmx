@@ -10,6 +10,7 @@ crv._points[0] = p1;
 crv._points[1] = p2;
 crv._h = p1._h;
 crv._num_points = 2;
+crv._idx = global.NumCurves;
 
 p1._curve = crv;
 p1._next_point = p2;
@@ -50,4 +51,3 @@ for(var i = 0; i < crv._num_points; i++)
 
 crv._points[crv._num_points] = p;
 crv._num_points++;
-

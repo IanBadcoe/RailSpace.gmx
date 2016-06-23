@@ -88,7 +88,7 @@ if (_mode == 1)
     edit_highlight_cube(c_blue);
     edit_highlight_point();
     
-    if (_in_drag &amp;&amp; !_hightlit_point_saved)
+    if (_in_drag &amp;&amp; _highlit_point_saved == noone)
     {
         edit_move_point(_highlit_cube, _highlit_point_subcube, _highlit_point);
     }
@@ -104,6 +104,30 @@ else
         edit_set_cube_height(_highlit_cube, _last_height);
     }    
 }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>_in_drag = false;
 
 </string>
           </argument>
@@ -206,30 +230,6 @@ else
         _in_drag = true;
     }
 }
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="7">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>_in_drag = false;
 
 </string>
           </argument>

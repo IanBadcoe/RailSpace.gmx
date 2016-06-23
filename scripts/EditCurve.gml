@@ -51,3 +51,35 @@ for(var i = 0; i < crv._num_points; i++)
 
 crv._points[crv._num_points] = p;
 crv._num_points++;
+#define edit_curve_remove_point
+var crv = argument0;
+var pnt = argument1;
+
+var j = 0;
+for(var i = 0; i < crv._num_points; i++)
+{
+    crv._points[j] = crv._points[i];
+    
+    if (crv._points[i] != pnt)
+        j++;
+}
+
+crv._points[crv._num_points - 1] = noone;
+crv._num_points--;
+
+if (pnt._prev_point != noone)
+    pnt._prev_point._next_point = pnt._next_point;
+
+if (pnt._next_point != noone)
+    pnt._next_point._prev_point = pnt._prev_point;
+
+if (crv._num_points < 2)
+    global.Curves[crv._idx] = noone;
+    
+while(global.NumCurves > 0 && global.Curves[global.NumCurves - 1] == noone)
+{
+    global.NumCurves--;
+}
+
+pnt._curve = noone;
+

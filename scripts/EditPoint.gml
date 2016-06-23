@@ -56,21 +56,20 @@ global.NumPoints++;
 _highlit_point_saved = inst;
 
 #define edit_remove_point
-var cube = argument0;
-var sc = argument1;
+var pnt = argument0;
 
-var pnt = cube._points[sc[0], sc[1]];
+edit_deselect_point(pnt);
+
+var cube = pnt._cube;
 var idx = pnt._idx;
 
 global.Points[idx] = noone;
-cube._points[sc[0], sc[1]] = noone;
+cube._points[pnt._sc[0], pnt._sc[1]] = noone;
 
 if (pnt._curve != noone)
 {
     edit_curve_remove_point(pnt._curve, pnt);
 }
-
-edit_deselect_point(pnt);
 
 while(global.NumPoints > 0 && global.Points[global.NumPoints - 1] == noone)
 {
@@ -80,6 +79,8 @@ while(global.NumPoints > 0 && global.Points[global.NumPoints - 1] == noone)
 
 #define edit_select_point
 var pnt = argument0;
+
+if (pnt == noone) exit;
 
 // stops us getting two of the same point in the list of three
 edit_deselect_point(pnt);
@@ -138,4 +139,6 @@ if (cube != pnt._cube || sc[0] != pnt._sc[0] || sc[1] != pnt._sc[1])
     pnt._j = cube._j;
     pnt._sc = copy_coord(sc);
     pnt._p = copy_coord(p);
+
+    cube._points[pnt._sc[0], pnt._sc[1]] = pnt;
 }

@@ -160,9 +160,11 @@ else
 }
 else
 {
+    edit_select_point(_highlit_point_saved);
+
     if (_highlit_point_saved != noone)
     {
-        edit_remove_point(_highlit_cube, _highlit_point_subcube);
+        edit_remove_point(_highlit_point_saved);
     }
 }
 
@@ -202,7 +204,7 @@ else
         edit_add_point(_highlit_cube, _highlit_point_subcube, _highlit_point);
     }
     
-    edit_select_point(_highlit_cube._points[_highlit_point_subcube[0], _highlit_point_subcube[1]]);
+    edit_select_point(_highlit_point_saved);
     
     if (global._selected_points[0] != noone &amp;&amp;
         global._selected_points[0]._curve == noone &amp;&amp;

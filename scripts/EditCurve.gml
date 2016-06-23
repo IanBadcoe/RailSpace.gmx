@@ -28,7 +28,7 @@ var p = argument1;
 
 p._curve = crv;
 p._prev_point = crv._points[crv._num_points - 1];
-crv._points[crv._num_points - 1]._next_pnt = p;
+crv._points[crv._num_points - 1]._next_point = p;
 
 crv._points[crv._num_points] = p;
 crv._num_points++;
@@ -40,7 +40,7 @@ var p = argument1;
 
 p._curve = crv;
 p._next_point = crv._points[0];
-crv._points[0]._prev_pnt = p;
+crv._points[0]._prev_point = p;
 
 for(var i = 0; i < crv._num_points; i++)
 {
@@ -51,6 +51,7 @@ for(var i = 0; i < crv._num_points; i++)
 
 crv._points[crv._num_points] = p;
 crv._num_points++;
+
 #define edit_curve_remove_point
 var crv = argument0;
 var pnt = argument1;
@@ -60,7 +61,7 @@ for(var i = 0; i < crv._num_points; i++)
 {
     crv._points[j] = crv._points[i];
     
-    if (crv._points[i] != pnt)
+    if (crv._points[j] != pnt)
         j++;
 }
 

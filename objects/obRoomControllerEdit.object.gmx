@@ -83,17 +83,14 @@ if (keyboard_check(vk_down))
     global._focus_y += 8;
 }
 
-
 if (_mode == 1)
 {
-    if (!_in_drag)
+    edit_highlight_cube(c_blue);
+    edit_highlight_point();
+    
+    if (_in_drag &amp;&amp; !_hightlit_point_saved)
     {
-        edit_highlight_cube(c_blue);
-        edit_highlight_point();
-    }
-    else
-    {
-        edit_move_point();
+        edit_move_point(_highlit_cube, _highlit_point_subcube, _highlit_point);
     }
 }
 else
@@ -183,7 +180,8 @@ else
     
     edit_select_point(_highlit_cube._points[_highlit_point_subcube[0], _highlit_point_subcube[1]]);
     
-    if (global._selected_points[0]._curve == noone &amp;&amp;
+    if (global._selected_points[0] != noone &amp;&amp;
+        global._selected_points[0]._curve == noone &amp;&amp;
         global._selected_points[1] != noone &amp;&amp;
         global._selected_points[0]._h == global._selected_points[1]._h)
     {
@@ -202,7 +200,36 @@ else
                 global._selected_points[0]);
         }
     }
+    
+    if (global._selected_points[0] != noone)
+    {
+        _in_drag = true;
+    }
 }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>_in_drag = false;
 
 </string>
           </argument>
@@ -230,10 +257,39 @@ else
 
 if (_highlit_point_cube != noone)
 {
-    draw_set_colour(c_red);
     var t = grid_transform(global._focus_x, global._focus_y, _highlit_point, _highlit_point_cube._h, false);
-    draw_line(t[0] - 20, t[1] - 20, t[0] + 20, t[1] + 20)
-    draw_line(t[0] - 20, t[1] + 20, t[0] + 20, t[1] - 20)
+
+    if (!_in_drag)
+    {
+        draw_set_colour(c_blue);
+        draw_line(t[0] - 20, t[1] - 20, t[0] + 20, t[1] + 20)
+        draw_line(t[0] - 20, t[1] + 20, t[0] + 20, t[1] - 20)
+    }
+    else
+    {
+        if (_highlit_point_saved)
+        {
+            draw_set_colour(c_red);
+        }
+        else
+        {
+            draw_set_colour(c_blue);
+        }
+
+        draw_primitive_begin(pr_linestrip);
+        draw_vertex(t[0] - 10, t[1] - 20);
+        draw_vertex(t[0] - 20, t[1] - 20);
+        draw_vertex(t[0] - 20, t[1] + 20);
+        draw_vertex(t[0] - 10, t[1] + 20);
+        draw_primitive_end();
+
+        draw_primitive_begin(pr_linestrip);
+        draw_vertex(t[0] + 10, t[1] - 20);
+        draw_vertex(t[0] + 20, t[1] - 20);
+        draw_vertex(t[0] + 20, t[1] + 20);
+        draw_vertex(t[0] + 10, t[1] + 20);
+        draw_primitive_end();
+    }
 }
 
 </string>

@@ -8,7 +8,7 @@ if (_highlit_cube != noone)
 {
     var r = edit_find_subcube(_highlit_cube);
     
-    // point in screen-space
+    // point in world-space
     _highlit_point[0] = r[2];
     _highlit_point[1] = r[3];
 
@@ -46,6 +46,7 @@ inst._sc = copy_coord(sc);
 inst._i = cube._i;
 inst._j = cube._j;
 inst._idx = global.NumPoints;
+inst._cube = cube;
 
 cube._points[sc[0], sc[1]] = inst;
 
@@ -117,10 +118,24 @@ return pnt == global._selected_points[0] ||
     pnt == global._selected_points[1] ||
     pnt == global._selected_points[2];
 #define edit_move_point
-if (global._selected_points[0] == noone) exit;
+var cube = argument0;
+var sc = argument1;
+var p = argument2;
+
+var pnt = global._selected_points[0];
+
+if (pnt == noone) exit;
 
 if (_highlit_cube == noone) exit;
 
-var r = edit_find_subcube(_highlit_cube);
+if (cube != pnt._cube || sc[0] != pnt._sc[0] || sc[1] != pnt._sc[1])
+{
+    cube._points[pnt._sc[0], pnt._sc[1]] = noone;
+    
+    pnt._cube = cube;
+    pnt._i = cube._i;
+    pnt._j = cube._j;
+    pnt._sc = copy_coord(sc);
+    pnt._p = p;
+}
 
-if (

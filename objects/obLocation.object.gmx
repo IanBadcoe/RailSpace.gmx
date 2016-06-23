@@ -25,10 +25,47 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (_room != noone)
-{
-    room_goto(_room);
-}
+            <string>// offset of the coords of centre of screen
+// for a point on the top parallax layer, this will be in the middle of the screen
+// for points on lower layers, we need to divide this by LayerParallax
+global.MapXOffset = 0;
+global.MapYOffset = 0;
+
+global.SquareSize = 120;
+global.NoiseAmount = global.SquareSize / 6;
+
+global.TilesWidth = 16;
+global.TilesHeight = 16;
+
+global.RoomCubes[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
+global.RoomGrid[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
+
+global.GroundTex[0] = background_get_texture(txtGround0);
+global.GroundTex[1] = background_get_texture(txtGround1);
+global.GroundTex[2] = background_get_texture(txtGround2);
+global.GroundTex[3] = background_get_texture(txtGround3);
+global.GroundTex[4] = background_get_texture(txtGround4);
+global.GroundTex[5] = background_get_texture(txtGround5);
+global.GroundTex[6] = background_get_texture(txtGround6);
+global.GroundTex[7] = background_get_texture(txtGround7);
+global.GroundTex[8] = background_get_texture(txtGround8);
+global.GroundTex[9] = background_get_texture(txtGround9);
+
+global.CliffTex = background_get_texture(txtCliff);
+
+global.MaxHeights = 10;
+global.GroundHeight = 5;
+
+global.OrthDirs[0, 0] =  0; global.OrthDirs[0, 1] =  1;
+global.OrthDirs[1, 0] =  1; global.OrthDirs[1, 1] =  0;
+global.OrthDirs[2, 0] =  0; global.OrthDirs[2, 1] = -1;
+global.OrthDirs[3, 0] = -1; global.OrthDirs[3, 1] =  0;
+
+global.Curves = noone;
+global.NumCurves = 0;
+global.Points = noone;
+global.NumPoints = 0;
+
 </string>
           </argument>
         </arguments>

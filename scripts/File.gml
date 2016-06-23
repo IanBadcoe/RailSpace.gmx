@@ -154,6 +154,8 @@ for(var i = 0; i < global.NumPoints; i++)
     
     if (pnt != noone)
     {
-        global.RoomCubes[pnt._i, pnt._j]._points[pnt._sc[0], pnt._sc[1]] = pnt;
+        var cube = global.RoomCubes[pnt._i, pnt._j];
+        cube._points[pnt._sc[0], pnt._sc[1]] = pnt;
+        pnt._cube = cube;
     }
 }

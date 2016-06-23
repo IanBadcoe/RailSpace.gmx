@@ -25,7 +25,6 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\Control.gml</script>
     <script>scripts\Coord.gml</script>
     <script>scripts\EditCube.gml</script>
     <script>scripts\EditCurve.gml</script>
@@ -36,7 +35,6 @@
     <script>scripts\GridMake.gml</script>
     <script>scripts\Map.gml</script>
     <script>scripts\Misc.gml</script>
-    <script>scripts\Tile.gml</script>
     <script>scripts\View.gml</script>
   </scripts>
   <fonts name="fonts">

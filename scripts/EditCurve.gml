@@ -82,4 +82,3 @@ while(global.NumCurves > 0 && global.Curves[global.NumCurves - 1] == noone)
 }
 
 pnt._curve = noone;
-

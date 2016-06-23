@@ -39,6 +39,8 @@ _mode = 0;
 
 _last_height = 2;
 
+_in_drag = false;
+
 </string>
           </argument>
         </arguments>
@@ -84,8 +86,15 @@ if (keyboard_check(vk_down))
 
 if (_mode == 1)
 {
-    edit_highlight_cube(c_blue);
-    edit_highlight_point();
+    if (!_in_drag)
+    {
+        edit_highlight_cube(c_blue);
+        edit_highlight_point();
+    }
+    else
+    {
+        edit_move_point();
+    }
 }
 else
 {

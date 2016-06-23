@@ -116,3 +116,11 @@ var pnt = argument0;
 return pnt == global._selected_points[0] ||
     pnt == global._selected_points[1] ||
     pnt == global._selected_points[2];
+#define edit_move_point
+if (global._selected_points[0] == noone) exit;
+
+if (_highlit_cube == noone) exit;
+
+var r = edit_find_subcube(_highlit_cube);
+
+if (

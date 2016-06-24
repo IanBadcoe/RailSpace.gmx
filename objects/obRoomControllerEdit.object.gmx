@@ -158,7 +158,7 @@ else
         edit_set_cube_height(_highlit_cube, _highlit_cube._h + 1);
     }
 }
-else
+else if (_mode == 1)
 {
     edit_select_point(_highlit_point_saved);
 
@@ -167,7 +167,10 @@ else
         edit_remove_point(_highlit_point_saved);
     }
 }
-
+else if (_mode == 2)
+{
+    edit_remove_tunnel(_highlit_cube);
+}
 </string>
           </argument>
         </arguments>
@@ -197,7 +200,7 @@ else
         edit_set_cube_height(_highlit_cube, _highlit_cube._h - 1);
     }
 }
-else
+else if (_mode == 1)
 {
     if (_highlit_point_saved == noone)
     {
@@ -231,6 +234,10 @@ else
     {
         _in_drag = true;
     }
+}
+else if (_mode == 2)
+{
+    edit_add_tunnel(_highlit_cube);
 }
 
 </string>
@@ -363,7 +370,7 @@ if (_highlit_point_cube != noone)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>_mode = (_mode + 1) % 2;
+            <string>_mode = (_mode + 1) % 3;
 
 </string>
           </argument>

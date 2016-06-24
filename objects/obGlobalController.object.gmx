@@ -53,6 +53,8 @@ global.GroundTex[9] = background_get_texture(txtGround0);
 
 global.CliffTex = background_get_texture(txtCliff);
 
+global.TunnelTex = sprite_get_texture(sprTunnel, 0);
+
 global.MaxHeights = 10;
 global.GroundHeight = 5;
 
@@ -65,6 +67,8 @@ global.Curves = noone;
 global.NumCurves = 0;
 global.Points = noone;
 global.NumPoints = 0;
+global.Tunnels = noone;
+global.NumTunnels = 0;
 
 </string>
           </argument>

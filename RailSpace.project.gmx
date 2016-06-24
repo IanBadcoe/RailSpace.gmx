@@ -10,6 +10,7 @@
     <sprite>sprites\sprJunction</sprite>
     <sprite>sprites\sprEngine</sprite>
     <sprite>sprites\sprTruck</sprite>
+    <sprite>sprites\sprTunnel</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bckMap</background>
@@ -32,8 +33,10 @@
     <script>scripts\EditCurve.gml</script>
     <script>scripts\EditMisc.gml</script>
     <script>scripts\EditPoint.gml</script>
+    <script>scripts\EditTunnel.gml</script>
     <script>scripts\File.gml</script>
-    <script>scripts\GridDraw.gml</script>
+    <script>scripts\GridDrawCubes.gml</script>
+    <script>scripts\GridDrawOther.gml</script>
     <script>scripts\GridMake.gml</script>
     <script>scripts\Map.gml</script>
     <script>scripts\Misc.gml</script>
@@ -58,6 +61,7 @@
     <object>objects\obRoomController</object>
     <object>objects\obRoomControllerEdit</object>
     <object>objects\obRoomDrawController</object>
+    <object>objects\obTunnel</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>

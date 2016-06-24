@@ -47,6 +47,8 @@ _points[2, 0] = noone;
 _points[2, 1] = noone;
 _points[2, 2] = noone;
 
+_tunnel = noone;
+
 </string>
           </argument>
         </arguments>

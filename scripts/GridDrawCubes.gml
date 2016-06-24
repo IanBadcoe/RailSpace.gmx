@@ -1,4 +1,4 @@
-#define GridDraw
+#define GridDrawCubes
 
 
 #define grid_draw_cubes
@@ -227,82 +227,18 @@ var h = argument2;
 draw_vertex_texture(c[0], c[1], (t[0] + t[1]) / global.SquareSize / 4, h);
 
 
+#define grid_draw_vertex_3
+var c = argument0;
+var t = argument1;
+var u = argument2;
+
+// override the y texture coordinate with h
+// use diagonal distance on texture x so it changes correctly on x and y of map
+
+draw_vertex_texture(c[0], c[1], t, u);
+
+
 #define grid_perspective
 var h = argument0;
 
 return global.MaxHeights / (global.MaxHeights + global.GroundHeight - h);
-
-#define grid_draw_line
-var p1 = argument0;
-var p2 = argument1;
-var w = argument2;
-
-draw_line_width(p1[0], p1[1], p2[0], p2[1], w);
-#define grid_draw_points
-var fx = argument0;
-var fy = argument1;
-var h = argument2;
-
-for(var i = 0; i < global.NumPoints; i++)
-{
-    if (global.Points[i] != noone && global.Points[i]._h = h)
-    {
-        grid_draw_point(fx, fy, global.Points[i]);
-    }
-}
-
-#define grid_draw_point
-var fx = argument0;
-var fy = argument1;
-var pnt = argument2;
-
-var p = pnt._p;
-var h = pnt._h;
-
-var t = grid_transform(fx, fy, p, h, false);
-
-if (global._selected_points[0] == pnt)
-{
-    draw_set_colour(c_yellow);
-}
-else if (edit_point_is_selected(pnt))
-{
-    draw_set_colour(c_white);
-}
-else
-{
-    draw_set_colour(c_blue);
-}
-
-draw_circle(t[0], t[1], 3, false);
-
-
-#define grid_draw_curves
-var fx = argument0;
-var fy = argument1;
-var h = argument2;
-
-for(var i = 0; i < global.NumCurves; i++)
-{
-    if (global.Curves[i] != noone && global.Curves[i]._h = h)
-    {
-        grid_draw_curve(fx, fy, global.Curves[i]);
-    }
-}
-
-#define grid_draw_curve
-var fx = argument0;
-var fy = argument1;
-var crv = argument2;
-
-var h = crv._h;
-
-draw_set_color(c_black);
-
-draw_primitive_begin(pr_linestrip);
-for(var i = 0; i < crv._num_points; i++)
-{
-    var pt = grid_transform(fx, fy, crv._points[i]._p, h, false);
-    draw_vertex(pt[0], pt[1]);
-}
-draw_primitive_end();

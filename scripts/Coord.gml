@@ -53,3 +53,10 @@ var x2 = argument1[0];
 var y2 = argument1[1];
 
 return x1 * x2 + y1 * y2;
+#define coord_add
+var ret;
+
+ret[0] = argument0[0] + argument1;
+ret[1] = argument0[1] + argument2;
+
+return ret;

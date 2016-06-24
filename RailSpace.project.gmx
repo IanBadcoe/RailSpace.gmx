@@ -8,6 +8,8 @@
   <sprites name="sprites">
     <sprite>sprites\sprTown</sprite>
     <sprite>sprites\sprJunction</sprite>
+    <sprite>sprites\sprEngine</sprite>
+    <sprite>sprites\sprTruck</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bckMap</background>

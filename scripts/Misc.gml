@@ -8,8 +8,9 @@ return a[irandom(array_length_1d(a) - 1)];
 #define noise
 var v = argument0;
 var n = argument1;
+var h = argument2;
 
-return (sin(v[0] * (n + 0.47675638) / 40) + sin(v[1] * (n + 0.56375879) / 40)) / 2;
+return (sin(v[0] * (n + 0.47675638 + h) / 50) + sin(v[1] * (n + 0.56375879 + h) / 50)) / 2;
 
 
 #define copy_coord

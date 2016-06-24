@@ -169,7 +169,10 @@ else if (_mode == 1)
 }
 else if (_mode == 2)
 {
-    edit_remove_tunnel(_highlit_cube);
+    if (_highlit_cube != noone &amp;&amp; _highlit_cube._tunnel != noone)
+    {
+        edit_remove_tunnel(_highlit_cube);
+    }
 }
 </string>
           </argument>
@@ -237,7 +240,10 @@ else if (_mode == 1)
 }
 else if (_mode == 2)
 {
-    edit_add_tunnel(_highlit_cube);
+    if (_highlit_cube != noone &amp;&amp; _highlit_cube._tunnel == noone)
+    {
+        edit_add_tunnel(_highlit_cube);
+    }
 }
 
 </string>

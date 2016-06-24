@@ -95,12 +95,12 @@ for(var d = 0; d < 4; d++)
         var et1 = grid_transform(fx, fy, cube._p[d], h, true);
         var et2 = grid_transform(fx, fy, cube._p[dn], h, true);
         
-        var side_rel = coord_subtract(global.ScreenCentre, et1);
+//        var side_rel = coord_subtract(global.ScreenCentre, et1);
         
-        var dot = coord_dot(side_rel, cube._side_normals[d]);
+//        var dot = coord_dot(side_rel, cube._side_normals[d]);
         
         // is the centre of the screen outside the side?
-        if (dot < 0)
+//        if (dot < 0.1)
         {    
             var eb1 = grid_transform(fx, fy, cube._p[d], h - 1, true);
             var eb2 = grid_transform(fx, fy, cube._p[dn], h - 1, true);
@@ -199,8 +199,8 @@ ret[1] = p[1] - fy;
 
 if (with_noise)
 {
-    ret[0] += noise(p, 0) * global.NoiseAmount;
-    ret[1] += noise(p, 1) * global.NoiseAmount;
+    ret[0] += noise(p, 0, h) * global.NoiseAmount;
+    ret[1] += noise(p, 1, h) * global.NoiseAmount;
 }
 
 ret[0] = ret[0] * perspective + global.ScreenCentreX;

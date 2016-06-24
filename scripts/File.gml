@@ -72,6 +72,29 @@ if (fname != "")
         
     }
     
+    file_text_write_real(f, global.NumTunnels);
+    file_text_writeln(f);
+
+    for(var i = 0; i < global.NumTunnels; i++)
+    {
+        if (global.Tunnels[i] != noone)
+        {
+            file_text_write_real(f, 1);
+            
+            file_text_write_real(f, global.Tunnels[i]._h);
+            file_text_write_real(f, global.Tunnels[i]._i);
+            file_text_write_real(f, global.Tunnels[i]._j);
+            file_text_write_real(f, global.Tunnels[i]._p[0]);
+            file_text_write_real(f, global.Tunnels[i]._p[1]);
+        }
+        else
+        {
+            file_text_write_real(f, 0);
+        }
+
+        file_text_writeln(f);
+    }
+
     file_text_close(f);
 }
 
@@ -143,6 +166,28 @@ if (fname != "")
         global.Curves[i] = inst;
     }
     
+    global.NumTunnels = file_text_read_real(f);
+    
+    for(var i = 0; i < global.NumTunnels; i++)
+    {
+        var exists = file_text_read_real(f);
+        var inst = noone;
+
+        if (exists)
+        {
+            inst = instance_create(0, 0, obTunnel);
+            
+            inst._h = file_text_read_real(f);
+            inst._i = file_text_read_real(f);
+            inst._j = file_text_read_real(f);
+            inst._p[0] = file_text_read_real(f);
+            inst._p[1] = file_text_read_real(f);
+            inst._idx = i;
+        }
+            
+        global.Tunnels[i] = inst;
+    }
+
     file_text_close(f);
 }
 
@@ -159,3 +204,16 @@ for(var i = 0; i < global.NumPoints; i++)
         pnt._cube = cube;
     }
 }
+
+for(var i = 0; i < global.NumTunnels; i++)
+{
+    var tnl = global.Tunnels[i];
+    
+    if (tnl != noone)
+    {
+        var cube = global.RoomCubes[tnl._i, tnl._j];
+        cube._tunnel = tnl;
+        tnl._cube = cube;
+    }
+}
+

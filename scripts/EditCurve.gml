@@ -82,16 +82,19 @@ if (pnt._next_point != noone)
     pnt._next_point._prev_point = pnt._prev_point;
 
 if (crv._num_points < 2)
+{
     global.Curves[crv._idx] = noone;
+    with (crv) instance_destroy();
+}
+else
+{
+    edit_curve_recalc(crv);
+}
     
 while(global.NumCurves > 0 && global.Curves[global.NumCurves - 1] == noone)
 {
     global.NumCurves--;
 }
-
-pnt._curve = noone;
-
-edit_curve_recalc(crv);
 
 
 #define edit_curve_recalc

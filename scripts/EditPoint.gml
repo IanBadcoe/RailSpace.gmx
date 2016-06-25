@@ -76,6 +76,9 @@ while(global.NumPoints > 0 && global.Points[global.NumPoints - 1] == noone)
     global.NumPoints--;
 }
 
+with (pnt) instance_destroy();
+
+
 
 #define edit_select_point
 var pnt = argument0;

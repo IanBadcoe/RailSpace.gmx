@@ -30,6 +30,7 @@
 _weight = 35;
 _power = 2800;
 
+_length = 40;
 </string>
           </argument>
         </arguments>

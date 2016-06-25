@@ -58,6 +58,22 @@ var trn = argument0;
 
 trn._curve_pos += trn._speed;
 
-//trn._front_p = curve_pos
+trn._front_p = curve_pos(trn._curve, trn._curve_pos);
 
+if (trn._front_p == noone) exit;
+
+var back_pos;
+
+if (trn._dir)
+{
+    back_pos = trn._curve_pos - trn._length;
+}
+else
+{
+    back_pos = trn._curve_pos + trn._length;
+}
+
+trn._back_p = curve_pos(trn._curve, back_pos);
+
+if (trn._back_p == noone) trn._front_p = noone;
 

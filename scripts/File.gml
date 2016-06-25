@@ -165,7 +165,9 @@ if (fname != "")
 
             for(var j = 0; j < inst._num_points; j++)
             {
-                inst._points[j] = global.Points[file_text_read_real(f)];
+                var pnt = global.Points[file_text_read_real(f)];
+                inst._points[j] = pnt;
+                pnt._curve = inst;
             }
             
             inst._idx = i;

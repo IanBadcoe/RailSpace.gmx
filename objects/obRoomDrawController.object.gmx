@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>grid_draw_cubes(global._focus_x, global._focus_y, _h);
+            <string>grid_draw_cubes(global._focus_x, global._focus_y, _h, false);
+grid_draw_cubes(global._focus_x, global._focus_y, _h, true);
 grid_draw_points(global._focus_x, global._focus_y, _h);
 grid_draw_curves(global._focus_x, global._focus_y, _h);
 grid_draw_tunnels(global._focus_x, global._focus_y, _h);

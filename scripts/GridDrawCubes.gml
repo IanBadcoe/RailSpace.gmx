@@ -5,6 +5,7 @@
 var fx = argument0;
 var fy = argument1;
 var h = argument2;
+var tops = argument3;
 
 var square_x = max(min(floor(fx / global.SquareSize), global.TilesWidth - 1), 0);
 var square_y = max(min(floor(fy / global.SquareSize), global.TilesHeight - 1), 0);
@@ -17,7 +18,8 @@ if (square_y > 0)
             square_x, square_y,
             0, 0,
             1, 1,
-            h, 0);
+            h, 0,
+            tops);
     }
     
     if (square_x < global.TilesWidth)
@@ -26,7 +28,8 @@ if (square_y > 0)
             square_x - 1, square_y,
             global.TilesWidth - 1, 0,
             -1, 1,
-            h, 3);
+            h, 3,
+            tops);
     }
 }
 
@@ -38,7 +41,8 @@ if (square_y < global.TilesWidth)
             square_x, square_y - 1,
             0, global.TilesHeight - 1,
             1, -1,
-            h, 1);
+            h, 1,
+            tops);
     }
 
     if (square_x < global.TilesWidth)
@@ -47,7 +51,8 @@ if (square_y < global.TilesWidth)
             square_x - 1, square_y - 1,
             global.TilesWidth - 1, global.TilesHeight - 1,
             -1, -1,
-            h, 2);
+            h, 2,
+            tops);
     }
 }
 
@@ -63,6 +68,7 @@ var dsx = argument6;
 var dsy = argument7;
 var h = argument8;
 var d = argument9;
+var tops = argument10;
 
 for(var i = ssx; i != esx; i += dsx)
 {
@@ -70,7 +76,7 @@ for(var i = ssx; i != esx; i += dsx)
     {
         if (global.RoomCubes[i, j]._h >= h && global.RoomCubes[i, j]._side_min <= h)
         {
-            grid_draw_cube(fx, fy, global.RoomCubes[i, j], h, d);
+            grid_draw_cube(fx, fy, global.RoomCubes[i, j], h, d, tops);
         }
     }
 }
@@ -82,46 +88,50 @@ var fy = argument1;
 var cube = argument2;
 var h = argument3;
 var d = argument4;
+var tops = argument5;
 
 texture_set_repeat(true)
 texture_set_blending(false);
 
-for(var d = 0; d < 4; d++)
+if (!tops)
 {
-    if (cube._side_bottoms[d] < h && cube._h >= h)
+    for(var d = 0; d < 4; d++)
     {
-        var dn = (d + 1) % 4;
-        
-        var et1 = grid_transform(fx, fy, cube._p[d], h, true);
-        var et2 = grid_transform(fx, fy, cube._p[dn], h, true);
-        
-//        var side_rel = coord_subtract(global.ScreenCentre, et1);
-        
-//        var dot = coord_dot(side_rel, cube._side_normals[d]);
-        
-        // is the centre of the screen outside the side?
-//        if (dot < 0.1)
-        {    
-            var eb1 = grid_transform(fx, fy, cube._p[d], h - 1, true);
-            var eb2 = grid_transform(fx, fy, cube._p[dn], h - 1, true);
-        
-            draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
-            grid_draw_vertex_2(et1, cube._p[d], 1);
-            grid_draw_vertex_2(et2, cube._p[dn], 1);
-            grid_draw_vertex_2(eb1, cube._p[d], 0);
-            grid_draw_vertex_2(eb2, cube._p[dn], 0);
-            draw_primitive_end();
-        }
-        
-        if (cube._h == h)
+        if (cube._side_bottoms[d] < h && cube._h >= h)
         {
-            draw_set_colour(c_black);
-            draw_line_width(et1[0], et1[1], et2[0], et2[1], 3);
+            var dn = (d + 1) % 4;
+            
+            var et1 = grid_transform(fx, fy, cube._p[d], h, true);
+            var et2 = grid_transform(fx, fy, cube._p[dn], h, true);
+            
+    //        var side_rel = coord_subtract(global.ScreenCentre, et1);
+            
+    //        var dot = coord_dot(side_rel, cube._side_normals[d]);
+            
+            // is the centre of the screen outside the side?
+    //        if (dot < 0.1)
+            {    
+                var eb1 = grid_transform(fx, fy, cube._p[d], h - 1, true);
+                var eb2 = grid_transform(fx, fy, cube._p[dn], h - 1, true);
+            
+                draw_primitive_begin_texture(pr_trianglestrip, global.CliffTex);
+                grid_draw_vertex_2(et1, cube._p[d], 1);
+                grid_draw_vertex_2(et2, cube._p[dn], 1);
+                grid_draw_vertex_2(eb1, cube._p[d], 0);
+                grid_draw_vertex_2(eb2, cube._p[dn], 0);
+                draw_primitive_end();
+            }
+            
+            if (cube._h == h)
+            {
+                draw_set_colour(c_black);
+                draw_line_width(et1[0], et1[1], et2[0], et2[1], 3);
+            }
         }
     }
 }
 
-if (cube._h == h)
+if (cube._h == h && tops)
 {
     var tp;
     

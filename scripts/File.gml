@@ -158,7 +158,7 @@ if (fname != "")
 
         if (exists)
         {
-            inst = instance_create(0, 0, obPoint);
+            inst = instance_create(0, 0, obCurve);
             
             inst._h = file_text_read_real(f);
             inst._num_points = file_text_read_real(f);
@@ -170,7 +170,7 @@ if (fname != "")
             
             inst._idx = i;
 
-            edit_curve_calc_length(inst);
+            edit_curve_recalc(inst);
         }
             
         global.Curves[i] = inst;

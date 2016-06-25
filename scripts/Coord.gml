@@ -69,3 +69,15 @@ var dy = c[1] - d[1];
 
 return sqrt(dx * dx + dy * dy);
 
+
+#define coord_dist_2
+var cx = argument0;
+var cy = argument1;
+var dx = argument2;
+var dy = argument3;
+
+var dx = cx - dx;
+var dy = cy - dy;
+
+return sqrt(dx * dx + dy * dy);
+

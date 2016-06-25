@@ -65,13 +65,18 @@ var fy = argument1;
 var crv = argument2;
 
 var h = crv._h;
+var step = 8 / crv._length;
 
 draw_set_color(c_black);
 
 draw_primitive_begin(pr_linestrip);
-for(var i = 0; i < crv._num_points; i++)
+for(var i = 0; i <= 1; i += step)
 {
-    var pt = grid_transform(fx, fy, crv._points[i]._p, h, false);
+    var p;
+    p[0] = path_get_x(crv._path, i);
+    p[1] = path_get_y(crv._path, i);
+    
+    var pt = grid_transform(fx, fy, p, h, false);
     draw_vertex(pt[0], pt[1]);
 }
 draw_primitive_end();

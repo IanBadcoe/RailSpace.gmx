@@ -21,7 +21,7 @@ p2._prev_point = p1;
 global.Curves[global.NumCurves] = crv;
 global.NumCurves++;
 
-edit_curve_calc_length(crv);
+edit_curve_recalc(crv);
 
 
 #define edit_curve_add_point_end
@@ -35,7 +35,7 @@ crv._points[crv._num_points - 1]._next_point = p;
 crv._points[crv._num_points] = p;
 crv._num_points++;
 
-edit_curve_calc_length(crv);
+edit_curve_recalc(crv);
 
 
 #define edit_curve_add_point_begin
@@ -56,7 +56,7 @@ for(var i = 0; i < crv._num_points; i++)
 crv._points[crv._num_points] = p;
 crv._num_points++;
 
-edit_curve_calc_length(crv);
+edit_curve_recalc(crv);
 
 
 #define edit_curve_remove_point
@@ -91,24 +91,48 @@ while(global.NumCurves > 0 && global.Curves[global.NumCurves - 1] == noone)
 
 pnt._curve = noone;
 
-edit_curve_calc_length(crv);
+edit_curve_recalc(crv);
 
 
-#define edit_curve_calc_length
+#define edit_curve_recalc
 var crv = argument0;
+
+if (crv._path != noone)
+{
+    path_delete(crv._path);
+}
+
+crv._path = path_add();
+
+path_set_closed(crv._path, false);
+path_set_kind(crv._path, 1);
+path_set_precision(crv._path, 4);
+
+for(var i = 0; i < crv._num_points; i++)
+{
+    path_add_point(crv._path, crv._points[i]._p[0], crv._points[i]._p[1], 100);
+}
 
 var len = 0;
 
-var pc = crv._points[0]._p;
+var pcx = path_get_x(crv._path, 0);
+var pcy = path_get_y(crv._path, 0);
 
-for(var i = 1; i < crv._num_points; i++)
+for(var i = 0.01; i < 1; i += 0.01)
 {
-    var c = crv._points[i]._p;
+    var cx = path_get_x(crv._path, i);
+    var cy = path_get_point_y(crv._path, i);
     
-    len += coord_dist(pc, c);
+    len += coord_dist_2(pcx, pcy, cx, cy);
     
-    pc = c;
+    pcx = cx;
+    pcy = cy;
 }
+
+var cx = path_get_x(crv._path, 1);
+var cy = path_get_y(crv._path, 1);
+
+len += coord_dist_2(pcx, pcy, cx, cy);
 
 crv._length = len;
 

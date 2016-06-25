@@ -28,6 +28,7 @@
             <string>_curve = noone;
 _next_point = noone;
 _prev_point = noone;
+
 </string>
           </argument>
         </arguments>

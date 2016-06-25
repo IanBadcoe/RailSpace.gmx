@@ -92,7 +92,7 @@ global.NumTunnels = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check(vk_control) &amp;&amp; keyboard_check(vk_shift))
+            <string>if (keyboard_check(vk_shift))
 {
     game_end();
 }

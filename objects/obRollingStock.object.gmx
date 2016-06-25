@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>_curve = noone;
+_front_p = noone;
+
 </string>
           </argument>
         </arguments>
@@ -49,6 +51,32 @@
           <argument>
             <kind>1</kind>
             <string>train_step(self);
+
+depth = -_h - 0.5;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>train_draw(global._focus_x, global._focus_y, self);
 
 </string>
           </argument>

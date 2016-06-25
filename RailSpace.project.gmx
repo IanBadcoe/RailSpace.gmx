@@ -48,6 +48,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\Coord.gml</script>
+    <script>scripts\Curve.gml</script>
     <script>scripts\EditCube.gml</script>
     <script>scripts\EditCurve.gml</script>
     <script>scripts\EditMisc.gml</script>
@@ -62,7 +63,6 @@
     <script>scripts\Play.gml</script>
     <script>scripts\Train.gml</script>
     <script>scripts\View.gml</script>
-    <script>scripts\Curve.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMap</font>

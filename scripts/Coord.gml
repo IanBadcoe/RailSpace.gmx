@@ -81,3 +81,24 @@ var dy = cy - dy;
 
 return sqrt(dx * dx + dy * dy);
 
+
+#define coord_mult
+var c = argument0;
+var s = argument1;
+
+var ret;
+ret[0] = c[0] * s;
+ret[1] = c[1] * s;
+
+return ret;
+
+
+#define coord_add_2
+var c = argument0;
+var d = argument1;
+
+var ret;
+ret[0] = c[0] + d[0];
+ret[1] = c[1] + d[1];
+
+return ret;

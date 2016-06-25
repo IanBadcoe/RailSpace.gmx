@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>global.PlayMode = true;
+global.PlayerTrain = noone;
 
 event_inherited();
 
@@ -61,6 +62,12 @@ if (!_loaded)
     _loaded = true;
     
     play_level_setup();
+}
+
+if (global.PlayerTrain &amp;&amp; global.PlayerTrain._front_p != noone)
+{
+    global._focus_x = global.PlayerTrain._front_p[0];
+    global._focus_y = global.PlayerTrain._front_p[1];
 }
 
 </string>

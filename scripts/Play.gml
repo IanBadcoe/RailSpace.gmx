@@ -5,11 +5,11 @@ var fname = working_directory + global._level_file;
 
 file_load(fname);
 #define play_level_setup
-train_create_player_train();
+global.PlayerTrain = train_create_player_train();
 
 for(var i = 0; i < global.NumTunnels; i++)
 {
-    if (global.Tunnels[i] != noone && string_pos(global.Tunnels[i]._labels, "ps"))
+    if (global.Tunnels[i] != noone && string_pos("ps", global.Tunnels[i]._labels))
     {
         var cube = global.Tunnels[i]._cube;
         var curve_data = find_first_curve(cube);

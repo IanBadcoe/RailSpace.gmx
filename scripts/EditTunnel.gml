@@ -32,3 +32,6 @@ cube._tunnel = noone;
 tnl._cube = noone;
 
 global.Tunnels[tnl._idx] = noone;
+
+with (tnl) instance_destroy();
+

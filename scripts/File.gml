@@ -195,7 +195,7 @@ if (fname != "")
             inst._p[0] = file_text_read_real(f);
             inst._p[1] = file_text_read_real(f);
             inst._idx = i;
-
+            
             inst._labels = "";
         }
         
@@ -235,3 +235,4 @@ for(var i = 0; i < global.NumTunnels; i++)
         tnl._cube = cube;
     }
 }
+

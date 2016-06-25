@@ -59,8 +59,9 @@
     <script>scripts\GridMake.gml</script>
     <script>scripts\Map.gml</script>
     <script>scripts\Misc.gml</script>
-    <script>scripts\View.gml</script>
     <script>scripts\Play.gml</script>
+    <script>scripts\Train.gml</script>
+    <script>scripts\View.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMap</font>
@@ -73,16 +74,22 @@
       <object>objects\obJunction</object>
       <object>objects\obLocation</object>
     </objects>
-    <object>objects\obCube</object>
-    <object>objects\obCurve</object>
     <object>objects\obGlobalController</object>
     <object>objects\obMapController</object>
-    <object>objects\obPoint</object>
     <object>objects\obRoomController</object>
     <object>objects\obRoomControllerEdit</object>
     <object>objects\obRoomControllerPlay</object>
     <object>objects\obRoomDrawController</object>
-    <object>objects\obTunnel</object>
+    <objects name="Landscape">
+      <object>objects\obCube</object>
+      <object>objects\obCurve</object>
+      <object>objects\obPoint</object>
+      <object>objects\obTunnel</object>
+    </objects>
+    <objects name="Rolling stock">
+      <object>objects\obRollingStock</object>
+      <object>objects\obEngine</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>

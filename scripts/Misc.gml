@@ -21,3 +21,32 @@ ret[0] = p[0];
 ret[1] = p[1];
 
 return ret;
+#define find_first_curve
+var cube = argument0;
+
+var ret;
+
+for(var i = 0; i < 3; i++)
+{
+    for(var j = 0; j < 3; j++)
+    {
+        var pnt = cube._points[i, j];
+
+        if (pnt != noone)
+        {
+            var crv = pnt._curve;
+            
+            if (crv != noone)
+            {
+                ret[0] = crv;
+                // if there is a next point we're going forwards...
+                ret[1] = pnt._next_point != noone;
+                
+                return ret;
+            }
+        }
+    }
+}
+
+return noone;
+

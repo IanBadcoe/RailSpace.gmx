@@ -60,3 +60,12 @@ ret[0] = argument0[0] + argument1;
 ret[1] = argument0[1] + argument2;
 
 return ret;
+#define coord_dist
+var c = argument0;
+var d = argument1;
+
+var dx = c[0] - d[0];
+var dy = c[1] - d[1];
+
+return sqrt(dx * dx + dy * dy);
+

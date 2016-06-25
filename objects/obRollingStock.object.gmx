@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obRoomController</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,12 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.PlayMode = true;
-
-event_inherited();
-
-_loaded = false;
-_paused = false;
+            <string>_curve = noone;
 </string>
           </argument>
         </arguments>
@@ -53,15 +48,7 @@ _paused = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (_paused) exit;
-
-if (!_loaded)
-{
-    play_load_level();
-    _loaded = true;
-    
-    play_level_setup();
-}
+            <string>train_step(self);
 
 </string>
           </argument>

@@ -169,6 +169,8 @@ if (fname != "")
             }
             
             inst._idx = i;
+
+            edit_curve_calc_length(inst);
         }
             
         global.Curves[i] = inst;
@@ -191,6 +193,8 @@ if (fname != "")
             inst._p[0] = file_text_read_real(f);
             inst._p[1] = file_text_read_real(f);
             inst._idx = i;
+
+            inst._labels = "";
         }
         
         if (exists > 1)

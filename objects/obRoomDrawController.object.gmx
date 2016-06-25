@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="8" enumb="0">
@@ -26,10 +26,18 @@
           <argument>
             <kind>1</kind>
             <string>grid_draw_cubes(global._focus_x, global._focus_y, _h, false);
+
 grid_draw_cubes(global._focus_x, global._focus_y, _h, true);
-grid_draw_points(global._focus_x, global._focus_y, _h);
+
+if (!global.PlayMode)
+{
+    grid_draw_points(global._focus_x, global._focus_y, _h);
+}
+
 grid_draw_curves(global._focus_x, global._focus_y, _h);
+
 grid_draw_tunnels(global._focus_x, global._focus_y, _h);
+
 </string>
           </argument>
         </arguments>

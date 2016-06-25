@@ -81,7 +81,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text_ext(x + 7, y - 12, _name, 15, 100); 
+            <string>draw_set_halign(fa_left);
+draw_set_colour(c_black);
+draw_text_ext(x + 7, y - 12, _name, 15, 100); 
 </string>
           </argument>
         </arguments>

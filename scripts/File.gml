@@ -1,5 +1,6 @@
 #define File
 
+
 #define file_save
 var fname = get_save_filename("*.txt", "PBJ.txt");
 
@@ -102,7 +103,12 @@ if (fname != "")
 
 
 #define file_load
-var fname = get_open_filename("*.lev", "PBJ.lev");
+var fname = argument0
+
+if (fname == "")
+{
+    fname = get_open_filename("*.lev", "PBJ.lev");
+}
 
 if (fname != "")
 {

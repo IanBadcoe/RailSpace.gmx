@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>global.PlayMode = false;
+
+event_inherited();
 
 _highlit_cube = noone;
 _highlit_point_cube = noone;
@@ -42,6 +44,8 @@ _last_height = 2;
 _in_drag = false;
 
 _paused = false;
+
+_loaded = false;
 
 </string>
           </argument>
@@ -66,6 +70,13 @@ _paused = false;
           <argument>
             <kind>1</kind>
             <string>if (_paused) exit;
+
+if (!_loaded)
+{
+    play_load_level();
+    
+    _loaded = true;
+}
 
 if (keyboard_check(vk_left))
 {
@@ -395,7 +406,8 @@ file_save();
             <kind>1</kind>
             <string>if (_paused) exit;
 
-file_load();
+// "" means ask the user
+file_load("");
 
 </string>
           </argument>

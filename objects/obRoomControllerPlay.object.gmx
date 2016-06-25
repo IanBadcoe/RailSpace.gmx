@@ -4,8 +4,8 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <persistent>0</persistent>
+  <parentName>obRoomController</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,57 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// offset of the coords of centre of screen
-// for a point on the top parallax layer, this will be in the middle of the screen
-// for points on lower layers, we need to divide this by LayerParallax
-global.MapXOffset = 0;
-global.MapYOffset = 0;
+            <string>global.PlayMode = true;
 
-global.SquareSize = 120;
-global.NoiseAmount = global.SquareSize / 6;
+event_inherited();
 
-global.TilesWidth = 16;
-global.TilesHeight = 16;
-
-global.RoomCubes[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
-global.RoomGrid[global.TilesWidth - 1, global.TilesHeight - 1] = noone;
-
-global.GroundTex[0] = background_get_texture(txtGround9);
-global.GroundTex[1] = background_get_texture(txtGround8);
-global.GroundTex[2] = background_get_texture(txtGround7);
-global.GroundTex[3] = background_get_texture(txtGround6);
-global.GroundTex[4] = background_get_texture(txtGround5);
-global.GroundTex[5] = background_get_texture(txtGround4);
-global.GroundTex[6] = background_get_texture(txtGround3);
-global.GroundTex[7] = background_get_texture(txtGround2);
-global.GroundTex[8] = background_get_texture(txtGround1);
-global.GroundTex[9] = background_get_texture(txtGround0);
-
-global.CliffTex = background_get_texture(txtCliff);
-
-global.TunnelTex = sprite_get_texture(sprTunnel, 0);
-
-global.MaxHeights = 10;
-global.GroundHeight = 5;
-
-global.OrthDirs[0, 0] =  0; global.OrthDirs[0, 1] =  1;
-global.OrthDirs[1, 0] =  1; global.OrthDirs[1, 1] =  0;
-global.OrthDirs[2, 0] =  0; global.OrthDirs[2, 1] = -1;
-global.OrthDirs[3, 0] = -1; global.OrthDirs[3, 1] =  0;
-
-global.Curves = noone;
-global.NumCurves = 0;
-global.Points = noone;
-global.NumPoints = 0;
-global.Tunnels = noone;
-global.NumTunnels = 0;
-
+_loaded = false;
+_paused = false;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="81">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -92,18 +53,14 @@ global.NumTunnels = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check(vk_shift))
+            <string>//if (_paused) exit;
+
+if (!_loaded)
 {
-    if (room != rmMap)
-    {
-        room_goto(rmMap);
-    }
-    else
-    {
-        game_end();
-    }
+    play_load_level();
+    _loaded = true;
 }
-    
+
 </string>
           </argument>
         </arguments>

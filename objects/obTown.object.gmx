@@ -82,9 +82,7 @@
           <argument>
             <kind>1</kind>
             <string>draw_set_halign(fa_center);
-
-//var width = string_width_ext(_name, -1, 100);
-
+draw_set_colour(c_black);
 draw_text_ext(x, y + 6, _name, 20, 110); 
 </string>
           </argument>

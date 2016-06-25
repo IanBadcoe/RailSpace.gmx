@@ -10,23 +10,7 @@
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
-  <code>grid_make_level(
-"2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 " +
-"2 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 " +
-"2 3 3 2 2 2 2 3 4 3 2 2 2 2 2 2 " +
-"2 2 2 2 2 2 2 3 3 3 2 2 2 2 2 2 " +
-"2 1 1 2 3 3 3 2 2 2 2 2 2 2 2 2 " +
-"2 1 1 2 3 3 3 2 2 2 2 2 2 2 2 2 " +
-"2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 " +
-"2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 " +
-"2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 " +
-"2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 " +
-"2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 " +
-"2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 " +
-"2 2 0 1 2 3 4 2 2 2 2 2 2 2 2 2 " +
-"2 2 4 3 2 1 0 2 2 2 2 2 2 2 2 2 " +
-"2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 " +
-"2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 ");</code>
+  <code></code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

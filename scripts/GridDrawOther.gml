@@ -139,4 +139,3 @@ grid_draw_vertex(tst[1], ts[1]);
 grid_draw_vertex(tst[3], ts[3]);
 grid_draw_vertex(tst[2], ts[2]);
 draw_primitive_end();
-

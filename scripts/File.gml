@@ -79,13 +79,15 @@ if (fname != "")
     {
         if (global.Tunnels[i] != noone)
         {
-            file_text_write_real(f, 1);
+            file_text_write_real(f, 2);
             
             file_text_write_real(f, global.Tunnels[i]._h);
             file_text_write_real(f, global.Tunnels[i]._i);
             file_text_write_real(f, global.Tunnels[i]._j);
             file_text_write_real(f, global.Tunnels[i]._p[0]);
             file_text_write_real(f, global.Tunnels[i]._p[1]);
+
+            file_text_write_real(f, global.Tunnels[i]._labels);
         }
         else
         {
@@ -184,6 +186,11 @@ if (fname != "")
             inst._p[1] = file_text_read_real(f);
             inst._idx = i;
         }
+        
+        if (exists > 1)
+        {
+            inst._labels = file_text_read_string(f);
+        }
             
         global.Tunnels[i] = inst;
     }
@@ -216,4 +223,3 @@ for(var i = 0; i < global.NumTunnels; i++)
         tnl._cube = cube;
     }
 }
-

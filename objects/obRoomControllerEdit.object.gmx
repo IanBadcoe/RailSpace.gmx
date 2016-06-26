@@ -47,6 +47,8 @@ _paused = false;
 
 _loaded = false;
 
+global.ShowTunnelRoofs = false;
+
 </string>
           </argument>
         </arguments>

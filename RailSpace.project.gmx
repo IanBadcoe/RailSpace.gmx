@@ -90,6 +90,7 @@
     <objects name="Rolling stock">
       <object>objects\obRollingStock</object>
       <object>objects\obEngine</object>
+      <object>objects\obFlatbed</object>
     </objects>
   </objects>
   <rooms name="rooms">

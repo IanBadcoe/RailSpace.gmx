@@ -28,6 +28,10 @@
             <string>_curve = noone;
 _front_p = noone;
 
+_coupled_forwards = noone;
+_coupled_backwards = noone;
+
+
 </string>
           </argument>
         </arguments>

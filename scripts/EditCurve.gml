@@ -138,4 +138,3 @@ var cy = path_get_y(crv._path, 1);
 len += coord_dist_2(pcx, pcy, cx, cy);
 
 crv._length = len;
-

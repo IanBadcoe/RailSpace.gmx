@@ -16,8 +16,7 @@ for(var i = 0; i < global.NumTunnels; i++)
         
         if (curve_data != noone)
         {     
-            train_follow_curve(global.PlayerTrain, curve_data[0], curve_data[1], 3);
+            with global.PlayerTrain train_follow_curve(curve_data[0], curve_data[1], 3);
         }
     }
 }
-

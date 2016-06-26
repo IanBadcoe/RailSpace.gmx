@@ -5,79 +5,109 @@ var inst = instance_create(0, 0, obEngine);
 
 inst._total_weight = inst._weight;
 
+var wgn = instance_create(0, 0, obFlatbed);
+inst._coupled_backwards = wgn;
+wgn._coupled_forwards = inst;
+
 return inst;
 
 
 #define train_follow_curve
-var trn = argument0;
-var crv = argument1;
-var dir = argument2;
-var reg = argument3;
+var crv = argument0;
+var dir = argument1;
+var reg = argument2;
 
-trn._curve = crv;
-trn._curve_dir = dir;
-trn._regulator = reg;
-trn._speed = train_speed_for_regulator(trn, reg);
-trn._h = crv._h;
+_regulator = reg;
+_speed = train_speed_for_regulator();
 
 if (dir)
 {
-    trn._curve_pos = 0;
+    _curve_pos = 0;
     
 }
 else
 {
-    trn._curve_pos = 1;
+    _curve_pos = 1;
 }
+
+
+train_set_curve(crv, dir);
+
+#define train_set_curve
+var crv = argument0;
+var dir = argument1;
+
+_curve = crv;
+_curve_dir = dir;
+_h = crv._h;
+
+with _coupled_backwards train_set_curve(crv, dir);
 
 
 #define train_speed_for_regulator
-var trn = argument0;
-var reg = argument1;
-
-return reg * trn._power / trn._total_weight / 50;
+return _regulator * _power / _total_weight / 50;
 
 
 #define train_step
-var trn = argument0;
-
-// when we have more than one rolling-stock, abort here unless we're the first
+// abort here unless we're the first wagon in the train
 // let first cascade into us instead
 
+if (_coupled_forwards != noone) exit;
+
+train_step_inner();
+
+
+#define train_step_inner
 // not on track
-if (trn._curve == noone) exit;
+if (_curve == noone) exit;
 
-train_update_speed(trn);
-
-train_update_position(trn);
-
-
-#define train_update_speed
-var trn = argument0;
-
-trn._speed = (trn._speed * 10 + train_speed_for_regulator(trn, trn._regulator)) / 11;
-
-
-#define train_update_position
-var trn = argument0;
-
-trn._curve_pos += trn._speed;
-
-trn._front_p = curve_pos(trn._curve, trn._curve_pos);
-
-
-var back_pos;
-
-if (trn._curve_dir)
+// only engine calculates this...
+if (_power != 0)
 {
-    back_pos = trn._curve_pos - trn._length;
+    train_update_speed();
+
+    _curve_pos += _speed;
+}
+
+train_calc_position();
+
+if (_coupled_backwards == noone) exit;
+
+var next_pos;
+
+if (_curve_dir)
+{
+    next_pos = _curve_pos + _length + 4;
 }
 else
 {
-    back_pos = trn._curve_pos + trn._length;
+    next_pos = _curve_pos - _length - 4;
 }
 
-trn._back_p = curve_pos(trn._curve, back_pos);
+_coupled_backwards._curve_pos = next_pos;
+
+with _coupled_backwards train_step_inner();
+
+
+#define train_update_speed
+_speed = (_speed * 10 + train_speed_for_regulator()) / 11;
+
+
+#define train_calc_position
+_front_p = curve_pos(_curve, _curve_pos);
+
+var back_pos;
+
+if (_curve_dir)
+{
+    back_pos = _curve_pos + _length;
+}
+else
+{
+    back_pos = _curve_pos - _length;
+}
+
+_back_p = curve_pos(_curve, back_pos);
 
 
 #define train_draw
@@ -104,8 +134,8 @@ for(var i = 0; i < 4; i++)
 }
 
 draw_primitive_begin_texture(pr_trianglestrip, sprite_get_texture(trn.sprite_index, 0));
-grid_draw_vertex_3(tc[0], 0, 0);
-grid_draw_vertex_3(tc[1], 0, 1);
-grid_draw_vertex_3(tc[2], 1, 0);
-grid_draw_vertex_3(tc[3], 1, 1);
+grid_draw_vertex_3(tc[0], 1, 0);
+grid_draw_vertex_3(tc[1], 1, 1);
+grid_draw_vertex_3(tc[2], 0, 0);
+grid_draw_vertex_3(tc[3], 0, 1);
 draw_primitive_end();

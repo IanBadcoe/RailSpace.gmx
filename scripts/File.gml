@@ -235,4 +235,3 @@ for(var i = 0; i < global.NumTunnels; i++)
         tnl._cube = cube;
     }
 }
-

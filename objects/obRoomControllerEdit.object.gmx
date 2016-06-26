@@ -110,7 +110,12 @@ if (_mode == 1)
 }
 else
 {
-    edit_highlight_cube(c_white);
+    var col = c_white;
+    
+    if (_mode == 2) col = c_green;
+    
+    edit_highlight_cube(col);
+    edit_clear_highlit_point();
     
     if (keyboard_check(vk_control) &amp;&amp;
         _highlit_cube != noone &amp;&amp;
@@ -261,9 +266,14 @@ else if (_mode == 1)
 }
 else if (_mode == 2)
 {
-    if (_highlit_cube != noone &amp;&amp; _highlit_cube._tunnel == noone)
+    if (_highlit_cube != noone)
     {
-        edit_add_tunnel(_highlit_cube);
+        if (_highlit_cube._tunnel == noone)
+        {
+            edit_add_tunnel(_highlit_cube);
+        }
+        
+        edit_tunnel_labels(_highlit_cube);
     }
 }
 

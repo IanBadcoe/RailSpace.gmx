@@ -16,10 +16,6 @@ global.Tunnels[global.NumTunnels] = inst;
 inst._idx = global.NumTunnels;
 global.NumTunnels++;
 
-edit_request_string("Tunnel labels, no spaces, comma separated:", "");
-// need this to know where to store the string
-_current_tunnel = inst;
-
 
 #define edit_remove_tunnel
 var cube = argument0;
@@ -34,3 +30,12 @@ tnl._cube = noone;
 global.Tunnels[tnl._idx] = noone;
 
 with (tnl) instance_destroy();
+
+#define edit_tunnel_labels
+var cube = argument0;
+var tnl = cube._tunnel;
+
+edit_request_string("Tunnel labels, no spaces, comma separated:", tnl._labels);
+// need this to know where to store the string
+_current_tunnel = tnl;
+

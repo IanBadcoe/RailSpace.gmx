@@ -186,6 +186,10 @@ if global.TunnelLabels
     {
         s += "-(" + string(tnl._time) + ")->" + string(tnl._to);
     }
+    if (tnl._player_start)
+    {
+        s += "#*";
+    }
     draw_text(c[0], c[1], s);
 }
 

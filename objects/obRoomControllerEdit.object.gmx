@@ -277,11 +277,19 @@ else if (_mode == 2)
         
         var tnl = _highlit_cube._tunnel;
         
-        var s = get_string("Tunnel time:", string(tnl._time));
-        tnl._time = real(s);
-
-        var s = get_string("Tunnel to:", string(tnl._to));
-        tnl._to = real(s);
+        if (keyboard_check(vk_control))
+        {
+            tnl._player_start = !tnl._player_start;
+            
+        }
+        else
+        {
+            var s = get_string("Tunnel time:", string(tnl._time));
+            tnl._time = real(s);
+    
+            var s = get_string("Tunnel to:", string(tnl._to));
+            tnl._to = real(s);
+        }
     }
 }
 

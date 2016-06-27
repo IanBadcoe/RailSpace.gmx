@@ -12,38 +12,6 @@ wgn._coupled_forwards = inst;
 return inst;
 
 
-#define train_follow_curve
-var crv = argument0;
-var dir = argument1;
-var reg = argument2;
-
-_regulator = reg;
-_speed = train_speed_for_regulator();
-
-if (dir)
-{
-    _curve_pos = 0;
-    
-}
-else
-{
-    _curve_pos = 1;
-}
-
-
-train_set_curve(crv, dir);
-
-#define train_set_curve
-var crv = argument0;
-var dir = argument1;
-
-_curve = crv;
-_curve_dir = dir;
-_h = crv._h;
-
-with _coupled_backwards train_set_curve(crv, dir);
-
-
 #define train_speed_for_regulator
 return _regulator * _power / _total_weight / 50;
 
@@ -66,7 +34,14 @@ if (_power != 0)
 {
     train_update_speed();
 
-    _curve_pos += _speed;
+    if (_curve_dir)
+    {
+        _curve_pos += _speed;
+    }
+    else
+    {
+        _curve_pos -= _speed;
+    }
 }
 
 train_calc_position();
@@ -77,11 +52,11 @@ var next_pos;
 
 if (_curve_dir)
 {
-    next_pos = _curve_pos + _length + 4;
+    next_pos = _curve_pos - _length - 4;
 }
 else
 {
-    next_pos = _curve_pos - _length - 4;
+    next_pos = _curve_pos + _length + 4;
 }
 
 _coupled_backwards._curve_pos = next_pos;
@@ -150,10 +125,10 @@ for(var i = 0; i < 4; i++)
 }
 
 draw_primitive_begin_texture(pr_trianglestrip, sprite_get_texture(trn.sprite_index, 0));
-grid_draw_vertex_3(tc[0], 1, 0);
-grid_draw_vertex_3(tc[1], 1, 1);
-grid_draw_vertex_3(tc[2], 0, 0);
-grid_draw_vertex_3(tc[3], 0, 1);
+grid_draw_vertex_3(tc[0], 0, 0);
+grid_draw_vertex_3(tc[1], 0, 1);
+grid_draw_vertex_3(tc[2], 1, 0);
+grid_draw_vertex_3(tc[3], 1, 1);
 draw_primitive_end();
 
 
@@ -179,3 +154,34 @@ if (curve_data != noone)
 {     
     with global.PlayerTrain train_follow_curve(curve_data[0], curve_data[1], 3);
 }
+#define train_follow_curve
+var crv = argument0;
+var d = argument1;
+var reg = argument2;
+
+_regulator = reg;
+_speed = train_speed_for_regulator();
+
+if (d != 0)
+{
+    _curve_pos = 0;
+    
+}
+else
+{
+    _curve_pos = crv._length;
+}
+
+
+train_set_curve(crv, d);
+
+#define train_set_curve
+var crv = argument0;
+var dir = argument1;
+
+_curve = crv;
+_curve_dir = dir;
+_h = crv._h;
+
+with _coupled_backwards train_set_curve(crv, dir);
+

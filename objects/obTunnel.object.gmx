@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>_to = -1;
 _time = 5;
+_player_start = false;
 
 </string>
           </argument>

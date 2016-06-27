@@ -40,7 +40,15 @@ for(var i = 0; i < 3; i++)
             {
                 ret[0] = crv;
                 // if there is a next point we're going forwards...
-                ret[1] = pnt._next_point != noone;
+                
+                if (pnt._next_point != noone)
+                {
+                    ret[1] = true;
+                }
+                else
+                {
+                    ret[1] = false;
+                }
                 
                 return ret;
             }

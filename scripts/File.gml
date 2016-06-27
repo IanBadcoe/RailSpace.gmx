@@ -80,7 +80,7 @@ if (fname != "")
     {
         if (global.Tunnels[i] != noone)
         {
-            file_text_write_real(f, 3);
+            file_text_write_real(f, 4);
             
             file_text_write_real(f, global.Tunnels[i]._h);
             file_text_write_real(f, global.Tunnels[i]._i);
@@ -90,6 +90,7 @@ if (fname != "")
 
             file_text_write_real(f, global.Tunnels[i]._to);
             file_text_write_real(f, global.Tunnels[i]._time);
+            file_text_write_real(f, global.Tunnels[i]._player_start);
         }
         else
         {
@@ -199,6 +200,11 @@ if (fname != "")
             inst._time = file_text_read_real(f);
             
             inst._idx = i;
+        }
+        
+        if (exists > 3)
+        {
+            inst._player_start = file_text_read_real(f);
         }
             
         global.Tunnels[i] = inst;

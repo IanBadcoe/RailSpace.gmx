@@ -29,4 +29,3 @@ for (var i = 0; i < global.NumTunnels; i++)
         tnl._to_tnl = global.Tunnels[tnl._to];
     }
 }
-

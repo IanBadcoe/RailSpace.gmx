@@ -30,6 +30,7 @@
     <sprite>sprites\sprEngine</sprite>
     <sprite>sprites\sprTruck</sprite>
     <sprite>sprites\sprTunnel</sprite>
+    <sprite>sprites\sprBridge</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bckMap</background>

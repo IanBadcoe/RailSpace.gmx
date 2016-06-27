@@ -102,3 +102,11 @@ ret[0] = c[0] + d[0];
 ret[1] = c[1] + d[1];
 
 return ret;
+#define coord_copy
+var ret;
+
+ret[0] = argument0[0];
+ret[1] = argument0[1];
+
+return ret;
+

@@ -155,6 +155,8 @@ grid_draw_vertex_3(tc[1], 1, 1);
 grid_draw_vertex_3(tc[2], 0, 0);
 grid_draw_vertex_3(tc[3], 0, 1);
 draw_primitive_end();
+
+
 #define train_get_heading_to
 var pnt = argument0;
 
@@ -177,4 +179,3 @@ if (curve_data != noone)
 {     
     with global.PlayerTrain train_follow_curve(curve_data[0], curve_data[1], 3);
 }
-

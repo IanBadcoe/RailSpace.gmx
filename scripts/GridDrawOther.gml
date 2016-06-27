@@ -81,6 +81,34 @@ for(var i = 0; i <= 1; i += step)
 }
 draw_primitive_end();
 
+step = 42 / crv._length;
+
+var q = noone;
+var prev = false;
+
+for(var i = 0; i <= 1; i += step)
+{
+    var p;
+    p[0] = path_get_x(crv._path, i);
+    p[1] = path_get_y(crv._path, i);
+    
+    if (q != noone)
+    {
+        var ch = global.RoomGrid[p[0] / global.SquareSize, p[1] / global.SquareSize];
+
+        var cur = ch < h;
+
+        if (cur || prev)
+        {
+            grid_draw_bridge(p, q, h, fx, fy);
+        }
+        
+        prev = cur;
+    }
+    
+    q = coord_copy(p);
+}
+
 
 #define grid_draw_tunnels
 var fx = argument0;
@@ -148,3 +176,33 @@ grid_draw_vertex(tst[2], ts[2]);
 draw_primitive_end();
 
 draw_set_alpha(1.0);
+#define grid_draw_bridge
+var p = argument0;
+var q = argument1;
+var h = argument2;
+var fx = argument3;
+var fy = argument4;
+
+var d = coord_subtract(p, q);
+var w = coord_rot90(coord_mult(d, 42 / 26 / 2));
+
+var c;
+c[0] = coord_add_2(p, w);
+c[1] = coord_subtract(p, w);
+c[2] = coord_add_2(q, w);
+c[3] = coord_subtract(q, w);
+
+var tc;
+
+for(var i = 0; i < 4; i++)
+{
+    tc[i] = grid_transform(fx, fy, c[i], h, false);
+}
+
+draw_primitive_begin_texture(pr_trianglestrip, sprite_get_texture(sprBridge, 0));
+grid_draw_vertex_3(tc[0], 0, 0);
+grid_draw_vertex_3(tc[1], 1, 0);
+grid_draw_vertex_3(tc[2], 0, 1);
+grid_draw_vertex_3(tc[3], 1, 1);
+draw_primitive_end();
+

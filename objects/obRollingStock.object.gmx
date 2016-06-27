@@ -31,7 +31,7 @@ _front_p = noone;
 _coupled_forwards = noone;
 _coupled_backwards = noone;
 
-_heading_to == noone;
+_heading_to = noone;
 
 
 </string>

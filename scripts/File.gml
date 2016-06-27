@@ -89,7 +89,7 @@ if (fname != "")
             file_text_write_real(f, global.Tunnels[i]._p[1]);
 
             file_text_write_string(f, global.Tunnels[i]._labels);
-            file_text_write_string(f, global.Tunnels[i]._name);
+            file_text_write_string(f, "x");
             file_text_write_real(f, global.Tunnels[i]._time);
             file_text_write_string(f, global.Tunnels[i]._to);
         }

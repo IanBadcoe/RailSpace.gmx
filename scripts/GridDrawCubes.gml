@@ -20,17 +20,17 @@ if (square_y > 0)
             square_x, square_y,
             llim[0], llim[1],
             1, 1,
-            h, 0,
+            h,
             tops);
     }
     
     if (square_x < global.TilesWidth)
     {
         grid_draw_quadrant(fx, fy,
-            square_x - 1, square_y,
+            square_x + 1, square_y,
             hlim[0], llim[1],
             -1, 1,
-            h, 3,
+            h,
             tops);
     }
 }
@@ -40,20 +40,20 @@ if (square_y < global.TilesWidth)
     if (square_x > 0)
     {
         grid_draw_quadrant(fx, fy,
-            square_x, square_y - 1,
+            square_x, square_y + 1,
             llim[0], hlim[1],
             1, -1,
-            h, 1,
+            h,
             tops);
     }
 
     if (square_x < global.TilesWidth)
     {
         grid_draw_quadrant(fx, fy,
-            square_x - 1, square_y - 1,
+            square_x + 1, square_y + 1,
             hlim[0], hlim[1],
             -1, -1,
-            h, 2,
+            h,
             tops);
     }
 }
@@ -69,8 +69,7 @@ var ssy = argument5;
 var dsx = argument6;
 var dsy = argument7;
 var h = argument8;
-var d = argument9;
-var tops = argument10;
+var tops = argument9;
 
 for(var i = ssx; i != esx; i += dsx)
 {
@@ -78,7 +77,7 @@ for(var i = ssx; i != esx; i += dsx)
     {
         if (global.RoomCubes[i, j]._h >= h && global.RoomCubes[i, j]._side_min <= h)
         {
-            grid_draw_cube(fx, fy, global.RoomCubes[i, j], h, d, tops);
+            grid_draw_cube(fx, fy, global.RoomCubes[i, j], h, tops);
         }
     }
 }
@@ -89,8 +88,7 @@ var fx = argument0;
 var fy = argument1;
 var cube = argument2;
 var h = argument3;
-var d = argument4;
-var tops = argument5;
+var tops = argument4;
 
 texture_set_repeat(true)
 texture_set_blending(false);

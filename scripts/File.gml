@@ -88,10 +88,8 @@ if (fname != "")
             file_text_write_real(f, global.Tunnels[i]._p[0]);
             file_text_write_real(f, global.Tunnels[i]._p[1]);
 
-            file_text_write_string(f, global.Tunnels[i]._labels);
-            file_text_write_string(f, "x");
+            file_text_write_real(f, global.Tunnels[i]._to);
             file_text_write_real(f, global.Tunnels[i]._time);
-            file_text_write_string(f, global.Tunnels[i]._to);
         }
         else
         {
@@ -197,21 +195,10 @@ if (fname != "")
             inst._j = file_text_read_real(f);
             inst._p[0] = file_text_read_real(f);
             inst._p[1] = file_text_read_real(f);
-            inst._idx = i;
-            
-            inst._labels = "";
-        }
-        
-        if (exists > 1)
-        {
-            inst._labels = file_text_read_string(f);
-        }
-        
-        if (exists > 2)
-        {
-            inst._name = file_text_read_string(f);
+            inst._to = file_text_read_real(f);
             inst._time = file_text_read_real(f);
-            inst._to = file_text_read_string(f);
+            
+            inst._idx = i;
         }
             
         global.Tunnels[i] = inst;

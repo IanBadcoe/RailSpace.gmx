@@ -47,6 +47,8 @@ _paused = false;
 
 _loaded = false;
 
+global.TunnelLabels = true;
+
 </string>
           </argument>
         </arguments>
@@ -273,56 +275,15 @@ else if (_mode == 2)
             edit_add_tunnel(_highlit_cube);
         }
         
-        edit_tunnel_labels(_highlit_cube);
+        var tnl = _highlit_cube._tunnel;
+        
+        var s = get_string("Tunnel time:", string(tnl._time));
+        tnl._time = real(s);
+
+        var s = get_string("Tunnel to:", string(tnl._to));
+        tnl._to = real(s);
     }
 }
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="63">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>var s = edit_retrieve_requested_string();
-
-if (s == noone) s = "";
-
-if (_tunnel_edit_phase == 0)
-{
-    _current_tunnel._labels = s;
-    edit_tunnel_name(_current_tunnel);
-}
-else if (_tunnel_edit_phase == 1)
-{
-    _current_tunnel._name = s;
-    edit_tunnel_time(_current_tunnel);
-}
-else if (_tunnel_edit_phase == 2)
-{
-    _current_tunnel._time = real(s);
-    edit_tunnel_to(_current_tunnel);
-}
-else if (_tunnel_edit_phase == 3)
-{
-    _current_tunnel._to = s;
-}
-
 
 </string>
           </argument>

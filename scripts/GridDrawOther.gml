@@ -175,7 +175,21 @@ grid_draw_vertex(tst[3], ts[3]);
 grid_draw_vertex(tst[2], ts[2]);
 draw_primitive_end();
 
-draw_set_alpha(1.0);
+if global.TunnelLabels
+{
+    draw_set_colour(c_white);
+    draw_set_font(fntDebug);
+    var c = coord_mult(coord_add_2(tst[0], tst[2]), 0.5);
+    var s = string(tnl._idx);
+    
+    if (tnl._to != -1)
+    {
+        s += "-(" + string(tnl._time) + ")->" + string(tnl._to);
+    }
+    draw_text(c[0], c[1], s);
+}
+
+
 #define grid_draw_bridge
 var p = argument0;
 var q = argument1;
@@ -205,4 +219,3 @@ grid_draw_vertex_3(tc[1], 1, 0);
 grid_draw_vertex_3(tc[2], 0, 1);
 grid_draw_vertex_3(tc[3], 1, 1);
 draw_primitive_end();
-

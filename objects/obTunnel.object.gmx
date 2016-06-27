@@ -25,9 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>_labels = "";
-_name = "";
-_to = "";
+            <string>_to = -1;
 _time = 5;
 
 </string>

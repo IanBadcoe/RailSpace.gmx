@@ -35,6 +35,9 @@ _paused = false;
 
 global.ShowTunnels = true;
 
+global.TunnelLabels = false;
+
+
 </string>
           </argument>
         </arguments>

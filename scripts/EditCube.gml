@@ -38,14 +38,14 @@ var h = argument0;
 
 var pers = grid_perspective(h);
 
-var hx = window_mouse_get_x() - global.ScreenCentreX;
-var hy = window_mouse_get_y() - global.ScreenCentreY;
+var pt;
+pt[0] = window_mouse_get_x();
+pt[1] = window_mouse_get_y();
 
-hx = hx / pers + global._focus_x;
-hy = hy / pers + global._focus_y;
+var p = grid_untransform(global._focus_x, global._focus_y, pt, h);
 
-var i = floor(hx / global.SquareSize);
-var j = floor(hy / global.SquareSize);
+var i = floor(p[0] / global.SquareSize);
+var j = floor(p[1] / global.SquareSize);
 
 if (i < 0 || i >= global.TilesWidth || j < 0 || j >= global.TilesHeight)
 {

@@ -6,6 +6,8 @@ var fx = argument0;
 var fy = argument1;
 var h = argument2;
 var tops = argument3;
+var llim = argument4;
+var hlim = argument5;
 
 var square_x = max(min(floor(fx / global.SquareSize), global.TilesWidth - 1), 0);
 var square_y = max(min(floor(fy / global.SquareSize), global.TilesHeight - 1), 0);
@@ -16,7 +18,7 @@ if (square_y > 0)
     {
         grid_draw_quadrant(fx, fy,
             square_x, square_y,
-            0, 0,
+            llim[0], llim[1],
             1, 1,
             h, 0,
             tops);
@@ -26,7 +28,7 @@ if (square_y > 0)
     {
         grid_draw_quadrant(fx, fy,
             square_x - 1, square_y,
-            global.TilesWidth - 1, 0,
+            hlim[0], llim[1],
             -1, 1,
             h, 3,
             tops);
@@ -39,7 +41,7 @@ if (square_y < global.TilesWidth)
     {
         grid_draw_quadrant(fx, fy,
             square_x, square_y - 1,
-            0, global.TilesHeight - 1,
+            llim[0], hlim[1],
             1, -1,
             h, 1,
             tops);
@@ -49,7 +51,7 @@ if (square_y < global.TilesWidth)
     {
         grid_draw_quadrant(fx, fy,
             square_x - 1, square_y - 1,
-            global.TilesWidth - 1, global.TilesHeight - 1,
+            hlim[0], hlim[1],
             -1, -1,
             h, 2,
             tops);
@@ -252,3 +254,20 @@ draw_vertex_texture(c[0], c[1], t, u);
 var h = argument0;
 
 return global.MaxHeights / (global.MaxHeights + global.GroundHeight - h);
+#define grid_untransform
+var fx = argument0;
+var fy = argument1;
+var pt = argument2;
+var h = argument3;
+
+// this is set up to go down reciprocally with distance from camera (depth)
+// and arranged so that global.GroundHeight is where perspective == 1
+var perspective = grid_perspective(h);
+
+var ret;
+
+ret[0] = (pt[0] - global.ScreenCentreX) / perspective + fx;
+ret[1] = (pt[1] - global.ScreenCentreY) / perspective + fy;
+
+return ret;
+

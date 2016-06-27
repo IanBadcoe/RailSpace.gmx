@@ -25,9 +25,27 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>grid_draw_cubes(global._focus_x, global._focus_y, _h, false);
+            <string>var p;
 
-grid_draw_cubes(global._focus_x, global._focus_y, _h, true);
+p[0] = 0;
+p[1] = 0;
+
+var llim = grid_untransform(global._focus_x, global._focus_y, p, _h);
+llim = coord_mult(llim, 1/global.SquareSize);
+llim[0] = max(min(llim[0], global.TilesWidth), 0);
+llim[1] = max(min(llim[1], global.TilesHeight), 0);
+
+p[0] = global.ScreenWidth;
+p[1] = global.ScreenHeight;
+
+var hlim = grid_untransform(global._focus_x, global._focus_y, p, _h);
+hlim = coord_mult(hlim, 1/global.SquareSize);
+hlim[0] = max(min(hlim[0], global.TilesWidth), 0);
+hlim[1] = max(min(hlim[1], global.TilesHeight), 0);
+
+grid_draw_cubes(global._focus_x, global._focus_y, _h, false, llim, hlim);
+
+grid_draw_cubes(global._focus_x, global._focus_y, _h, true, llim, hlim);
 
 if (!global.PlayMode)
 {

@@ -70,6 +70,8 @@ global.NumPoints = 0;
 global.Tunnels = noone;
 global.NumTunnels = 0;
 
+global.ShowTunnels = true;
+
 </string>
           </argument>
         </arguments>

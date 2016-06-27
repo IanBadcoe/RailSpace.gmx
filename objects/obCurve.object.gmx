@@ -48,7 +48,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (_path != noone)
+            <string>for(var i = 0; i &lt; _num_points; i++)
+{
+    _points[i]._curve = noone;
+}
+
+if (_path != noone)
 {
     path_delete(_path);
 }

@@ -100,10 +100,7 @@ var fx = argument0;
 var fy = argument1;
 var tnl = argument2;
 
-if (!global.ShowTunnelRoofs)
-{
-    draw_set_alpha(0.5);
-}
+if (!global.ShowTunnels) exit;
 
 var h = tnl._h;
 
@@ -151,4 +148,3 @@ grid_draw_vertex(tst[2], ts[2]);
 draw_primitive_end();
 
 draw_set_alpha(1.0);
-

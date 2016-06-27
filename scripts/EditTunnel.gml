@@ -38,4 +38,3 @@ var tnl = cube._tunnel;
 edit_request_string("Tunnel labels, no spaces, comma separated:", tnl._labels);
 // need this to know where to store the string
 _current_tunnel = tnl;
-

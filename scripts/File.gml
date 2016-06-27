@@ -172,7 +172,7 @@ if (fname != "")
             
             inst._idx = i;
 
-            edit_curve_recalc(inst);
+            with inst edit_curve_recalc();
         }
             
         global.Curves[i] = inst;

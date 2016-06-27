@@ -33,7 +33,7 @@ event_inherited();
 _loaded = false;
 _paused = false;
 
-global.ShowTunnelRoofs = true;
+global.ShowTunnels = true;
 
 </string>
           </argument>

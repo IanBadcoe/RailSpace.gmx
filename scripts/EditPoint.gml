@@ -144,4 +144,6 @@ if (cube != pnt._cube || sc[0] != pnt._sc[0] || sc[1] != pnt._sc[1])
     pnt._p = copy_coord(p);
 
     cube._points[pnt._sc[0], pnt._sc[1]] = pnt;
+    
+    with pnt._curve edit_curve_recalc();
 }

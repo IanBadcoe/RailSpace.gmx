@@ -301,10 +301,28 @@ else if (_mode == 2)
             <kind>1</kind>
             <string>var s = edit_retrieve_requested_string();
 
-if (s != noone)
+if (s == noone) s = "";
+
+if (_tunnel_edit_phase == 0)
 {
     _current_tunnel._labels = s;
+    edit_tunnel_name(_current_tunnel);
 }
+else if (_tunnel_edit_phase == 1)
+{
+    _current_tunnel._name = s;
+    edit_tunnel_time(_current_tunnel);
+}
+else if (_tunnel_edit_phase == 2)
+{
+    _current_tunnel._time = real(s);
+    edit_tunnel_to(_current_tunnel);
+}
+else if (_tunnel_edit_phase == 3)
+{
+    _current_tunnel._to = s;
+}
+
 
 </string>
           </argument>

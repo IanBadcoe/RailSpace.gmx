@@ -38,3 +38,28 @@ var tnl = cube._tunnel;
 edit_request_string("Tunnel labels, no spaces, comma separated:", tnl._labels);
 // need this to know where to store the string
 _current_tunnel = tnl;
+_tunnel_edit_phase = 0;
+
+#define edit_tunnel_name
+var tnl = argument0;
+
+edit_request_string("Tunnel name:", tnl._name);
+// need this to know where to store the string
+_current_tunnel = tnl;
+_tunnel_edit_phase = 1;
+
+#define edit_tunnel_time
+var tnl = argument0;
+
+edit_request_string("Tunnel time:", string(tnl._time));
+// need this to know where to store the string
+_current_tunnel = tnl;
+_tunnel_edit_phase = 2;
+
+#define edit_tunnel_to
+var tnl = argument0;
+
+edit_request_string("Tunnel to:", tnl._to);
+// need this to know where to store the string
+_current_tunnel = tnl;
+_tunnel_edit_phase = 3;

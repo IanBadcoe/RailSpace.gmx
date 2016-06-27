@@ -88,6 +88,22 @@ _coupled_backwards._curve_pos = next_pos;
 
 with _coupled_backwards train_step_inner();
 
+if (_heading_to == noone) exit;
+
+if (_curve_pos > 1 || !_dir)
+{
+    _heading_to = train_get_heading_to(_curve._points[_curve._num_points - 1]);
+}
+else if (_curve_pos < 0 || _dir)
+{
+    _heading_to = train_get_heading_to(_curve._points[0]);
+}
+
+if (_heading_to != noone)
+{
+    alarm_set(0, _time);
+}
+
 
 #define train_update_speed
 _speed = (_speed * 10 + train_speed_for_regulator()) / 11;
@@ -139,3 +155,26 @@ grid_draw_vertex_3(tc[1], 1, 1);
 grid_draw_vertex_3(tc[2], 0, 0);
 grid_draw_vertex_3(tc[3], 0, 1);
 draw_primitive_end();
+#define train_get_heading_to
+var pnt = argument0;
+
+var cube = pnt._cube;
+
+var tnl = cube._tunnel;
+
+if (tnl == noone) exit;
+
+return tnl._to_tnl;
+
+
+#define train_follow_track_from_tunnel
+var tnl = argument0;
+
+var cube = tnl._cube;
+var curve_data = find_first_curve(cube);
+
+if (curve_data != noone)
+{     
+    with global.PlayerTrain train_follow_curve(curve_data[0], curve_data[1], 3);
+}
+

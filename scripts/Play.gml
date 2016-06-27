@@ -13,13 +13,7 @@ for(var i = 0; i < global.NumTunnels; i++)
 {
     if (global.Tunnels[i] != noone && string_pos("ps", global.Tunnels[i]._labels))
     {
-        var cube = global.Tunnels[i]._cube;
-        var curve_data = find_first_curve(cube);
-        
-        if (curve_data != noone)
-        {     
-            with global.PlayerTrain train_follow_curve(curve_data[0], curve_data[1], 3);
-        }
+        train_follow_track_from_tunnel(global.Tunnels[i]);
     }
 }
 
@@ -50,4 +44,3 @@ for(var i = 0; i < global.NumTunnels; i++)
 }
 
 return noone;
-

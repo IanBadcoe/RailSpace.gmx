@@ -26,6 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>_labels = "";
+_name = "";
+_to = "";
+_time = 5;
 
 </string>
           </argument>

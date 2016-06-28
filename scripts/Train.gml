@@ -71,11 +71,11 @@ if (_power == 0) exit;
 
 var tunnel = noone;
 
-if (_curve_pos > _curve._length && _curve_dir)
+if (_curve_pos > _curve._length)
 {
     tunnel = train_get_tunnel(_curve._points[_curve._num_points - 1]);
 }
-else if (_curve_pos < 0 && !_curve_dir)
+else if (_curve_pos < 0)
 {
     tunnel = train_get_tunnel(_curve._points[0]);
 }

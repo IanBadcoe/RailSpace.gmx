@@ -2,11 +2,10 @@
 
 
 #define train_create_player_train
-var inst = instance_create(0, 0, obEngine);
+var inst = instance_create(0, 0, obPlayerEngine);
 
 with inst
 {
-    _player_train = true;
     train_attach_wagon(obFlatbed);
     train_attach_wagon(obFlatbed);
 }

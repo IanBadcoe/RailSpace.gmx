@@ -93,6 +93,7 @@
       <object>objects\obEngine</object>
       <object>objects\obFlatbed</object>
       <object>objects\obEnemyEngine</object>
+      <object>objects\obPlayerEngine</object>
     </objects>
   </objects>
   <rooms name="rooms">

@@ -12,9 +12,9 @@ var hlim = argument5;
 var square_x = max(min(floor(fx / global.SquareSize), global.TilesWidth - 1), 0);
 var square_y = max(min(floor(fy / global.SquareSize), global.TilesHeight - 1), 0);
 
-if (square_y > 0)
+if (square_y > llim[1])
 {
-    if (square_x > 0)
+    if (square_x > llim[0])
     {
         grid_draw_quadrant(fx, fy,
             square_x, square_y,
@@ -24,10 +24,10 @@ if (square_y > 0)
             tops);
     }
     
-    if (square_x < global.TilesWidth)
+    if (square_x <= hlim[0])
     {
         grid_draw_quadrant(fx, fy,
-            square_x + 1, square_y,
+            square_x - 1, square_y,
             hlim[0], llim[1],
             -1, 1,
             h,
@@ -35,22 +35,22 @@ if (square_y > 0)
     }
 }
 
-if (square_y < global.TilesWidth)
+if (square_y <= hlim[1])
 {
-    if (square_x > 0)
+    if (square_x > llim[0])
     {
         grid_draw_quadrant(fx, fy,
-            square_x, square_y + 1,
+            square_x, square_y - 1,
             llim[0], hlim[1],
             1, -1,
             h,
             tops);
     }
 
-    if (square_x < global.TilesWidth)
+    if (square_x <= hlim[0])
     {
         grid_draw_quadrant(fx, fy,
-            square_x + 1, square_y + 1,
+            square_x - 1, square_y - 1,
             hlim[0], hlim[1],
             -1, -1,
             h,
@@ -268,4 +268,3 @@ ret[0] = (pt[0] - global.ScreenCentreX) / perspective + fx;
 ret[1] = (pt[1] - global.ScreenCentreY) / perspective + fy;
 
 return ret;
-

@@ -63,20 +63,27 @@ _coupled_backwards._curve_pos = next_pos;
 
 with _coupled_backwards train_step_inner();
 
-if (_heading_to == noone) exit;
+if (_heading_to != noone) exit;
 
-if (_curve_pos > 1 || !_dir)
+// only engine calculates this...
+if (_power == 0) exit;
+
+var tunnel = noone;
+
+if (_curve_pos > 1 && _curve_dir)
 {
-    _heading_to = train_get_heading_to(_curve._points[_curve._num_points - 1]);
+    tunnel = train_get_tunnel(_curve._points[_curve._num_points - 1]);
 }
-else if (_curve_pos < 0 || _dir)
+else if (_curve_pos < 0 && !_curve_dir)
 {
-    _heading_to = train_get_heading_to(_curve._points[0]);
+    tunnel = train_get_tunnel(_curve._points[0]);
 }
 
-if (_heading_to != noone)
+if (tunnel != noone)
 {
-    alarm_set(0, _time);
+    _heading_to = tunnel._to_tnl;
+    
+    alarm_set(0, tunnel._time);
 }
 
 
@@ -132,16 +139,14 @@ grid_draw_vertex_3(tc[3], 1, 1);
 draw_primitive_end();
 
 
-#define train_get_heading_to
+#define train_get_tunnel
 var pnt = argument0;
 
 var cube = pnt._cube;
 
 var tnl = cube._tunnel;
 
-if (tnl == noone) exit;
-
-return tnl._to_tnl;
+return tnl;
 
 
 #define train_follow_track_from_tunnel
@@ -184,4 +189,3 @@ _curve_dir = dir;
 _h = crv._h;
 
 with _coupled_backwards train_set_curve(crv, dir);
-

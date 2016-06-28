@@ -3,19 +3,11 @@
 #define train_create_player_train
 var inst = instance_create(0, 0, obEngine);
 
-inst._total_weight = inst._weight;
-
-var wgn = instance_create(0, 0, obFlatbed);
-inst._coupled_backwards = wgn;
-wgn._coupled_forwards = inst;
-
-inst._total_weight += wgn._weight;
-
-var wgn2 = instance_create(0, 0, obFlatbed);
-wgn._coupled_backwards = wgn2;
-wgn2._coupled_forwards = wgn;
-
-inst._total_weight += wgn2._weight;
+with inst
+{
+    train_attach_wagon(obFlatbed);
+    train_attach_wagon(obFlatbed);
+}
 
 return inst;
 
@@ -78,7 +70,7 @@ if (_power == 0) exit;
 
 var tunnel = noone;
 
-if (_curve_pos > 1 && _curve_dir)
+if (_curve_pos > _curve._length && _curve_dir)
 {
     tunnel = train_get_tunnel(_curve._points[_curve._num_points - 1]);
 }
@@ -165,8 +157,9 @@ var curve_data = find_first_curve(cube);
 
 if (curve_data != noone)
 {     
-    with global.PlayerTrain train_follow_curve(curve_data[0], curve_data[1], 3);
+    train_follow_curve(curve_data[0], curve_data[1], 3);
 }
+
 #define train_follow_curve
 var crv = argument0;
 var d = argument1;
@@ -197,3 +190,26 @@ _curve_dir = dir;
 _h = crv._h;
 
 with _coupled_backwards train_set_curve(crv, dir);
+#define train_attach_wagon
+var obj = argument0;
+
+var inst = instance_create(0, 0, obj);
+
+var last = train_find_end();
+
+last._coupled_backwards = inst;
+inst._coupled_forwards = last;
+
+_total_weight += inst._weight;
+
+
+#define train_find_end
+var inst = self;
+
+while(inst._coupled_backwards != noone)
+{
+    inst = inst._coupled_backwards;
+}
+
+return inst;
+

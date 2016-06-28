@@ -25,9 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>_weight = 15;
 
-_weight = 35;
+event_inherited();
+
 _power = 0;
 
 _length = 40;

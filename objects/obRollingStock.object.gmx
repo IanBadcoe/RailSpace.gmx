@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>_curve = noone;
+            <string>// derived object must set weight first...
+_total_weight = _weight;
+
+_curve = noone;
 _front_p = noone;
 
 _coupled_forwards = noone;

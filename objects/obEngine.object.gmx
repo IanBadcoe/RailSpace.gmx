@@ -25,15 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>_weight = 35;
 
-_weight = 35;
+event_inherited();
+
 _power = 2800;
 
 _length = 40;
 _width_ratio = 0.5;
 
 _regulator = 0;
+
+_colour = c_white;
 
 </string>
           </argument>

@@ -9,11 +9,19 @@ var wgn = instance_create(0, 0, obFlatbed);
 inst._coupled_backwards = wgn;
 wgn._coupled_forwards = inst;
 
+inst._total_weight += wgn._weight;
+
+var wgn2 = instance_create(0, 0, obFlatbed);
+wgn._coupled_backwards = wgn2;
+wgn2._coupled_forwards = wgn;
+
+inst._total_weight += wgn2._weight;
+
 return inst;
 
 
 #define train_speed_for_regulator
-return _regulator * _power / _total_weight / 50;
+return _regulator * _power / _total_weight / 25;
 
 
 #define train_step

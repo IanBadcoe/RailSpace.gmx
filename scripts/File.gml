@@ -80,7 +80,7 @@ if (fname != "")
     {
         if (global.Tunnels[i] != noone)
         {
-            file_text_write_real(f, 4);
+            file_text_write_real(f, 5);
             
             file_text_write_real(f, global.Tunnels[i]._h);
             file_text_write_real(f, global.Tunnels[i]._i);
@@ -91,6 +91,9 @@ if (fname != "")
             file_text_write_real(f, global.Tunnels[i]._to);
             file_text_write_real(f, global.Tunnels[i]._time);
             file_text_write_real(f, global.Tunnels[i]._player_start);
+
+            file_text_write_real(f, global.Tunnels[i]._enemy_type);
+            file_text_write_real(f, global.Tunnels[i]._enemy_delay);
         }
         else
         {
@@ -207,6 +210,12 @@ if (fname != "")
             inst._player_start = file_text_read_real(f);
         }
             
+        if (exists > 4)
+        {
+            inst._enemy_type = file_text_read_real(f);
+            inst._enemy_delay = file_text_read_real(f);
+        }
+
         global.Tunnels[i] = inst;
     }
 

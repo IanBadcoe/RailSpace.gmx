@@ -190,6 +190,11 @@ if global.TunnelLabels
     {
         s += "#*";
     }
+    else if (tnl._enemy_type != -1)
+    {
+        s += "#" + string(tnl._enemy_type) + "(" + string(tnl._enemy_delay) + ")";
+    }
+    
     draw_text(c[0], c[1], s);
 }
 

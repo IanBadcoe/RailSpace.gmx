@@ -28,6 +28,8 @@
             <string>_to = -1;
 _time = 5;
 _player_start = false;
+_enemy_type = -1;
+_enemy_delay = 0;
 
 </string>
           </argument>

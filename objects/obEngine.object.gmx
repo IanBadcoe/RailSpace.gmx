@@ -38,6 +38,8 @@ _regulator = 0;
 
 _colour = c_white;
 
+_player_train = false;
+
 </string>
           </argument>
         </arguments>

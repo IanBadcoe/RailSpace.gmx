@@ -1,10 +1,12 @@
 #define Train
 
+
 #define train_create_player_train
 var inst = instance_create(0, 0, obEngine);
 
 with inst
 {
+    _player_train = true;
     train_attach_wagon(obFlatbed);
     train_attach_wagon(obFlatbed);
 }
@@ -82,8 +84,17 @@ else if (_curve_pos < 0 && !_curve_dir)
 if (tunnel != noone)
 {
     _heading_to = tunnel._to_tnl;
+}
+
+if (_heading_to != noone)
+{    
+    alarm_set(0, tunnel._time * 30);
     
-    alarm_set(0, tunnel._time);
+    if (_player_train)
+    {
+        obRoomControllerPlay._force_camera_to = _heading_to._p;
+        obRoomControllerPlay._camera_time = tunnel._time * 30;
+    }
 }
 
 

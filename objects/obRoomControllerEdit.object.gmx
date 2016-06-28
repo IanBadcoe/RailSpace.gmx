@@ -121,7 +121,8 @@ else
     
     if (keyboard_check(vk_control) &amp;&amp;
         _highlit_cube != noone &amp;&amp;
-        _highlit_cube._h != _last_height)
+        _highlit_cube._h != _last_height &amp;&amp;
+        _highlit_cube._tunnel == noone)
     {
         edit_set_cube_height(_highlit_cube, _last_height);
     }    
@@ -179,7 +180,7 @@ _in_drag = false;
 
 if (_mode == 0)
 {
-    if (_highlit_cube != noone)
+    if (_highlit_cube != noone &amp;&amp; _highlit_cube._tunnel == noone)
     {
         edit_set_cube_height(_highlit_cube, _highlit_cube._h + 1);
     }
@@ -226,7 +227,7 @@ else if (_mode == 2)
 
 if (_mode == 0)
 {
-    if (_highlit_cube != noone)
+    if (_highlit_cube != noone &amp;&amp; _highlit_cube._tunnel == noone)
     {
         edit_set_cube_height(_highlit_cube, _highlit_cube._h - 1);
     }
@@ -289,6 +290,13 @@ else if (_mode == 2)
     
             var s = get_string("Tunnel to:", string(tnl._to));
             tnl._to = real(s);
+            
+            if (tnl._to &gt; 0 &amp;&amp; tnl._to &lt; global.NumTunnels &amp;&amp;
+                global.Tunnels[tnl._to] != noone)
+            {
+                global.Tunnels[tnl._to]._to = tnl._idx;
+                global.Tunnels[tnl._to]._time = tnl._time;
+            }
         }
     }
 }

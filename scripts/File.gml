@@ -173,6 +173,12 @@ if (fname != "")
                 var pnt = global.Points[file_text_read_real(f)];
                 inst._points[j] = pnt;
                 pnt._curve = inst;
+                
+                if (j > 0)
+                {
+                    pnt._prev_point = inst._points[j - 1];
+                    inst._points[j - 1]._next_point = pnt;
+                }
             }
             
             inst._idx = i;

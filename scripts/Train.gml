@@ -65,6 +65,10 @@ if (_coupled_backwards != noone)
     with _coupled_backwards train_step_inner();
 }
 
+with (_turrets[0]) turret_step();
+
+with (_turrets[0]) turret_step();
+
 if (_heading_to != noone) exit;
 
 // only engine calculates this...
@@ -118,36 +122,41 @@ else
 
 _back_p = curve_pos(_curve, back_pos);
 
+_p = coord_mult(coord_add_2(_back_p, _front_p), 0.5);
+
 
 #define train_draw
 var fx = argument0;
 var fy = argument1;
-var trn = argument2;
 
-if (trn._front_p == noone) exit;
+if (_front_p == noone) exit;
 
-var d = coord_subtract(trn._front_p, trn._back_p);
-var w = coord_mult(coord_rot90(d), trn._width_ratio / 2);
+var d = coord_subtract(_front_p, _back_p);
+var w = coord_mult(coord_rot90(d), _width_ratio / 2);
 
 var c;
-c[0] = coord_add_2(trn._front_p, w);
-c[1] = coord_subtract(trn._front_p, w);
-c[2] = coord_add_2(trn._back_p, w);
-c[3] = coord_subtract(trn._back_p, w);
+c[0] = coord_add_2(_front_p, w);
+c[1] = coord_subtract(_front_p, w);
+c[2] = coord_add_2(_back_p, w);
+c[3] = coord_subtract(_back_p, w);
 
 var tc;
 
 for(var i = 0; i < 4; i++)
 {
-    tc[i] = grid_transform(fx, fy, c[i], trn._h, false);
+    tc[i] = grid_transform(fx, fy, c[i], _h, false);
 }
 
-draw_primitive_begin_texture(pr_trianglestrip, sprite_get_texture(trn.sprite_index, 0));
+draw_primitive_begin_texture(pr_trianglestrip, sprite_get_texture(sprite_index, 0));
 grid_draw_vertex_3(tc[0], 0, 0);
 grid_draw_vertex_3(tc[1], 0, 1);
 grid_draw_vertex_3(tc[2], 1, 0);
 grid_draw_vertex_3(tc[3], 1, 1);
 draw_primitive_end();
+
+with (_turrets[0]) turret_draw(fx, fy, other._back_p, d, other._h);
+
+with (_turrets[1]) turret_draw(fx, fy, other._back_p, d, other._h);
 
 
 #define train_get_tunnel
@@ -212,6 +221,8 @@ last._coupled_backwards = inst;
 inst._coupled_forwards = last;
 
 _total_weight += inst._weight;
+
+return inst;
 
 
 #define train_find_end

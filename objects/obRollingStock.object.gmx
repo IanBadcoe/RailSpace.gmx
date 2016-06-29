@@ -36,6 +36,11 @@ _coupled_backwards = noone;
 
 _heading_to = noone;
 
+_turrets[0] = noone;
+_turrets[1] = noone;
+
+_p[0] = 0;
+_p[1] = 0;
 
 </string>
           </argument>
@@ -112,7 +117,7 @@ depth = -_h - 0.5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>train_draw(global._focus_x, global._focus_y, self);
+            <string>train_draw(global._focus_x, global._focus_y);
 
 </string>
           </argument>

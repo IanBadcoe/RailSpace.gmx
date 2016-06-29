@@ -55,20 +55,24 @@ var enemy = play_create_enemy_by_type(_enemy_type);
 with enemy train_follow_track_from_tunnel(other);
 
 #define play_create_enemy_by_type
+var type = argument0;
+
 var inst = instance_create(0, 0, obEnemyEngine);
 
-inst._total_weight = inst._weight;
-
-var wgn = instance_create(0, 0, obFlatbed);
-inst._coupled_backwards = wgn;
-wgn._coupled_forwards = inst;
-
-inst._total_weight += wgn._weight;
-
-var wgn2 = instance_create(0, 0, obFlatbed);
-wgn._coupled_backwards = wgn2;
-wgn2._coupled_forwards = wgn;
-
-inst._total_weight += wgn2._weight;
+with (inst)
+{
+    switch(type)
+    {
+        case 1:
+            var wgn = train_attach_wagon(obFlatbed);
+            
+            wagon_attach_turret(obRifle, 0, wgn, true);
+            
+            wgn = train_attach_wagon(obFlatbed);
+            
+            break;
+            
+    }
+}
 
 return inst;

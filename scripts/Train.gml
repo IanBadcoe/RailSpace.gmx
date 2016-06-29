@@ -1,13 +1,12 @@
 #define Train
 
-
 #define train_create_player_train
 var inst = instance_create(0, 0, obPlayerEngine);
 
 with inst
 {
-    train_attach_wagon(obFlatbed);
-    train_attach_wagon(obFlatbed);
+    train_attach_wagon(obFlatbed, false);
+    train_attach_wagon(obFlatbed, false);
 }
 
 return inst;
@@ -147,6 +146,9 @@ for(var i = 0; i < 4; i++)
     tc[i] = grid_transform(fx, fy, c[i], _h, false);
 }
 
+draw_set_colour(_colour);
+texture_set_blending(true);
+
 draw_primitive_begin_texture(pr_trianglestrip, sprite_get_texture(sprite_index, 0));
 grid_draw_vertex_3(tc[0], 0, 0);
 grid_draw_vertex_3(tc[1], 0, 1);
@@ -154,9 +156,13 @@ grid_draw_vertex_3(tc[2], 1, 0);
 grid_draw_vertex_3(tc[3], 1, 1);
 draw_primitive_end();
 
-with (_turrets[0]) turret_draw(fx, fy, other._back_p, d, other._h);
 
-with (_turrets[1]) turret_draw(fx, fy, other._back_p, d, other._h);
+if (_curve_pos >= 0 && _curve_pos <= _curve._length)
+{
+    with (_turrets[0]) turret_draw(fx, fy, other._back_p, d, other._h);
+    
+    with (_turrets[1]) turret_draw(fx, fy, other._back_p, d, other._h);
+}
 
 
 #define train_get_tunnel
@@ -212,6 +218,7 @@ _h = crv._h;
 with _coupled_backwards train_set_curve(crv, dir);
 #define train_attach_wagon
 var obj = argument0;
+var enemy = argument1;
 
 var inst = instance_create(0, 0, obj);
 
@@ -221,6 +228,11 @@ last._coupled_backwards = inst;
 inst._coupled_forwards = last;
 
 _total_weight += inst._weight;
+
+if (enemy)
+{
+    inst._colour = merge_colour(c_red, c_dkgray, 0.75);
+}
 
 return inst;
 

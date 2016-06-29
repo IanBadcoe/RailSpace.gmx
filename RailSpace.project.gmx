@@ -101,6 +101,10 @@
       <object>objects\obTurret</object>
       <object>objects\obRifle</object>
     </objects>
+    <objects name="Missiles">
+      <object>objects\obBullet</object>
+      <object>objects\obMissile</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>

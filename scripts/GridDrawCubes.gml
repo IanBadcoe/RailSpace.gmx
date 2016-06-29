@@ -268,3 +268,10 @@ ret[0] = (pt[0] - global.ScreenCentreX) / perspective + fx;
 ret[1] = (pt[1] - global.ScreenCentreY) / perspective + fy;
 
 return ret;
+#define grid_draw_line_width
+var p1 = argument0;
+var p2 = argument1;
+var w = argument2;
+
+draw_line_width(p1[0], p1[1], p2[0], p2[1], w);
+

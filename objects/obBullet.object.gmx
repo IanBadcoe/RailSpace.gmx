@@ -3,9 +3,9 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-20</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obMissile</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,51 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// derived object must set weight first...
-_total_weight = _weight;
-
-_curve = noone;
-_front_p = noone;
-
-_coupled_forwards = noone;
-_coupled_backwards = noone;
-
-_heading_to = noone;
-
-_turrets[0] = noone;
-_turrets[1] = noone;
-
-_p[0] = 0;
-_p[1] = 0;
-
-_colour = c_white;
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>train_follow_track_from_tunnel(_heading_to);
-
-_heading_to = noone;
-
+            <string>_time = 0;
 
 </string>
           </argument>
@@ -93,9 +49,13 @@ _heading_to = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>train_step(self);
+            <string>_time++;
 
-depth = -_h - 0.5;
+if (_time == 2)
+{
+    play_damage(_target, 1);
+    instance_destroy();
+}
 
 </string>
           </argument>
@@ -119,7 +79,31 @@ depth = -_h - 0.5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>train_draw(global._focus_x, global._focus_y);
+            <string>var d = coord_subtract(_targ_pos, _origin);
+var p;
+
+p[0] = _origin;
+p[1] = coord_add_2(_origin, coord_mult(d, 0.01));
+p[2] = coord_add_2(_origin, coord_mult(d, 0.03));
+p[3] = coord_add_2(_origin, coord_mult(d, 0.1));
+p[4] = coord_add_2(_origin, coord_mult(d, 0.3));
+p[5] = _targ_pos;
+
+for(var i = 0; i &lt; 6; i++)
+{
+    p[i] = grid_transform(global._focus_x, global._focus_y, p[i], _h, false);
+}
+
+draw_set_colour(c_white);
+draw_set_blend_mode(bm_add);
+draw_set_alpha(0.5);
+grid_draw_line_width(p[0], p[1], 1);
+grid_draw_line_width(p[1], p[2], 2);
+grid_draw_line_width(p[2], p[3], 3);
+grid_draw_line_width(p[3], p[4], 2);
+grid_draw_line_width(p[4], p[5], 1);
+draw_set_alpha(1.0);
+draw_set_blend_mode(bm_normal);
 
 </string>
           </argument>

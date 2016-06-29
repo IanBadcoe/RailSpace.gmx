@@ -64,11 +64,11 @@ with (inst)
     switch(type)
     {
         case 1:
-            var wgn = train_attach_wagon(obFlatbed);
+            var wgn = train_attach_wagon(obFlatbed, true);
             
             wagon_attach_turret(obRifle, 0, wgn, true);
             
-            wgn = train_attach_wagon(obFlatbed);
+            wgn = train_attach_wagon(obFlatbed, true);
             
             break;
             
@@ -76,3 +76,6 @@ with (inst)
 }
 
 return inst;
+
+#define play_damage
+

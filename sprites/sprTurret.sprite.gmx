@@ -21,5 +21,6 @@
   <height>19</height>
   <frames>
     <frame index="0">images\sprTurret_0.png</frame>
+    <frame index="1">images\sprTurret_1.png</frame>
   </frames>
 </sprite>

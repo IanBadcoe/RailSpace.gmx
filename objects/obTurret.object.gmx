@@ -30,6 +30,8 @@
 _p[0] = 0;
 _p[1] = 0;
 
+_fire_cycle = -1;
+
 </string>
           </argument>
         </arguments>

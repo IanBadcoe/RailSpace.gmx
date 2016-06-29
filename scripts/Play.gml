@@ -72,4 +72,3 @@ wgn2._coupled_forwards = wgn;
 inst._total_weight += wgn2._weight;
 
 return inst;
-

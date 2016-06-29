@@ -61,6 +61,9 @@ _heading_to = noone;
             <kind>1</kind>
             <string>train_follow_track_from_tunnel(_heading_to);
 
+_heading_to = noone;
+
+
 </string>
           </argument>
         </arguments>

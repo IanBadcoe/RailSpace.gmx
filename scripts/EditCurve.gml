@@ -122,7 +122,7 @@ var pcy = path_get_y(_path, 0);
 for(var i = 0.01; i < 1; i += 0.01)
 {
     var cx = path_get_x(_path, i);
-    var cy = path_get_point_y(_path, i);
+    var cy = path_get_y(_path, i);
     
     len += coord_dist_2(pcx, pcy, cx, cy);
     

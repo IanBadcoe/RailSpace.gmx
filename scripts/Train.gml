@@ -47,22 +47,23 @@ if (_power != 0)
 
 train_calc_position();
 
-if (_coupled_backwards == noone) exit;
-
-var next_pos;
-
-if (_curve_dir)
+if (_coupled_backwards != noone)
 {
-    next_pos = _curve_pos - _length - 4;
-}
-else
-{
-    next_pos = _curve_pos + _length + 4;
-}
+    var next_pos;
+    
+    if (_curve_dir)
+    {
+        next_pos = _curve_pos - _length - 4;
+    }
+    else
+    {
+        next_pos = _curve_pos + _length + 4;
+    }
+    
+    _coupled_backwards._curve_pos = next_pos;
 
-_coupled_backwards._curve_pos = next_pos;
-
-with _coupled_backwards train_step_inner();
+    with _coupled_backwards train_step_inner();
+}
 
 if (_heading_to != noone) exit;
 
@@ -222,4 +223,3 @@ while(inst._coupled_backwards != noone)
 }
 
 return inst;
-

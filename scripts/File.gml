@@ -249,7 +249,18 @@ for(var i = 0; i < global.NumTunnels; i++)
     if (tnl != noone)
     {
         var cube = global.RoomCubes[tnl._i, tnl._j];
-        cube._tunnel = tnl;
-        tnl._cube = cube;
+        if (cube._tunnel != noone)
+        {
+            // just crudely fix-up any duplicate tunnels
+            with tnl instance_destroy();
+            global.Tunnels[i] = noone;
+        }
+        else
+        {
+            cube._tunnel = tnl;
+            tnl._cube = cube;
+            // should match but...
+            tnl._h = cube._h;
+        }
     }
 }

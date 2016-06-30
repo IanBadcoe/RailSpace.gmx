@@ -72,10 +72,10 @@ if (_target != noone)
     var d = coord_subtract(_target._p, _p);
 
     _angle = arctan2(d[0], d[1]);
-    var dh = sign(_target._h - _h);
+    var dh = sign(_target._h - _h) * 0.1;
     
-    _v[0] = (_v[0] + sin(_angle) * 10) / 2;
-    _v[1] = (_v[1] + cos(_angle) * 10) / 2;
+    _v[0] = (_v[0] + sin(_angle) * 7) / 2;
+    _v[1] = (_v[1] + cos(_angle) * 7) / 2;
     _v[2] = (_v[2] + dh) / 2;
     
     if abs(_h - _target._h) &lt; 0.5 &amp;&amp; coord_length(d) &lt; 20

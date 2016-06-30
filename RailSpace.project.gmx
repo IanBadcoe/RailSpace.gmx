@@ -34,6 +34,8 @@
     <sprite>sprites\sprTurret</sprite>
     <sprite>sprites\sprMissileTurret</sprite>
     <sprite>sprites\sprMissile</sprite>
+    <sprite>sprites\sprExplosion</sprite>
+    <sprite>sprites\sprSmoke</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bckMap</background>
@@ -109,6 +111,8 @@
       <object>objects\obMissile</object>
       <object>objects\obProjectile</object>
     </objects>
+    <object>objects\obExplosion</object>
+    <object>objects\obSmoke</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmMap</room>

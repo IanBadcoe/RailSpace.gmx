@@ -113,3 +113,13 @@ return ret;
 var c = argument0;
 
 return sqrt(c[0] * c[0] + c[1] * c[1]);
+#define coord_random
+var p = argument0;
+var r = argument1;
+
+var ret;
+
+ret[0] = p[0] + random_range(-r, r);
+ret[1] = p[1] + random_range(-r, r);
+
+return ret;

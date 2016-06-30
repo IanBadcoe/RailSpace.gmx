@@ -272,7 +272,7 @@ return inst;
 
 
 #define train_find_end
-var inst = self;
+var inst = self.id;
 
 while(inst._coupled_backwards != noone)
 {
@@ -280,6 +280,7 @@ while(inst._coupled_backwards != noone)
 }
 
 return inst;
+
 #define train_destroy
 var ob = train_find_start(self.id);
 
@@ -292,7 +293,7 @@ while(ob != noone)
 
 
 #define train_find_start
-var inst = self;
+var inst = argument0;
 
 while(inst._coupled_forwards != noone)
 {
@@ -314,4 +315,3 @@ if (_coming_damage > 0)
 _decay_b = _decay_b * 0.7 + b * 0.3;
 
 return merge_colour(_colour, c_red, _decay_b);
-

@@ -65,21 +65,35 @@ var fy = argument1;
 var crv = argument2;
 
 var h = crv._h;
-var step = 8 / crv._length;
+var step = 16 / crv._length;
 
 draw_set_color(c_black);
 
-draw_primitive_begin(pr_linestrip);
-for(var i = 0; i <= 1; i += step)
+
+for(var o = -0.3; o < 0.6; o += 0.6)
 {
-    var p;
-    p[0] = path_get_x(crv._path, i);
-    p[1] = path_get_y(crv._path, i);
-    
-    var pt = grid_transform(fx, fy, p, h, false);
-    draw_vertex(pt[0], pt[1]);
+    draw_primitive_begin(pr_linestrip);
+    var q = noone;
+
+    for(var i = 0; i <= 1; i += step)
+    {
+        var p;
+        p[0] = path_get_x(crv._path, i);
+        p[1] = path_get_y(crv._path, i);
+        
+        if (q != noone)
+        {
+            var de = coord_mult(coord_rot90(coord_subtract(p, q)), o);
+            var p2 = coord_add_2(p, de);
+            
+            var pt = grid_transform(fx, fy, p2, h, false);
+            draw_vertex(pt[0], pt[1]);
+        }
+        
+        q = coord_copy(p);
+    }
+    draw_primitive_end();
 }
-draw_primitive_end();
 
 step = 42 / crv._length;
 

@@ -320,4 +320,3 @@ return merge_colour(_colour, c_red, _decay_b);
 var wgn = argument0;
 
 return wgn._curve_pos > wgn._curve._length || wgn._curve_pos < 0;
-

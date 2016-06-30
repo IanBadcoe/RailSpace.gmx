@@ -1,5 +1,8 @@
 #define Train
 
+
+
+
 #define train_create_player_train
 var inst = instance_create(0, 0, obPlayerEngine);
 
@@ -7,10 +10,10 @@ with inst
 {
     var wgn = train_attach_wagon(obFlatbed, false);
     wagon_attach_turret(obRifle, 0, wgn, false);
-//    wagon_attach_turret(obRifle, 1, wgn, false);
+    wagon_attach_turret(obRifle, 1, wgn, false);
     wgn = train_attach_wagon(obFlatbed, false);
-//    wagon_attach_turret(obRifle, 0, wgn, false);
-//    wagon_attach_turret(obRifle, 1, wgn, false);
+    wagon_attach_turret(obRifle, 0, wgn, false);
+    wagon_attach_turret(obRifle, 1, wgn, false);
 }
 
 return inst;
@@ -24,9 +27,32 @@ return _regulator * _power / _total_weight / 25;
 // abort here unless we're the first wagon in the train
 // let first cascade into us instead
 
-if (_coupled_forwards != noone) exit;
+if (_coupled_forwards == noone)
+{
+    train_step_inner();
+}
 
-train_step_inner();
+depth = -_h - 0.5;
+
+if (_coming_damage == 0) exit;
+
+_coming_damage -= _damage_to_do[0];
+_health -= _damage_to_do[7];
+
+if (_health <= 0)
+{
+    if (_player_train)
+        room_goto(rmMap);
+
+    train_destroy();
+}
+
+for(var i = 0; i < 15; i++)
+{
+    _damage_to_do[i] = _damage_to_do[i + 1];
+}
+
+_damage_to_do[15] = 0;
 
 
 #define train_step_inner
@@ -150,7 +176,9 @@ for(var i = 0; i < 4; i++)
     tc[i] = grid_transform(fx, fy, c[i], _h, false);
 }
 
-draw_set_colour(_colour);
+var c = train_damage_colour();
+
+draw_set_colour(c);
 texture_set_blending(true);
 
 draw_primitive_begin_texture(pr_trianglestrip, sprite_get_texture(sprite_index, 0));
@@ -252,3 +280,38 @@ while(inst._coupled_backwards != noone)
 }
 
 return inst;
+#define train_destroy
+var ob = train_find_start(self.id);
+
+while(ob != noone)
+{
+    var nob = ob._coupled_backwards;
+    with ob instance_destroy();
+    ob = nob;
+}
+
+
+#define train_find_start
+var inst = self;
+
+while(inst._coupled_forwards != noone)
+{
+    inst = inst._coupled_forwards;
+}
+
+return inst;
+
+#define train_damage_colour
+var b = 0;
+
+if (_coming_damage > 0)
+{
+    var l = log2(_coming_damage) + 1;
+    
+    b = min(l / 3, 1.0);
+}
+
+_decay_b = _decay_b * 0.7 + b * 0.3;
+
+return merge_colour(_colour, c_red, _decay_b);
+

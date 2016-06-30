@@ -46,6 +46,28 @@ _colour = c_white;
 
 _enemy = true;
 
+_health = 10;
+
+_coming_damage = 0;
+
+_damage_to_do[0] = 0;
+_damage_to_do[1] = 0;
+_damage_to_do[2] = 0;
+_damage_to_do[3] = 0;
+_damage_to_do[4] = 0;
+_damage_to_do[5] = 0;
+_damage_to_do[6] = 0;
+_damage_to_do[7] = 0;
+_damage_to_do[8] = 0;
+_damage_to_do[9] = 0;
+_damage_to_do[10] = 0;
+_damage_to_do[11] = 0;
+_damage_to_do[12] = 0;
+_damage_to_do[13] = 0;
+_damage_to_do[14] = 0;
+_damage_to_do[15] = 0;
+
+_decay_b = 0;
 </string>
           </argument>
         </arguments>
@@ -96,8 +118,6 @@ _heading_to = noone;
           <argument>
             <kind>1</kind>
             <string>train_step(self);
-
-depth = -_h - 0.5;
 
 </string>
           </argument>

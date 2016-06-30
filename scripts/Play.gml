@@ -78,3 +78,5 @@ with (inst)
 return inst;
 
 #define play_damage
+_damage_to_do[15] += argument0;
+_coming_damage += argument0;

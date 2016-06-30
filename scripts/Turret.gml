@@ -77,21 +77,6 @@ if (_enemy_turret)
         
         turret_create_missile(_missile_type, _p, global.PlayerTrain._p, global.PlayerTrain, _wagon._h);
     }
-    
-    if (_fire_cycle != -1)
-    {
-        _fire_cycle++;
-        
-        image_index = 0;
-        
-        if (_fire_cycle < _recoil_time)
-        {
-            image_index = 1;
-        }
-        
-        if _fire_cycle == _cycle_length
-            _fire_cycle = -1;
-    }
 }
 else
 {
@@ -105,7 +90,7 @@ else
     
     _angle = arctan2(dx, dy);
     
-    if (_fire_cycle == -1 && mouse_button = mb_left)
+    if (_fire_cycle == -1 && mouse_button = mb_left  && random(1) < 0.1)
     {
         var targ = turret_find_target(m);
         if (targ != noone)
@@ -118,7 +103,24 @@ else
             
             turret_create_missile(_missile_type, _p, pt, noone, _wagon._h);        
         }
+        
+        _fire_cycle = 0;
     }
+}
+
+image_index = 0;
+
+if (_fire_cycle != -1)
+{
+    _fire_cycle++;
+        
+    if (_fire_cycle < _recoil_time)
+    {
+        image_index = 1;
+    }
+    
+    if _fire_cycle == _cycle_length
+        _fire_cycle = -1;
 }
 
 

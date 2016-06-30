@@ -28,6 +28,9 @@
             <string>event_inherited();
 
 _colour = merge_colour(c_red, c_dkgray, 0.75);
+
+_enemy = true;
+
 </string>
           </argument>
         </arguments>

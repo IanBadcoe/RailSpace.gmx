@@ -70,7 +70,8 @@ if (_enemy_turret)
     
     var d = sqrt(dx * dx + dy * dy);
     
-    if (d < _range && _fire_cycle == -1)
+    // stutter firing a bit...
+    if (d < _range && _fire_cycle == -1 && random(1) < 0.1)
     {
         _fire_cycle = 0;
         
@@ -92,6 +93,33 @@ if (_enemy_turret)
             _fire_cycle = -1;
     }
 }
+else
+{
+    var m;
+    
+    m[0] = window_mouse_get_x();
+    m[1] = window_mouse_get_y();
+    
+    var dx = m[0] - _p[0];
+    var dy = m[1] - _p[1];
+    
+    _angle = arctan2(dx, dy);
+    
+    if (_fire_cycle == -1 && mouse_button = mb_left)
+    {
+        var targ = turret_find_target(m);
+        if (targ != noone)
+        {
+            turret_create_missile(_missile_type, _p, targ._p, targ, _wagon._h);        
+        }
+        else
+        {
+            var pt = grid_untransform(global._focus_x, global._focus_y, m, _wagon._h);
+            
+            turret_create_missile(_missile_type, _p, pt, noone, _wagon._h);        
+        }
+    }
+}
 
 
 #define turret_create_missile
@@ -107,3 +135,22 @@ inst._origin = orig;
 inst._target = targ;
 inst._h = h;
 
+#define turret_find_target
+var p = argument0;
+
+with(obRollingStock)
+{
+    if (_enemy)
+    {
+        var pt = grid_untransform(global._focus_x, global._focus_y, p, _h);
+        
+        var dist = coord_dist(pt, _p);
+        
+        if (dist < 15)
+        {
+            return self.id;
+        }
+    }
+}
+
+return noone;

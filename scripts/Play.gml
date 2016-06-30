@@ -78,4 +78,3 @@ with (inst)
 return inst;
 
 #define play_damage
-

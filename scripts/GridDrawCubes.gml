@@ -274,4 +274,3 @@ var p2 = argument1;
 var w = argument2;
 
 draw_line_width(p1[0], p1[1], p2[0], p2[1], w);
-

@@ -5,8 +5,12 @@ var inst = instance_create(0, 0, obPlayerEngine);
 
 with inst
 {
-    train_attach_wagon(obFlatbed, false);
-    train_attach_wagon(obFlatbed, false);
+    var wgn = train_attach_wagon(obFlatbed, false);
+    wagon_attach_turret(obRifle, 0, wgn, false);
+//    wagon_attach_turret(obRifle, 1, wgn, false);
+    wgn = train_attach_wagon(obFlatbed, false);
+//    wagon_attach_turret(obRifle, 0, wgn, false);
+//    wagon_attach_turret(obRifle, 1, wgn, false);
 }
 
 return inst;
@@ -66,7 +70,7 @@ if (_coupled_backwards != noone)
 
 with (_turrets[0]) turret_step();
 
-with (_turrets[0]) turret_step();
+with (_turrets[1]) turret_step();
 
 if (_heading_to != noone) exit;
 
@@ -228,6 +232,8 @@ last._coupled_backwards = inst;
 inst._coupled_forwards = last;
 
 _total_weight += inst._weight;
+
+inst._enemy = enemy;
 
 if (enemy)
 {

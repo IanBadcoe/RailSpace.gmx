@@ -28,6 +28,9 @@
             <string>event_inherited();
 
 _player_train = true;
+
+_enemy = false;
+
 </string>
           </argument>
         </arguments>

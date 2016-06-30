@@ -29,7 +29,7 @@
 
 _colour = merge_colour(c_red, c_dkgray, 0.75);
 
-_enemy = true;
+_player_train = false;
 
 </string>
           </argument>

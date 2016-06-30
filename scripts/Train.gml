@@ -261,7 +261,7 @@ inst._coupled_forwards = last;
 
 _total_weight += inst._weight;
 
-inst._enemy = enemy;
+inst._player_train = !enemy;
 
 if (enemy)
 {

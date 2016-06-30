@@ -29,7 +29,7 @@
 
 _player_train = true;
 
-_enemy = false;
+_player_train = true;
 
 _health = 20;
 

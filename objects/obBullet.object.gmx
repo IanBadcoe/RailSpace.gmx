@@ -49,9 +49,47 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>_time++;
+            <string>if (_time == 0)
+{
+    var d = coord_mult(coord_subtract(_targ_pos, _origin), 0.1);
+        
+    var dh = (_targ_h - _h) / 10;
 
-if (_time == 2)
+    var p = _origin;
+    var ph = _h;
+    
+    for(var q = 0; q &lt; 10; q++)
+    {
+        p = coord_add_2(p, d);
+        ph += dh;
+        
+//        var c = grid_untransform(global._focus_x, global._focus_y, p, ph);
+        
+        var i = p[0] / global.SquareSize;
+        var j = p[1] / global.SquareSize;
+        
+        if (i &lt; 0 || j &lt; 0 || i &gt;= global.TilesWidth || j &gt;= global.TilesHeight)
+            continue;
+            
+        var cube = global.RoomCubes[i, j];
+        var ch = cube._h;
+        
+        if cube._tunnel != noone
+            ch += 0.5;
+            
+        if ch &gt; ph
+        {
+            _targ_pos = p;
+            _targ_h = ph;
+            _target = noone;
+            break;
+        }
+    }
+}
+
+_time++;
+
+if (_time == 3)
 {
     if (_target != noone)
     {
@@ -83,7 +121,9 @@ if (_time == 2)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var d = coord_subtract(_targ_pos, _origin);
+            <string>if (_time == 0) exit;
+
+var d = coord_subtract(_targ_pos, _origin);
 var p;
 
 p[0] = _origin;

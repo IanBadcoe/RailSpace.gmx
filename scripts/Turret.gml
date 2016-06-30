@@ -71,14 +71,16 @@ if (_enemy_turret)
     var d = sqrt(dx * dx + dy * dy);
     
     // stutter firing a bit...
-    if (_wagon._h == global.PlayerTrain._h &&
+    if (abs(_wagon._h - global.PlayerTrain._h) < _max_height_diff &&
         d < _range &&
         _fire_cycle == -1 &&
         random(1) < 0.1)
     {
         _fire_cycle = 0;
         
-        turret_create_missile(_missile_type, _p, global.PlayerTrain._p, global.PlayerTrain, _wagon._h);
+        turret_create_missile(_missile_type, _p,
+            global.PlayerTrain._p, global.PlayerTrain, _wagon._h,
+            global.PlayerTrain._h);
     }
 }
 else
@@ -88,8 +90,10 @@ else
     m[0] = window_mouse_get_x();
     m[1] = window_mouse_get_y();
     
-    var dx = m[0] - _p[0];
-    var dy = m[1] - _p[1];
+    mt = grid_untransform(global._focus_x, global._focus_y, m, _wagon._h);
+    
+    var dx = mt[0] - _p[0];
+    var dy = mt[1] - _p[1];
     
     _angle = arctan2(dx, dy);
 
@@ -99,16 +103,19 @@ else
         _fire_cycle == -1 &&
         mouse_button = mb_left)
     {
+        // this must be the untransformed "m" as the target could be on a different level
         var targ = turret_find_target(m);
         if (targ != noone)
         {
-            turret_create_missile(_missile_type, _p, targ._p, targ, _wagon._h);        
+            turret_create_missile(_missile_type, _p, targ._p, targ,
+                _wagon._h, targ._h);
         }
         else
         {
             var pt = grid_untransform(global._focus_x, global._focus_y, m, _wagon._h);
             
-            turret_create_missile(_missile_type, _p, pt, noone, _wagon._h);        
+            turret_create_missile(_missile_type, _p, pt, noone,
+                _wagon._h, _wagon._h);        
         }
         
         _fire_cycle = 0;
@@ -137,12 +144,14 @@ var orig = argument1;
 var targ_pos = argument2;
 var targ = argument3;
 var h = argument4;
+var targ_h = argument5;
 
 var inst = instance_create(0, 0, ob);
 inst._targ_pos = targ_pos;
 inst._origin = orig;
 inst._target = targ;
 inst._h = h;
+inst._targ_h = targ_h;
 
 // missiles use these
 inst._p = coord_copy(orig);
@@ -156,7 +165,7 @@ var p = argument0;
 
 with(obRollingStock)
 {
-    if (_enemy)
+    if (!_player_train)
     {
         var pt = grid_untransform(global._focus_x, global._focus_y, p, _h);
         

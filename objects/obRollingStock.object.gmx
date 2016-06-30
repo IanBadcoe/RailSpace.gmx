@@ -44,8 +44,6 @@ _p[1] = 0;
 
 _colour = c_white;
 
-_enemy = true;
-
 _health = 10;
 
 _coming_damage = 0;

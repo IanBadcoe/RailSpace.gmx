@@ -17,6 +17,9 @@ return inst;
 
 
 #define turret_draw
+if (in_tunnel(_wagon)) exit;
+
+
 var fx = argument0;
 var fy = argument1;
 var truck_rear = argument2;
@@ -59,66 +62,70 @@ draw_primitive_end();
 // before we know where we are...
 if _p[0] == 0 && _p[1] == 0 exit;
 
-if (_enemy_turret)
-{
-    if (global.PlayerTrain == noone) exit;
 
-    var dx = global.PlayerTrain._p[0] - _p[0];
-    var dy = global.PlayerTrain._p[1] - _p[1];
-    
-    _angle = arctan2(dx, dy);
-    
-    var d = sqrt(dx * dx + dy * dy);
-    
-    // stutter firing a bit...
-    if (abs(_wagon._h - global.PlayerTrain._h) < _max_height_diff &&
-        d < _range &&
-        _fire_cycle == -1 &&
-        random(1) < 0.1)
+if (!in_tunnel(_wagon))
+{
+    if (_enemy_turret)
     {
-        _fire_cycle = 0;
+        if (global.PlayerTrain == noone) exit;
+    
+        var dx = global.PlayerTrain._p[0] - _p[0];
+        var dy = global.PlayerTrain._p[1] - _p[1];
         
-        turret_create_missile(_missile_type, _p,
-            global.PlayerTrain._p, global.PlayerTrain, _wagon._h,
-            global.PlayerTrain._h);
-    }
-}
-else
-{
-    var m;
-    
-    m[0] = window_mouse_get_x();
-    m[1] = window_mouse_get_y();
-    
-    mt = grid_untransform(global._focus_x, global._focus_y, m, _wagon._h);
-    
-    var dx = mt[0] - _p[0];
-    var dy = mt[1] - _p[1];
-    
-    _angle = arctan2(dx, dy);
-
-    var d = sqrt(dx * dx + dy * dy);
-    
-    if (d < _range &&
-        _fire_cycle == -1 &&
-        mouse_button = mb_left)
-    {
-        // this must be the untransformed "m" as the target could be on a different level
-        var targ = turret_find_target(m);
-        if (targ != noone)
+        _angle = arctan2(dx, dy);
+        
+        var d = sqrt(dx * dx + dy * dy);
+        
+        // stutter firing a bit...
+        if (abs(_wagon._h - global.PlayerTrain._h) < _max_height_diff &&
+            d < _range &&
+            _fire_cycle == -1 &&
+            random(1) < 0.1)
         {
-            turret_create_missile(_missile_type, _p, targ._p, targ,
-                _wagon._h, targ._h);
-        }
-        else
-        {
-            var pt = grid_untransform(global._focus_x, global._focus_y, m, _wagon._h);
+            _fire_cycle = 0;
             
-            turret_create_missile(_missile_type, _p, pt, noone,
-                _wagon._h, _wagon._h);        
+            turret_create_missile(_missile_type, _p,
+                global.PlayerTrain._p, global.PlayerTrain, _wagon._h,
+                global.PlayerTrain._h);
         }
+    }
+    else
+    {
+        var m;
         
-        _fire_cycle = 0;
+        m[0] = window_mouse_get_x();
+        m[1] = window_mouse_get_y();
+        
+        mt = grid_untransform(global._focus_x, global._focus_y, m, _wagon._h);
+        
+        var dx = mt[0] - _p[0];
+        var dy = mt[1] - _p[1];
+        
+        _angle = arctan2(dx, dy);
+    
+        var d = sqrt(dx * dx + dy * dy);
+        
+        if (d < _range &&
+            _fire_cycle == -1 &&
+            mouse_button = mb_left)
+        {
+            // this must be the untransformed "m" as the target could be on a different level
+            var targ = turret_find_target(m);
+            if (targ != noone)
+            {
+                turret_create_missile(_missile_type, _p, targ._p, targ,
+                    _wagon._h, targ._h);
+            }
+            else
+            {
+                var pt = grid_untransform(global._focus_x, global._focus_y, m, _wagon._h);
+                
+                turret_create_missile(_missile_type, _p, pt, noone,
+                    _wagon._h, _wagon._h);        
+            }
+            
+            _fire_cycle = 0;
+        }
     }
 }
 

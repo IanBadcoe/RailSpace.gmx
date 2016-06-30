@@ -315,3 +315,9 @@ if (_coming_damage > 0)
 _decay_b = _decay_b * 0.7 + b * 0.3;
 
 return merge_colour(_colour, c_red, _decay_b);
+
+#define in_tunnel
+var wgn = argument0;
+
+return wgn._curve_pos > wgn._curve._length || wgn._curve_pos < 0;
+

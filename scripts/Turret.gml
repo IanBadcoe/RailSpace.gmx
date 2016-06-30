@@ -89,8 +89,10 @@ else
     var dy = m[1] - _p[1];
     
     _angle = arctan2(dx, dy);
+
+    var d = sqrt(dx * dx + dy * dy);
     
-    if (_fire_cycle == -1 && mouse_button = mb_left  && random(1) < 0.1)
+    if (d < _range && _fire_cycle == -1 && mouse_button = mb_left)
     {
         var targ = turret_find_target(m);
         if (targ != noone)
@@ -136,6 +138,13 @@ inst._targ_pos = targ_pos;
 inst._origin = orig;
 inst._target = targ;
 inst._h = h;
+
+// missiles use these
+inst._p = coord_copy(orig);
+inst._angle = _angle;
+inst._v[0] = sin(_angle) * 10;
+inst._v[1] = cos(_angle) * 10;
+
 
 #define turret_find_target
 var p = argument0;

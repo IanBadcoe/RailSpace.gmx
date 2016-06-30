@@ -10,10 +10,10 @@ with inst
 {
     var wgn = train_attach_wagon(obFlatbed, false);
     wagon_attach_turret(obRifle, 0, wgn, false);
-    wagon_attach_turret(obRifle, 1, wgn, false);
+    wagon_attach_turret(obMissileTurret, 1, wgn, false);
     wgn = train_attach_wagon(obFlatbed, false);
     wagon_attach_turret(obRifle, 0, wgn, false);
-    wagon_attach_turret(obRifle, 1, wgn, false);
+    wagon_attach_turret(obMissileTurret, 1, wgn, false);
 }
 
 return inst;

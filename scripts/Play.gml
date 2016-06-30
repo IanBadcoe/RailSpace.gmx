@@ -72,6 +72,24 @@ with (inst)
             
             break;
             
+        case 2:
+            var wgn = train_attach_wagon(obFlatbed, true);
+            
+            wagon_attach_turret(obMissileTurret, 0, wgn, true);
+            
+            wgn = train_attach_wagon(obFlatbed, true);
+            
+            break;
+            
+        case 3:
+            var wgn = train_attach_wagon(obFlatbed, true);
+            
+            wagon_attach_turret(obMissileTurret, 0, wgn, true);
+
+            wagon_attach_turret(obMissileTurret, 1, wgn, true);
+
+            break;
+            
     }
 }
 

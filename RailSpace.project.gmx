@@ -32,6 +32,8 @@
     <sprite>sprites\sprTunnel</sprite>
     <sprite>sprites\sprBridge</sprite>
     <sprite>sprites\sprTurret</sprite>
+    <sprite>sprites\sprMissileTurret</sprite>
+    <sprite>sprites\sprMissile</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bckMap</background>
@@ -100,10 +102,12 @@
     <objects name="Turrets">
       <object>objects\obTurret</object>
       <object>objects\obRifle</object>
+      <object>objects\obMissileTurret</object>
     </objects>
     <objects name="Missiles">
       <object>objects\obBullet</object>
       <object>objects\obMissile</object>
+      <object>objects\obProjectile</object>
     </objects>
   </objects>
   <rooms name="rooms">

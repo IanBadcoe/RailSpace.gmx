@@ -32,6 +32,8 @@ _p[1] = 0;
 
 _fire_cycle = -1;
 
+_max_height_diff = 0;
+
 </string>
           </argument>
         </arguments>

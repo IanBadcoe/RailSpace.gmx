@@ -71,7 +71,10 @@ if (_enemy_turret)
     var d = sqrt(dx * dx + dy * dy);
     
     // stutter firing a bit...
-    if (d < _range && _fire_cycle == -1 && random(1) < 0.1)
+    if (_wagon._h == global.PlayerTrain._h &&
+        d < _range &&
+        _fire_cycle == -1 &&
+        random(1) < 0.1)
     {
         _fire_cycle = 0;
         
@@ -92,7 +95,9 @@ else
 
     var d = sqrt(dx * dx + dy * dy);
     
-    if (d < _range && _fire_cycle == -1 && mouse_button = mb_left)
+    if (d < _range &&
+        _fire_cycle == -1 &&
+        mouse_button = mb_left)
     {
         var targ = turret_find_target(m);
         if (targ != noone)
@@ -157,7 +162,7 @@ with(obRollingStock)
         
         var dist = coord_dist(pt, _p);
         
-        if (dist < 15)
+        if (dist < 25)
         {
             return self.id;
         }

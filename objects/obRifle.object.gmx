@@ -34,6 +34,8 @@ _missile_type = obBullet;
 
 _range = 300;
 
+_max_height_diff = 3;
+
 </string>
           </argument>
         </arguments>

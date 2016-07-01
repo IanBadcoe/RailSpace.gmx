@@ -101,3 +101,15 @@ return inst;
 #define play_damage
 _damage_to_do[15] += argument0;
 _coming_damage += argument0;
+#define play_parse_weapons
+var s = argument0;
+
+var ret = obRifle;
+
+if (s == "g")
+    ret = obGattling;
+    
+if (s == "m")
+    ret = obMissileTurret;
+    
+return ret;

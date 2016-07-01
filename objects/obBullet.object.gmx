@@ -93,7 +93,7 @@ if (_time == 3)
 {
     if (_target != noone)
     {
-        if abs(_h - _target._h) &lt; 3
+        if abs(_h - _target._h) &lt; 3 &amp;&amp; instance_exists(_target)
             with _target play_damage(1);
     }
     instance_destroy();

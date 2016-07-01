@@ -80,7 +80,8 @@ if (_target != noone)
     
     if abs(_h - _target._h) &lt; 0.5 &amp;&amp; coord_length(d) &lt; 20
     {
-        with _target play_damage(5);
+        if instance_exists(_target)
+            with _target play_damage(5);
         
         instance_destroy();
     }

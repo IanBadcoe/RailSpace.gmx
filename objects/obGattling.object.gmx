@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>event_inherited();
 
-_cycle_length = 20;
-_recoil_time = 6;
+_cycle_length = 4;
+_recoil_time = 2;
 
 _missile_type = obBullet;
 

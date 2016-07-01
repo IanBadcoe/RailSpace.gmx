@@ -127,6 +127,12 @@ if (!tops)
                 draw_set_colour(c_black);
                 draw_line_width(et1[0], et1[1], et2[0], et2[1], 3);
             }
+            
+            if (cube._draw_corners[d])
+            {
+                draw_set_colour(c_black);
+                draw_line_width(et2[0], et2[1], eb2[0], eb2[1], 3);
+            }
         }
     }
 }

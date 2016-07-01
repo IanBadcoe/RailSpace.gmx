@@ -68,8 +68,8 @@
     <script>scripts\Misc.gml</script>
     <script>scripts\Play.gml</script>
     <script>scripts\Train.gml</script>
-    <script>scripts\View.gml</script>
     <script>scripts\Turret.gml</script>
+    <script>scripts\View.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMap</font>

@@ -102,3 +102,11 @@ for(var d = 0; d < 4; d++)
         }
     }
 }
+
+for(var d = 0; d < 4; d++)
+{
+    var dn = (d + 1) % 4;
+    
+    cube._draw_corners[d] = cube._side_bottoms[d] != 100 && cube._side_bottoms[dn] != 100;
+}
+

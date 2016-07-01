@@ -72,6 +72,12 @@ global.NumTunnels = 0;
 
 global.ShowTunnels = true;
 
+_fullscreen = true;
+
+window_set_fullscreen(_fullscreen);
+
+display_reset(4, true);
+
 </string>
           </argument>
         </arguments>
@@ -106,6 +112,31 @@ global.ShowTunnels = true;
     }
 }
     
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="70">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>_fullscreen = !_fullscreen;
+
+window_set_fullscreen(_fullscreen);
 </string>
           </argument>
         </arguments>

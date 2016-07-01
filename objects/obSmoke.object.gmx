@@ -50,7 +50,9 @@
             <kind>1</kind>
             <string>_p[0] += 1;
 _p[1] -= 0.3;
-_h -= 0.5;
+_h += 0.02;
+
+depth = -_h - 0.5;
 
 </string>
           </argument>
